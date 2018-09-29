@@ -61,5 +61,6 @@ public class LoginActivity extends AppCompatActivity {
     public void logOut(View logOut) {
        // Log.i("This is the users ID", auth.getUid());
         FirebaseAuth.getInstance().signOut();
+
     }
 }
