@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainScreenActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/mainAddBtn"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_bright"
-        app:srcCompat="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteX="326dp"
-        tools:layout_editor_absoluteY="584dp" />
-
     <ScrollView
         android:id="@+id/mainScroll"
         android:layout_width="418dp"
         android:layout_height="586dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:scrollbarStyle="insideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
@@ -36,18 +27,16 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/blankFragment"
+                android:id="@+id/fragment2"
                 android:name="efx.com.mygroup.BlankFragment"
                 android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.428"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.11" />
+                android:layout_height="wrap_content" />
+
+            <fragment
+                android:id="@+id/fragment"
+                android:name="efx.com.mygroup.BlankFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
@@ -85,5 +74,22 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/mainScroll"
         app:layout_constraintTop_toBottomOf="@+id/mainScroll" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mainAddBtn"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        app:backgroundTint="@color/browser_actions_bg_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+
 
 </android.support.constraint.ConstraintLayout>
