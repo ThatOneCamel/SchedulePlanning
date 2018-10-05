@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Cameron/Documents/AndroidStudio/MyGroup/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a8ea86246899df78e0fcf2863e921477/res/values-fr-rCA/values.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/009f6219778527f510cfd05ea75fc84e/res/values-fr-rCA/values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "38",
+                        "startColumns": "4",
+                        "startOffsets": "4924",
+                        "endColumns": "100",
+                        "endOffsets": "5020"
+                    }
+                },
+                {
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/7ec066c90f9933ebd5ba189b51847091/res/values-fr-rCA/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/93a8440105754e2b9ac0757c42e4ad3c/res/values-fr-rCA/values.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/938cb4b609ca1321c3ee9f53d710d760/res/values-fr-rCA/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c86c6d265a06d1bc995e1db6a02e9472/res/values-fr-rCA/values-fr-rCA.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/values-fr-rCA/values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -52,23 +69,6 @@
                         "startOffsets": "105,216,331,442,529,645,775,858,938,1034,1144,1256,1359,1470,1577,1679,1838,4838",
                         "endColumns": "110,114,110,86,115,129,82,79,95,109,111,102,110,106,101,158,98,85",
                         "endOffsets": "211,326,437,524,640,770,853,933,1029,1139,1251,1354,1465,1572,1674,1833,1932,4919"
-                    }
-                },
-                {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/f396ba3c137f24d60e0e850bf84fed99/res/values-fr-rCA/values-fr-rCA.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "38",
-                        "startColumns": "4",
-                        "startOffsets": "4924",
-                        "endColumns": "100",
-                        "endOffsets": "5020"
                     }
                 }
             ]

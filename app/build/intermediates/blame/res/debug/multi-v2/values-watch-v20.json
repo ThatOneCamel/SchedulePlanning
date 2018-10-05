@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Cameron/Documents/AndroidStudio/MyGroup/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c86c6d265a06d1bc995e1db6a02e9472/res/values-watch-v20/values-watch-v20.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/values-watch-v20/values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/7f795db4e45a5e5078fea536e3433580/res/values-watch-v20/values.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/b1faef99a60223a3ef1b2a69dbcb0cbf/res/values-watch-v20/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",

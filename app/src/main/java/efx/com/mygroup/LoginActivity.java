@@ -53,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
             myActivity.finish();
             System.exit(0);
         }
+
+    }
+
+    //Logout Button
+    public void logOut(View logOut) {
+        FirebaseAuth.getInstance().signOut();
+
     }
 
     //Logout Button
