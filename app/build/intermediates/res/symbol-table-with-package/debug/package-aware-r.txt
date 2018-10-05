@@ -18,6 +18,10 @@ anim design_snackbar_out
 anim fui_slide_in_right
 anim fui_slide_out_left
 animator design_appbar_state_list_animator
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -906,6 +910,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font abeezee_italic
 id ALT
 id CTRL
 id FUNCTION
@@ -942,6 +947,7 @@ id async
 id auto
 id barrier
 id beginning
+id blankFragment
 id blocking
 id bottom
 id browser_actions_header_text
@@ -1044,6 +1050,11 @@ id listMode
 id list_item
 id logo
 id logoutBtn
+id mainAddBtn
+id mainEmptyPlannerTxt
+id mainScroll
+id mainSettingsBtn
+id mainToolbar
 id main_tos_and_pp
 id masked
 id media_actions
@@ -1202,6 +1213,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_event_data
 layout activity_login
+layout activity_main_screen
 layout activity_splash
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -1219,6 +1231,7 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_blank
 layout fui_activity_invisible
 layout fui_activity_register_email
 layout fui_activity_register_phone
@@ -1288,7 +1301,6 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
-string action_settings
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -1390,6 +1402,7 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string hello_blank_fragment
 string nav_header_desc
 string nav_header_subtitle
 string nav_header_title
