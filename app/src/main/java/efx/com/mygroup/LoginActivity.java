@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
@@ -53,11 +54,12 @@ public class LoginActivity extends AppCompatActivity {
             myActivity.finish();
             System.exit(0);
         }
+
     }
 
     //Logout Button
     public void logOut(View logOut) {
+       // Log.i("This is the users ID", auth.getUid());
         FirebaseAuth.getInstance().signOut();
     }
-
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Cameron/Documents/AndroidStudio/MyGroup/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
+            "outputFile": "C:\\Users\\Clayton Vanderploeg\\AndroidStudioProjects\\SchedulePlanning\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c86c6d265a06d1bc995e1db6a02e9472/res/values-v26/values-v26.xml",
+                    "source": "C:\\Users\\Clayton Vanderploeg\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\852fb4a5a11c283dd2480b45b2021600\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/2e6de9ca10b8987115b59a6982fa0dcd/res/values-v26/values-v26.xml",
+                    "source": "C:\\Users\\Clayton Vanderploeg\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\9a5bf7ea4927a4502e0976907825d41a\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/f7d80f6df81232d354e206e97c05fe2d/res/values-v26/values-v26.xml",
+                    "source": "C:\\Users\\Clayton Vanderploeg\\.gradle\\caches\\transforms-1\\files-1.1\\firebase-ui-auth-4.1.0.aar\\0485b4cd54c8eaaff9b6d244fc2deb07\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6,10,14",
                         "startColumns": "4,4,4,4",
