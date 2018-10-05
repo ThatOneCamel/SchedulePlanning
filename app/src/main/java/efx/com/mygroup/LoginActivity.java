@@ -49,18 +49,20 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
-        if (resultCode == RESULT_CANCELED){
+        if (resultCode == RESULT_CANCELED) {
             Activity myActivity = this;
             myActivity.finish();
             System.exit(0);
         }
-
+        Log.i("This is the users ID", auth.getUid());
+        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     //Logout Button
     public void logOut(View logOut) {
-       // Log.i("This is the users ID", auth.getUid());
-        FirebaseAuth.getInstance().signOut();
-
+       FirebaseAuth.getInstance().signOut();
     }
+
 }
