@@ -26,19 +26,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/fragEventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:text="EventName"
+        android:textColor="@color/BG_Sidebar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/fragTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:text="8:00 - 9:45AM"
+        android:text="09:00AM - 09:45AM"
         android:textColor="@color/BG_Sidebar"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragEventName"
         app:layout_constraintTop_toTopOf="@+id/fragBackground" />
 
     <TextView
@@ -46,6 +57,7 @@
         android:layout_width="285dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Lorem ipsum This is the example text why are you still writing this finish doing work"
@@ -54,15 +66,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/fragBackground"
         app:layout_constraintEnd_toEndOf="@+id/fragBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragTime" />
+        app:layout_constraintTop_toBottomOf="@+id/fragEventName" />
 
     <TextView
         android:id="@+id/hourOfDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
         android:text="12am"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,4 +89,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
