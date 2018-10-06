@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/descriptiveText" />
 
     <EditText
-        android:id="@+id/eventDesc"
+        android:id="@+id/fragDesc"
         android:layout_width="0dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
@@ -68,7 +68,7 @@
         android:hint="Date: DD/MM/YYYY"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/fragDesc" />
 
     <EditText
         android:id="@+id/eventStart"

@@ -18,6 +18,10 @@ anim design_snackbar_out
 anim fui_slide_in_right
 anim fui_slide_out_left
 animator design_appbar_state_list_animator
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -756,6 +760,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen text_margin
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -850,6 +855,7 @@ drawable abc_vector_test
 drawable app_icon
 drawable avd_hide_password
 drawable avd_show_password
+drawable button_green
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -891,6 +897,7 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable material_icon_more_white
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -906,6 +913,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font abeezee_italic
 id ALT
 id CTRL
 id FUNCTION
@@ -988,6 +996,7 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
+id divider
 id dynamic
 id edit_phone_number
 id edit_query
@@ -1001,7 +1010,6 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id eventDate
-id eventDesc
 id eventEnd
 id eventPrivateCheck
 id eventStart
@@ -1014,6 +1022,9 @@ id fill_horizontal
 id fill_vertical
 id fixed
 id forever
+id fragBackground
+id fragDesc
+id fragTime
 id fragment_phone
 id fragment_register_email
 id ghost_view
@@ -1024,6 +1035,7 @@ id heading
 id home
 id homeAsUp
 id horizontal
+id hourOfDay
 id icon
 id icon_group
 id icon_only
@@ -1044,6 +1056,10 @@ id listMode
 id list_item
 id logo
 id logoutBtn
+id mainAddBtn
+id mainEmptyPlannerTxt
+id mainRecycler
+id mainToolbar
 id main_tos_and_pp
 id masked
 id media_actions
@@ -1103,6 +1119,7 @@ id search_voice_btn
 id select_dialog_listview
 id send_code
 id send_sms_tos
+id settingsBtn
 id shortcut
 id showCustom
 id showHome
@@ -1152,6 +1169,7 @@ id trouble_signing_in
 id uniform
 id up
 id useLogo
+id userFragment
 id view_offset_helper
 id visible
 id welcome_back_idp_button
@@ -1202,6 +1220,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_event_data
 layout activity_login
+layout activity_main_screen
 layout activity_splash
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -1219,6 +1238,7 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_blank
 layout fui_activity_invisible
 layout fui_activity_register_email
 layout fui_activity_register_phone
@@ -1288,7 +1308,6 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
-string action_settings
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -1390,6 +1409,7 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string hello_blank_fragment
 string nav_header_desc
 string nav_header_subtitle
 string nav_header_title

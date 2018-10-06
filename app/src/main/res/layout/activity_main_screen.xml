@@ -6,40 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainScreenActivity">
 
-    <ScrollView
-        android:id="@+id/mainScroll"
-        android:layout_width="418dp"
-        android:layout_height="586dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:scrollbarStyle="insideOverlay"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainRecycler"
+        android:layout_width="0dp"
+        android:layout_height="579dp"
+        android:layout_marginStart="4dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <fragment
-                android:id="@+id/fragment2"
-                android:name="efx.com.mygroup.BlankFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
-                android:id="@+id/fragment"
-                android:name="efx.com.mygroup.BlankFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
+        tools:listitem="@layout/fragment_blank" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/mainToolbar"
@@ -51,36 +27,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/mainSettingsBtn"
-        android:layout_width="87dp"
-        android:layout_height="58dp"
-        android:backgroundTint="@android:color/transparent"
-        android:text="Settings"
-        tools:layout_editor_absoluteX="326dp"
-        tools:layout_editor_absoluteY="2dp" />
+    <ImageButton
+        android:id="@+id/settingsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/material_icon_more_white" />
 
     <TextView
         android:id="@+id/mainEmptyPlannerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/abeezee_italic"
         android:text="Your planner is empty"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/mainScroll"
-        app:layout_constraintEnd_toStartOf="@+id/mainScroll"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mainRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mainScroll"
-        app:layout_constraintTop_toBottomOf="@+id/mainScroll" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainRecycler" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mainAddBtn"
         android:layout_width="59dp"
         android:layout_height="59dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
         app:backgroundTint="@color/browser_actions_bg_grey"
@@ -89,7 +70,6 @@
         app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
-
 
 
 </android.support.constraint.ConstraintLayout>
