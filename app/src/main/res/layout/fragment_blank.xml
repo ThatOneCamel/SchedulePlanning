@@ -2,16 +2,17 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout3"
+    android:id="@+id/userFragment"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_gravity="top|center"
+    android:clickable="true"
     tools:context=".BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/eventBackgroundDisplay"
+        android:id="@+id/fragBackground"
         android:layout_width="387dp"
         android:layout_height="77dp"
         android:layout_marginStart="8dp"
@@ -25,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/fragTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -38,10 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/eventBackgroundDisplay" />
+        app:layout_constraintTop_toTopOf="@+id/fragBackground" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/fragDesc"
         android:layout_width="285dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
@@ -50,13 +51,13 @@
         android:text="Lorem ipsum This is the example text why are you still writing this finish doing work"
         android:textColor="@color/BG_Sidebar"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/eventBackgroundDisplay"
-        app:layout_constraintEnd_toEndOf="@+id/eventBackgroundDisplay"
+        app:layout_constraintBottom_toBottomOf="@+id/fragBackground"
+        app:layout_constraintEnd_toEndOf="@+id/fragBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/fragTime" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/hourOfDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"

@@ -7,9 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.List;
 
 public class EventData extends AppCompatActivity {
 
@@ -28,7 +25,7 @@ public class EventData extends AppCompatActivity {
 
         input = new EditText[]{
                 findViewById(R.id.eventTitle),
-                findViewById(R.id.eventDesc),
+                findViewById(R.id.fragDesc),
                 findViewById(R.id.eventDate),
                 findViewById(R.id.eventStart),
                 findViewById(R.id.eventEnd)
