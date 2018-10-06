@@ -1,4 +1,4 @@
-package efx.com.mygroup;
+package efx.com.GroupLink;
 
 import android.content.Intent;
 import android.os.Handler;
