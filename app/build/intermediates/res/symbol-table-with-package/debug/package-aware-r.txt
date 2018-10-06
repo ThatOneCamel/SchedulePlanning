@@ -760,6 +760,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen text_margin
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -854,6 +855,7 @@ drawable abc_vector_test
 drawable app_icon
 drawable avd_hide_password
 drawable avd_show_password
+drawable button_green
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -895,6 +897,7 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable material_icon_more_white
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -947,7 +950,6 @@ id async
 id auto
 id barrier
 id beginning
-id blankFragment
 id blocking
 id bottom
 id browser_actions_header_text
@@ -994,6 +996,7 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
+id divider
 id dynamic
 id edit_phone_number
 id edit_query
@@ -1007,7 +1010,6 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id eventDate
-id eventDesc
 id eventEnd
 id eventPrivateCheck
 id eventStart
@@ -1020,6 +1022,9 @@ id fill_horizontal
 id fill_vertical
 id fixed
 id forever
+id fragBackground
+id fragDesc
+id fragTime
 id fragment_phone
 id fragment_register_email
 id ghost_view
@@ -1030,6 +1035,7 @@ id heading
 id home
 id homeAsUp
 id horizontal
+id hourOfDay
 id icon
 id icon_group
 id icon_only
@@ -1052,8 +1058,7 @@ id logo
 id logoutBtn
 id mainAddBtn
 id mainEmptyPlannerTxt
-id mainScroll
-id mainSettingsBtn
+id mainRecycler
 id mainToolbar
 id main_tos_and_pp
 id masked
@@ -1114,6 +1119,7 @@ id search_voice_btn
 id select_dialog_listview
 id send_code
 id send_sms_tos
+id settingsBtn
 id shortcut
 id showCustom
 id showHome
@@ -1163,6 +1169,7 @@ id trouble_signing_in
 id uniform
 id up
 id useLogo
+id userFragment
 id view_offset_helper
 id visible
 id welcome_back_idp_button
