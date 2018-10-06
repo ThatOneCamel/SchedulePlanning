@@ -260,12 +260,12 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/drawable-mdpi-v4/abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
-        "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/drawable-v23/abc_control_background_material.xml"
-    },
-    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-watch-v20_common_google_signin_btn_text_light_normal.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/b1faef99a60223a3ef1b2a69dbcb0cbf/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
+        "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/drawable-v23/abc_control_background_material.xml"
     },
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -372,6 +372,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/drawable/abc_cab_background_top_material.xml"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_app_icon_trans.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/app_icon_trans.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/color-v23_abc_tint_edittext.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/81bd5de500742d00cc6f453cea0ae1b3/res/color-v23/abc_tint_edittext.xml"
     },
@@ -386,6 +390,10 @@
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/layout_notification_template_media.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/2282e876a196fd38fdba2ff98c87386c/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_app_icon_trans_2x.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/app_icon_trans_2x.png"
     },
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_abc_ic_voice_search_api_material.xml.flat",

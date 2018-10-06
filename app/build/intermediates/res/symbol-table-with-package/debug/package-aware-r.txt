@@ -853,6 +853,8 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable app_icon
+drawable app_icon_trans
+drawable app_icon_trans_2x
 drawable avd_hide_password
 drawable avd_show_password
 drawable button_green
@@ -1024,6 +1026,7 @@ id fixed
 id forever
 id fragBackground
 id fragDesc
+id fragEventName
 id fragTime
 id fragment_phone
 id fragment_register_email

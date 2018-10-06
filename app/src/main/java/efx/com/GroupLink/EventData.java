@@ -1,5 +1,6 @@
-package efx.com.mygroup;
+package efx.com.GroupLink;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ public class EventData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_data);
-
         Toolbar topToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolBar);
         ActionBar actionBar = getSupportActionBar();
@@ -45,5 +45,14 @@ public class EventData extends AppCompatActivity {
         date = assignStringData(2);
         start = assignStringData(3);
         end = assignStringData(4);
+
+        Intent intent = new Intent(EventData.this, MainScreenActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("description", description);
+        intent.putExtra("date", date);
+        intent.putExtra("start", start);
+        intent.putExtra("end", end);
+        setResult(123, intent);
+        finish();
     }
 }

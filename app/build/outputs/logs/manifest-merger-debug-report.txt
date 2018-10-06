@@ -51,7 +51,7 @@ INJECTED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/ma
 INJECTED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:2:1-30:12
 INJECTED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:2:1-30:12
 	package
-		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:3:5-30
+		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:3:5-32
 		INJECTED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -132,7 +132,7 @@ MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /User
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:8:9-35
 	android:theme
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:13:9-40
-activity#efx.com.mygroup.SplashActivity
+activity#efx.com.GroupLink.SplashActivity
 ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:14:9-20:20
 	android:name
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:14:19-49
@@ -146,15 +146,15 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:18:17-77
 	android:name
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:18:27-74
-activity#efx.com.mygroup.LoginActivity
+activity#efx.com.GroupLink.LoginActivity
 ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:21:9-51
 	android:name
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:21:19-48
-activity#efx.com.mygroup.MainScreenActivity
+activity#efx.com.GroupLink.MainScreenActivity
 ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:22:9-65
 	android:name
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:22:19-53
-activity#efx.com.mygroup.EventData
+activity#efx.com.GroupLink.EventData
 ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:23:9-56
 	android:name
 		ADDED from /Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/AndroidManifest.xml:23:19-44
