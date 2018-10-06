@@ -1,4 +1,4 @@
-package efx.com.mygroup;
+package efx.com.GroupLink;
 
 
 import android.os.Bundle;
@@ -44,7 +44,6 @@ public class BlankFragment extends Fragment {
 
         }
     }*/
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

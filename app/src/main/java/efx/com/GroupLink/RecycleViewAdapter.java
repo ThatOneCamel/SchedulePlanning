@@ -1,4 +1,4 @@
-package efx.com.mygroup;
+package efx.com.GroupLink;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -18,19 +18,23 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     //RecycleView Variables
 
-    //Array that will contain the information from the dataset, the info to be displayed on individual fragments
-    private ArrayList<String> hours = new ArrayList<>();
-    private ArrayList<String> times = new ArrayList<>();
+    //Array that will contain the information from the data set, the info to be displayed on individual fragments
+    private ArrayList<String> hours = new ArrayList<>(); //used to store hours on the left side of fragment
+    private ArrayList<String> eventName = new ArrayList<>(); //used to store eventName inside the fragment
+    private ArrayList<String> times = new ArrayList<>(); //used to store time inside the fragment
+    private ArrayList<String> description = new ArrayList<>(); //used to store description inside the fragment
 
     //Context is basically the system getting the current state of an object/environment
     //Simply put: Each list item has its own individual context
-    private Context context;
+    private Context context;  //Separate fragment objects
 
-    //Adapter Constructor [Connects DataSet to ArrayLists]
+    //Adapter Constructor [Connects Data set to ArrayLists]
     //'d' prefix represents "data"
-    public RecycleViewAdapter(ArrayList<String> dHours, ArrayList<String> dTimes, Context dContext){
+    public RecycleViewAdapter(ArrayList<String> dHours, ArrayList<String> dName, ArrayList<String> dTimes, ArrayList<String> dDescription, Context dContext){
         hours = dHours;
+        eventName = dName;
         times = dTimes;
+        description = dDescription;
         context = dContext;
     }
 
@@ -54,8 +58,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull mViewHolder holder, final int position) {
         //Log.i(, )
         holder.fragHour.setText(hours.get(position));
+        holder.fragEventName.setText(eventName.get(position));
         holder.fragTime.setText(times.get(position));
-        
+        holder.fragDesc.setText(description.get(position));
+
+
         holder.fragmentParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,23 +83,38 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     //Holds individual recyclerview elements in memory, for faster/efficient loading
     //By putting the fragment into the memory findViewById(...), which is expensive,
-    //Only has to be called once, instead of everytime an object is creaated
-        //IE: References the fragment template, puts it in memory for fast access
-            //Process is automated by the AndroidOS
+    //Only has to be called once, instead of every time an object is created
+    //IE: References the fragment template, puts it in memory for fast access
+    //Process is automated by the AndroidOS
     public class mViewHolder extends RecyclerView.ViewHolder{
 
         //Variables
         TextView fragHour;
+        TextView fragEventName;
         TextView fragTime;
+        TextView fragDesc;
         ConstraintLayout fragmentParent;
 
         public mViewHolder(View itemView){
             super(itemView);
             fragHour = itemView.findViewById(R.id.hourOfDay);
+            fragEventName = itemView.findViewById(R.id.fragEventName);
             fragTime = itemView.findViewById(R.id.fragTime);
+            fragDesc = itemView.findViewById(R.id.fragDesc);
             fragmentParent = itemView.findViewById(R.id.userFragment);
 
         }
     }
 
+    public void addNewItem(String title,String descript, String date, String sTime, String eTime, boolean pEvent, Context recyclerContext) {
+            hours.add(sTime);
+            eventName.add(title);
+            times.add(sTime + "-" + eTime);
+            description.add(descript);
+            context = recyclerContext;
+    }
+
+    public int size() {
+        return hours.size() - 1;
+    }
 }
