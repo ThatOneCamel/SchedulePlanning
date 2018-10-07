@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,6 @@ public class MainScreenActivity extends AppCompatActivity {
     ArrayList<String> randomT;
     ArrayList<String> randomD;
 
-    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,25 +37,36 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("function" , "AM I RUNNING?");
         String title = data.getStringExtra("title");
         String description = data.getStringExtra("description");
         String date = data.getStringExtra("date");
         String start = data.getStringExtra("start");
+        String sAMPM = data.getStringExtra("sAMPM");
         String end = data.getStringExtra("end");
-        createData(title, description, date, start, end);
-
+        String eAMPM = data.getStringExtra( "eAMPM");
+        createData(title, description, date, start, sAMPM, end, eAMPM);
         mainAdapter.notifyDataSetChanged();
     }
 
     //This is just a test function to create random data to test our recycled views
-    private void createData(String title, String description, String date, String start, String end){
-        randomH.add(start);
-        randomE.add(title);
-        randomT.add(start + "-" + end);
-        randomD.add(description);
-
-        initRecycler(randomH, randomE, randomT, randomD);
+    private void createData(String title, String description, String date, String start, String sAMPM, String end, String eAMPM) {
+        TextView mainEmptyPlannerTxt = (TextView)findViewById(R.id.mainEmptyPlannerTxt);
+        //Toggle
+        if (mainEmptyPlannerTxt.getVisibility() == View.VISIBLE) {
+            mainEmptyPlannerTxt.setVisibility(View.INVISIBLE);
+        }
+        if (title != null && !title.isEmpty() && description != null && !description.isEmpty() && date != null
+                && !date.isEmpty() && start != null && !start.isEmpty() && sAMPM != null && !sAMPM.isEmpty() &&
+                end != null && !end.isEmpty() && eAMPM != null && !eAMPM.isEmpty()) {
+                randomH.add(start + sAMPM);
+                randomE.add(title);
+                randomT.add(start + sAMPM + "-" + end + eAMPM);
+                randomD.add(description);
+                initRecycler(randomH, randomE, randomT, randomD);
+         }
+        else {
+           Log.i("error", "You left one blank.");
+        }
     }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
@@ -78,9 +91,5 @@ public class MainScreenActivity extends AppCompatActivity {
     public void openActivity(View v){
         Intent intent = new Intent(MainScreenActivity.this, EventData.class);
         startActivityForResult(intent, 123);
-    }
-
-    public void addNewItem(String title,String description, String date, String sTime, String eTime, boolean pEvent) {
-
     }
 }

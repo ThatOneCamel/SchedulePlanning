@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class EventData extends AppCompatActivity {
 
-    private String title, description, date, start, end;
+    private String title, description, date, start, end, sAMPM, eAMPM;
     private EditText[] input;
 
     @Override
@@ -28,7 +28,9 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.fragDesc),
                 findViewById(R.id.eventDate),
                 findViewById(R.id.eventStart),
-                findViewById(R.id.eventEnd)
+                findViewById(R.id.startAMPM),
+                findViewById(R.id.eventEnd),
+                findViewById(R.id.endAMPM)
         };
 
     }
@@ -44,14 +46,18 @@ public class EventData extends AppCompatActivity {
         description= assignStringData(1);
         date = assignStringData(2);
         start = assignStringData(3);
-        end = assignStringData(4);
+        sAMPM = assignStringData(4);
+        end = assignStringData(5);
+        eAMPM = assignStringData(6);
 
         Intent intent = new Intent(EventData.this, MainScreenActivity.class);
         intent.putExtra("title", title);
         intent.putExtra("description", description);
         intent.putExtra("date", date);
         intent.putExtra("start", start);
+        intent.putExtra("sAMPM", sAMPM);
         intent.putExtra("end", end);
+        intent.putExtra("eAMPM", eAMPM);
         setResult(123, intent);
         finish();
     }

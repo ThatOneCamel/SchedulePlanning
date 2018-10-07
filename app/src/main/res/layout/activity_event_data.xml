@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".EventData">
 
+    <EditText
+        android:id="@+id/endAMPM"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="AM/PM"
+        android:inputType="textCapCharacters"
+        app:layout_constraintStart_toEndOf="@+id/eventEnd"
+        app:layout_constraintTop_toBottomOf="@+id/startAMPM" />
+
+    <EditText
+        android:id="@+id/startAMPM"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="AM/PM"
+        android:inputType="textCapCharacters"
+        app:layout_constraintStart_toEndOf="@+id/eventStart"
+        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
