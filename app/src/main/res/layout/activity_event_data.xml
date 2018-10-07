@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".EventData">
 
+    <EditText
+        android:id="@+id/endAMPM"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="AM/PM"
+        android:inputType="textCapCharacters"
+        app:layout_constraintStart_toEndOf="@+id/eventEnd"
+        app:layout_constraintTop_toBottomOf="@+id/startAMPM" />
+
+    <EditText
+        android:id="@+id/startAMPM"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="AM/PM"
+        android:inputType="textCapCharacters"
+        app:layout_constraintStart_toEndOf="@+id/eventStart"
+        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -133,9 +157,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
+        android:clickable="true"
         android:onClick="saveData"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/AlertTextView"
+        android:layout_width="223dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="ERROR"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>
