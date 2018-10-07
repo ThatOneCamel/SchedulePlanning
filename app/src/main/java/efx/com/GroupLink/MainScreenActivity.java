@@ -39,7 +39,7 @@ public class MainScreenActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_CANCELED){
             Log.i("Cancelled EventData", "Nothing new was added");
-            
+
         } else {
             String title = data.getStringExtra("title");
             String description = data.getStringExtra("description");

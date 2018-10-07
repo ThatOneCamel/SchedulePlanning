@@ -16,6 +16,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app_icon_trans" />
+        app:srcCompat="@drawable/app_icon_bold" />
 
 </android.support.constraint.ConstraintLayout>
