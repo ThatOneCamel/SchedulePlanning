@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1e2941"
+    android:background="@color/ic_launcher_background"
     tools:context=".SplashActivity">
 
     <ImageView
@@ -16,6 +16,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app_icon" />
+        app:srcCompat="@drawable/app_icon_trans" />
 
 </android.support.constraint.ConstraintLayout>
