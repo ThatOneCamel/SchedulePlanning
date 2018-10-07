@@ -64,9 +64,6 @@ public class MainScreenActivity extends AppCompatActivity {
                 randomD.add(description);
                 initRecycler(randomH, randomE, randomT, randomD);
          }
-        else {
-           Log.i("error", "You left one blank.");
-        }
     }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]

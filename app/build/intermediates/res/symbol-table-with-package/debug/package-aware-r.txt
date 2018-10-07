@@ -918,6 +918,7 @@ drawable tooltip_frame_dark
 drawable tooltip_frame_light
 font abeezee_italic
 id ALT
+id AlertTextView
 id CTRL
 id FUNCTION
 id META
@@ -1009,6 +1010,7 @@ id email_footer_tos_and_pp_text
 id email_layout
 id email_tos_and_pp_text
 id end
+id endAMPM
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
@@ -1141,6 +1143,7 @@ id src_in
 id src_over
 id standard
 id start
+id startAMPM
 id status_bar_latest_event_content
 id submenuarrow
 id submit_area
@@ -1415,6 +1418,7 @@ string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
 string hello_blank_fragment
+string mainEmptyPlannerTxt
 string nav_header_desc
 string nav_header_subtitle
 string nav_header_title
