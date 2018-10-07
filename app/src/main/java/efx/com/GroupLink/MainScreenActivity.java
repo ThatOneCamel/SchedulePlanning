@@ -37,15 +37,20 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        String title = data.getStringExtra("title");
-        String description = data.getStringExtra("description");
-        String date = data.getStringExtra("date");
-        String start = data.getStringExtra("start");
-        String sAMPM = data.getStringExtra("sAMPM");
-        String end = data.getStringExtra("end");
-        String eAMPM = data.getStringExtra( "eAMPM");
-        createData(title, description, date, start, sAMPM, end, eAMPM);
-        mainAdapter.notifyDataSetChanged();
+        if (resultCode == RESULT_CANCELED){
+            Log.i("Cancelled EventData", "Nothing new was added");
+            
+        } else {
+            String title = data.getStringExtra("title");
+            String description = data.getStringExtra("description");
+            String date = data.getStringExtra("date");
+            String start = data.getStringExtra("start");
+            String sAMPM = data.getStringExtra("sAMPM");
+            String end = data.getStringExtra("end");
+            String eAMPM = data.getStringExtra("eAMPM");
+            createData(title, description, date, start, sAMPM, end, eAMPM);
+            mainAdapter.notifyDataSetChanged();
+        }
     }
 
     //This is just a test function to create random data to test our recycled views
