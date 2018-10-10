@@ -1,5 +1,6 @@
 package efx.com.GroupLink;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 
 public class EventData extends AppCompatActivity {
 
-    private String title, description, date, start, end, sAMPM, eAMPM;
     private EditText[] input;
     private TextView alertTextView;
 
@@ -40,64 +40,74 @@ public class EventData extends AppCompatActivity {
 
     }
 
+    public Dialog createDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("You must fill every text slot");
+        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                emptyField = false;
+                dialog.dismiss();
+            }
+        });
+
+        return builder.create();
+
+    }
+
+    boolean emptyField = false;
     String assignStringData(int pos){
-        String inputString = input[pos].getText().toString();
-        Log.i("Value:",inputString);
-        return inputString;
+        if (input[pos].getText().toString().isEmpty()){
+            emptyField = true;
+            return null;
+
+        } else {
+            String inputString = input[pos].getText().toString();
+            Log.i("Value:", inputString);
+            return inputString;
+        }
+
     }
 
     public void saveData(View v){
-        title = assignStringData(0);
+        //String title, description, date, start, end, sAMPM, eAMPM;
+
+        /*title = assignStringData(0);
         description= assignStringData(1);
         date = assignStringData(2);
         start = assignStringData(3);
         sAMPM = assignStringData(4);
         end = assignStringData(5);
-        eAMPM = assignStringData(6);
+        eAMPM = assignStringData(6);*/
 
-        //if any textview box in event data is empty... present alert message... otherwise,
-        //make a fragment with the data
-        if (title != null && !title.isEmpty() && description != null && !description.isEmpty() && date != null
-                && !date.isEmpty() && start != null && !start.isEmpty() && sAMPM != null && !sAMPM.isEmpty() &&
-                end != null && !end.isEmpty() && eAMPM != null && !eAMPM.isEmpty()) {
-            Intent intent = new Intent(EventData.this, MainScreenActivity.class);
-            intent.putExtra("title", title);
-            intent.putExtra("description", description);
-            intent.putExtra("date", date);
-            intent.putExtra("start", start);
-            intent.putExtra("sAMPM", sAMPM);
-            intent.putExtra("end", end);
-            intent.putExtra("eAMPM", eAMPM);
-            setResult(123, intent);
+
+        //If any of these fields are empty, emptyField will be set to true, causing an error dialog
+        String arr[] = new String[7];
+
+        for (int i = 0; i < 7; i++){
+            arr[i] = assignStringData(i);
+        }
+
+        //If any of the fields were empty, show  error message
+        if (emptyField){
+            //When error message is closed, emptyField is set to false again
+            createDialog().show();
+
+
+        //Otherwise, put all of the userInput into an intent bundle to be transferred to the MainActivity
+        } else {
+            Intent mIntent = new Intent(EventData.this, MainScreenActivity.class);
+            mIntent.putExtra("title", arr[0]);
+            mIntent.putExtra("description", arr[1]);
+            mIntent.putExtra("date", arr[2]);
+            mIntent.putExtra("start", arr[3]);
+            mIntent.putExtra("sAMPM", arr[4]);
+            mIntent.putExtra("end", arr[5]);
+            mIntent.putExtra("eAMPM", arr[6]);
+            setResult(123, mIntent);
             finish();
+
         }
 
-        alertTextView = (TextView) findViewById(R.id.AlertTextView);
-        AlertDialog.Builder builder = new AlertDialog.Builder(EventData.this);
-        builder.setCancelable(true);
-        builder.setMessage("You must fill every text slot.");
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i){
-                dialogInterface.cancel();
-            }
-        });
-        builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i){
-                dialogInterface.cancel();
-            }
-        });
-
-        if (title != null && !title.isEmpty() && description != null && !description.isEmpty() && date != null
-                && !date.isEmpty() && start != null && !start.isEmpty() && sAMPM != null && !sAMPM.isEmpty() &&
-                end != null && !end.isEmpty() && eAMPM != null && !eAMPM.isEmpty()){
-            AlertDialog alertDialog = builder.create();
-            alertDialog.dismiss();
-        }
-        else {
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-        }
     }
 }

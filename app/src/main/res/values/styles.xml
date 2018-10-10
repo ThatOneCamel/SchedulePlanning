@@ -6,6 +6,9 @@
         <!--<item name="colorPrimary">@color/primary_material_dark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item> -->
+        <item name="colorAccent">@color/custom_accent_green</item>
+        <item name="colorPrimary">@color/custom_primary</item>
+        <item name="android:colorBackground">@color/custom_bg_A</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="BG_Sidebar">#1b1f37</color>
+    <color name="custom_accent_green">#1DB955</color>
+    <color name="custom_bg_A">#16171a</color>
+    <color name="custom_bg_B">#121212</color>
+    <color name="custom_primary">#212121</color>
 </resources>
