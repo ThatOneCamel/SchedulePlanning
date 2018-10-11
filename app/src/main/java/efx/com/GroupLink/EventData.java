@@ -83,7 +83,15 @@ public class EventData extends AppCompatActivity {
         final TimePickerDialog.OnTimeSetListener myListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                myTextView.setText(String.format("%2d:%02d", hourOfDay, minute));
+                String mAMPM;
+                if (hourOfDay > 13) {
+                    hourOfDay -= 12;
+                    mAMPM = "PM";
+                } else {
+                    mAMPM = "AM";
+                }
+
+                myTextView.setText(String.format("%2d:%02d " + mAMPM, hourOfDay, minute));
 
                //myTextView.setText("h:mm a");
             }
