@@ -45,27 +45,26 @@ public class MainScreenActivity extends AppCompatActivity {
             String description = data.getStringExtra("description");
             String date = data.getStringExtra("date");
             String start = data.getStringExtra("start");
-            String sAMPM = data.getStringExtra("sAMPM");
             String end = data.getStringExtra("end");
-            String eAMPM = data.getStringExtra("eAMPM");
-            createData(title, description, date, start, sAMPM, end, eAMPM);
+            createData(title, description, date, start, end);
             mainAdapter.notifyDataSetChanged();
         }
     }
 
     //This is just a test function to create random data to test our recycled views
-    private void createData(String title, String description, String date, String start, String sAMPM, String end, String eAMPM) {
+    private void createData(String title, String description, String date, String start, String end) {
         TextView mainEmptyPlannerTxt = (TextView)findViewById(R.id.mainEmptyPlannerTxt);
         //Toggle
         if (mainEmptyPlannerTxt.getVisibility() == View.VISIBLE) {
             mainEmptyPlannerTxt.setVisibility(View.INVISIBLE);
         }
         if (title != null && !title.isEmpty() && description != null && !description.isEmpty() && date != null
-                && !date.isEmpty() && start != null && !start.isEmpty() && sAMPM != null && !sAMPM.isEmpty() &&
-                end != null && !end.isEmpty() && eAMPM != null && !eAMPM.isEmpty()) {
-                randomH.add(start + sAMPM);
+                && !date.isEmpty() && start != null && !start.isEmpty() && end != null && !end.isEmpty()) {
+                String a = start.replace(" ", "");
+                String b = end.replace(" ", "");
+                randomH.add(a);
                 randomE.add(title);
-                randomT.add(start + sAMPM + "-" + end + eAMPM);
+                randomT.add(a + "-" + b);
                 randomD.add(description);
                 initRecycler(randomH, randomE, randomT, randomD);
          }

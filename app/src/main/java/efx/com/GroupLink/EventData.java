@@ -40,9 +40,7 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.fragDesc),
                 findViewById(R.id.eventDate),
                 findViewById(R.id.eventStart),
-                findViewById(R.id.startAMPM),
-                findViewById(R.id.eventEnd),
-                findViewById(R.id.endAMPM)
+                findViewById(R.id.eventEnd)
         };
 
         input[3].setOnClickListener(new View.OnClickListener() {
@@ -52,18 +50,19 @@ public class EventData extends AppCompatActivity {
             }
         });
 
-        input[5].setOnClickListener(new View.OnClickListener() {
+        input[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createDateDialog(input[5]).show();
+                createDateDialog(input[4]).show();
             }
         });
 
     }
 
+    //Create the alert box
     public Dialog createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You must fill every text slot");
+        builder.setMessage("You must fill every text slot.");
         builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -139,9 +138,9 @@ public class EventData extends AppCompatActivity {
 
 
         //If any of these fields are empty, emptyField will be set to true, causing an error dialog
-        String arr[] = new String[7];
+        String arr[] = new String[5];
 
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 5; i++){
             arr[i] = assignStringData(i);
         }
 
@@ -158,12 +157,9 @@ public class EventData extends AppCompatActivity {
             mIntent.putExtra("description", arr[1]);
             mIntent.putExtra("date", arr[2]);
             mIntent.putExtra("start", arr[3]);
-            mIntent.putExtra("sAMPM", arr[4]);
-            mIntent.putExtra("end", arr[5]);
-            mIntent.putExtra("eAMPM", arr[6]);
+            mIntent.putExtra("end", arr[4]);
             setResult(123, mIntent);
             finish();
-
         }
 
     }

@@ -1017,7 +1017,6 @@ id email_footer_tos_and_pp_text
 id email_layout
 id email_tos_and_pp_text
 id end
-id endAMPM
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
@@ -1150,7 +1149,6 @@ id src_in
 id src_over
 id standard
 id start
-id startAMPM
 id status_bar_latest_event_content
 id submenuarrow
 id submit_area
