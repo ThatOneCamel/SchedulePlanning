@@ -1,18 +1,25 @@
 package efx.com.GroupLink;
 
 import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.EventLog;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class EventData extends AppCompatActivity {
 
@@ -24,9 +31,9 @@ public class EventData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_data);
         Toolbar topToolBar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolBar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //setSupportActionBar(topToolBar);
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         input = new EditText[]{
                 findViewById(R.id.eventTitle),
@@ -37,6 +44,20 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.eventEnd),
                 findViewById(R.id.endAMPM)
         };
+
+        input[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDateDialog(input[3]).show();
+            }
+        });
+
+        input[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDateDialog(input[5]).show();
+            }
+        });
 
     }
 
@@ -54,6 +75,34 @@ public class EventData extends AppCompatActivity {
         return builder.create();
 
     }
+
+    public Dialog createDateDialog(final TextView myTextView){
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int min = c.get(Calendar.MINUTE);
+        final TimePickerDialog.OnTimeSetListener myListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                myTextView.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+               //myTextView.setText("h:mm a");
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                this,
+                android.R.style.Theme_Holo_Dialog_NoActionBar,
+                myListener,
+                hour,
+                min,
+                true);
+
+        timePickerDialog.setTitle("Choose time of event:");
+        timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        return timePickerDialog;
+
+    }
+
 
     boolean emptyField = false;
     String assignStringData(int pos){

@@ -4,7 +4,7 @@
             "outputFile": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw360dp-v13/values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/1dcb3facf46c0a5ae357fc3009bded21/res/values-sw360dp-v13/values-sw360dp-v13.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/b3c1f7fbc3551508255c2864fab4bb6c/res/values-sw360dp-v13/values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
