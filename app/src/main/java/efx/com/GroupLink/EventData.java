@@ -83,7 +83,7 @@ public class EventData extends AppCompatActivity {
         final TimePickerDialog.OnTimeSetListener myListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                myTextView.setText(String.format("%02d:%02d", hourOfDay, minute));
+                myTextView.setText(String.format("%2d:%02d", hourOfDay, minute));
 
                //myTextView.setText("h:mm a");
             }
@@ -95,7 +95,7 @@ public class EventData extends AppCompatActivity {
                 myListener,
                 hour,
                 min,
-                true);
+                false);
 
         timePickerDialog.setTitle("Choose time of event:");
         timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
