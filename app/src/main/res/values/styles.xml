@@ -9,7 +9,29 @@
         <item name="colorAccent">@color/custom_accent_green</item>
         <item name="colorPrimary">@color/custom_primary</item>
         <item name="android:colorBackground">@color/custom_bg_A</item>
+
+        <item name="android:timePickerDialogTheme">@style/TimePickerTheme</item>
+
     </style>
+
+    <style name="TimePickerTheme" parent="android:Theme.Material.Dialog">
+        <item name="android:colorAccent">@color/custom_accent_green</item>
+        <item name="android:windowBackground">@color/custom_bg_B</item> <!-- Valid -->
+
+        <item name="android:colorBackground">@color/custom_bg_A</item>
+
+        <item name="android:headerBackground">@color/custom_bg_B</item>
+
+        <item name="android:numbersBackgroundColor">@color/custom_bg_B</item>
+
+
+
+        <item name="android:colorPrimary">@color/custom_bg_A</item>
+        <item name="android:colorControlActivated">@color/custom_accent_green</item>
+        <item name="android:titleTextColor">@color/custom_accent_green</item>
+
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

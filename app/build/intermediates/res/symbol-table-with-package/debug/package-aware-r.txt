@@ -1025,6 +1025,7 @@ id eventEnd
 id eventPrivateCheck
 id eventStart
 id eventTitle
+id eventVisibility
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1781,6 +1782,7 @@ style ThemeOverlay_AppCompat_Dark_ActionBar
 style ThemeOverlay_AppCompat_Dialog
 style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
+style TimePickerTheme
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
