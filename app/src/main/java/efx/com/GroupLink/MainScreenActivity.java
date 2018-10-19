@@ -86,7 +86,7 @@ public class MainScreenActivity extends AppCompatActivity {
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
         //mainAdapter = new RecycleViewAdapter(hour, eventName, time, description,this);
-        mainAdapter = new RecycleViewAdapter(mainUser);
+        mainAdapter = new RecycleViewAdapter(mainUser, this);
 
         //Connects our recycler and our adapter
         mainRecyclerView.setAdapter(mainAdapter);

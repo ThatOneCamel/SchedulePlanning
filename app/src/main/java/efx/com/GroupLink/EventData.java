@@ -173,7 +173,7 @@ public class EventData extends AppCompatActivity {
                 }
 
                 //Sets the text of the TextView that called for the dialog
-                myTextView.setText(String.format("%2d:%02d " + AM_PM, hourOfDay, minute));
+                myTextView.setText(String.format("%2d:%02d" + AM_PM, hourOfDay, minute));
 
             }
         };//End OnTimeSetListener

@@ -23,7 +23,7 @@ public class UserInfo {
 
     UserInfo(){
         userAuthorization = FirebaseAuth.getInstance();
-        uid = userAuthorization.getUid();
+        //uid = userAuthorization.getUid();
 
         name = email = "default";
         numOfEvents = 0;
@@ -33,7 +33,7 @@ public class UserInfo {
         eventTimes = new ArrayList<>();
         eventDescriptions = new ArrayList<>();
         eventFlavorText = new ArrayList<>();
-        groups = new ArrayList<>();Log.i("UID:" , uid);
+        //groups = new ArrayList<>();Log.i("UID:" , uid);
 
         Log.i("NAME:" , name);
         Log.i("EMAIL:" , email);
@@ -84,7 +84,7 @@ public class UserInfo {
 
     //These RETURN a SPECIFIC event attribute
     String getEventName(int i){ return eventNames.get(i); }
-    String getEventDate(int i){ return eventNames.get(i); }
+    String getEventDate(int i){ return eventDates.get(i); }
     String getEventTime(int i){ return eventTimes.get(i); }
     String getEventDesc(int i){ return eventDescriptions.get(i); }
     String getEventFlavor(int i){ return eventFlavorText.get(i); }
