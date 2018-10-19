@@ -52,8 +52,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     }
 
-    public RecycleViewAdapter(UserInfo myUser){
+    public RecycleViewAdapter(UserInfo myUser, Context appContext){
         user = myUser;
+        context = appContext;
         //user.addEventName("TEST TEST CONSTRCUTOR");
 
     }
@@ -95,8 +96,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.fragmentParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Clicked at:", user.getEventFlavor(position));
-                Toast.makeText(context, user.getEventFlavor(position), Toast.LENGTH_SHORT).show();
+                Log.d("Clicked at:", user.getEventName(position));
+                Toast.makeText(context, user.getEventName(position), Toast.LENGTH_SHORT).show();
             }
         });
 
