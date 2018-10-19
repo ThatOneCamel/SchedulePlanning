@@ -1,5 +1,6 @@
 package efx.com.GroupLink;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -14,15 +15,18 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EventData extends AppCompatActivity {
 
@@ -57,7 +61,14 @@ public class EventData extends AppCompatActivity {
             }
         });//End Date button OnClickListener
 
-        //Creating on click listeners for the eventStart and eventEnd text fields.
+        //Creating on click listeners for the eventDate, eventStart and eventEnd text fields.
+
+        input[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDateDialog(input[2]).show();
+            }
+        });
 
         //When they are clicked they will create and open a new TimePickerDialog
         //eventStart OnClickListener
@@ -92,9 +103,36 @@ public class EventData extends AppCompatActivity {
 
     }
 
-    //public Dialog createDateDialog(final TextView myTextView){
-        //return dateDialog;
-    //}
+    public Dialog createDateDialog(final TextView myTextView){
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        final DatePickerDialog.OnDateSetListener myListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                c.set(year, month, dayOfMonth);
+                Date date = c.getTime();
+                //Format is Month, Day, Year
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+                myTextView.setText(sdf.format(date));
+            }
+        };
+
+        DatePickerDialog dateDialog = new DatePickerDialog(
+                this,
+                R.style.TimePickerTheme,
+                myListener,
+                year,
+                month,
+                day);
+
+        dateDialog.setTitle("What day is the event on?");
+
+        return dateDialog;
+    }
 
     //Creates the TimePickerDialog
     public Dialog createTimeDialog(final TextView myTextView){
