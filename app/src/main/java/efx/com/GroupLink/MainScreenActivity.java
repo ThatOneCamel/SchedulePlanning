@@ -2,6 +2,7 @@ package efx.com.GroupLink;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainScreenActivity extends AppCompatActivity {
@@ -52,10 +54,14 @@ public class MainScreenActivity extends AppCompatActivity {
             mainUser.addEventName(data.getStringExtra("title"));
             mainUser.addEventDesc(data.getStringExtra("description"));
             mainUser.addEventDate(data.getStringExtra("date"));
-            mainUser.addEventFlavor("9");
+            mainUser.addEventFlavor(data.getStringExtra("start"));
             mainUser.addEventTime(time);
             mainUser.addNumberOfEvents(1);
-
+            TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
+            emptyPlannerTxt.setVisibility(View.INVISIBLE);
+            if (mainUser.size() > 1) {
+                sortingFragments();
+            }
             //mainAdapter.setEqual(mainUser);
 
             mainAdapter.notifyDataSetChanged();
@@ -96,5 +102,38 @@ public class MainScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(MainScreenActivity.this, EventData.class);
         startActivityForResult(intent, 123);
         //Log.i("Event1:", mainUser.getEventName(0));
+    }
+
+    public void sortingFragments() {
+        int arrLength = mainUser.size();
+        for (int i = 0; i < arrLength - 1; i++)
+        {
+            int min_index = i;
+            for (int j = i+1; j < arrLength; j++) {
+                //If Date i is greater than Date j, returns a positive number
+                if (mainUser.getEventDate(i).compareTo(mainUser.getEventDate(j)) > 0) {
+                    //If number is positive, make minimum index = j (the smaller date)
+                    min_index = j;
+                }
+            }
+            //Make temporary storage for original data
+            String tempEventName = mainUser.getEventName(min_index);
+            String tempEventDate = mainUser.getEventDate(min_index);
+            String tempEventTime = mainUser.getEventTime(min_index);
+            String tempEventDesc = mainUser.getEventDesc(min_index);
+            String tempEventFlavor = mainUser.getEventFlavor(min_index);
+
+            mainUser.setEventName(min_index, mainUser.getEventName(i));
+            mainUser.setEventDate(min_index, mainUser.getEventDate(i));
+            mainUser.setEventTime(min_index, mainUser.getEventTime(i));
+            mainUser.setEventDesc(min_index, mainUser.getEventDesc(i));
+            mainUser.setEventFlavor(min_index, mainUser.getEventFlavor(i));
+
+            mainUser.setEventName(i, tempEventName);
+            mainUser.setEventDate(i, tempEventDate);
+            mainUser.setEventTime(i, tempEventTime);
+            mainUser.setEventDesc(i, tempEventDesc);
+            mainUser.setEventFlavor(i, tempEventFlavor);
+        }
     }
 }
