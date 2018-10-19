@@ -6,6 +6,7 @@ import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserInfo {
 
@@ -13,6 +14,7 @@ public class UserInfo {
     private String name, email, uid;
 
     private ArrayList<String> eventNames, eventDates, eventTimes, eventDescriptions, eventFlavorText, groups;
+    //private ArrayList<Date> eventDates;
     private ArrayList<Boolean> eventIsPrivate;
     private int numOfEvents;
 

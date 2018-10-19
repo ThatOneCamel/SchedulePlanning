@@ -65,8 +65,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:focusableInTouchMode="true"
-        android:hint="Date: DD/MM/YYYY"
+        android:focusableInTouchMode="false"
+        android:hint="Date: MM/DD/YYYY"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragDesc" />
