@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.User;
+
 import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
@@ -19,10 +21,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     //RecycleView Variables
 
     //Array that will contain the information from the data set, the info to be displayed on individual fragments
-    private ArrayList<String> hours = new ArrayList<>(); //used to store hours on the left side of fragment
+   /* public ArrayList<String> hours = new ArrayList<>(); //used to store hours on the left side of fragment
     private ArrayList<String> eventName = new ArrayList<>(); //used to store eventName inside the fragment
     private ArrayList<String> times = new ArrayList<>(); //used to store time inside the fragment
-    private ArrayList<String> description = new ArrayList<>(); //used to store description inside the fragment
+    private ArrayList<String> description = new ArrayList<>(); //used to store description inside the fragment*/
+
+    UserInfo user;
 
     //Context is basically the system getting the current state of an object/environment
     //Simply put: Each list item has its own individual context
@@ -30,14 +34,33 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     //Adapter Constructor [Connects Data set to ArrayLists]
     //'d' prefix represents "data"
-    public RecycleViewAdapter(ArrayList<String> dHours, ArrayList<String> dName, ArrayList<String> dTimes, ArrayList<String> dDescription, Context dContext){
+    /*public RecycleViewAdapter(ArrayList<String> dHours, ArrayList<String> dName, ArrayList<String> dTimes, ArrayList<String> dDescription, Context dContext){
         hours = dHours;
         eventName = dName;
         times = dTimes;
         description = dDescription;
         context = dContext;
+
+        user.setEventName(0, eventName.get(0));
+        //eventTimes.add(myTime);
+        //eventDescriptions.add(myDesc);
+        //eventTimeDisplays.add(myHour);
+        //eventIsPrivate.add(privacy);
+    }*/
+
+    public RecycleViewAdapter(){
+
     }
 
+    public RecycleViewAdapter(UserInfo myUser){
+        user = myUser;
+        //user.addEventName("TEST TEST CONSTRCUTOR");
+
+    }
+
+    public void setEqual(UserInfo main){
+        user = main;
+    }
 
     //Note: Override methods are default methods of the AndroidOS that we are modifying to suit our needs
 
@@ -57,17 +80,23 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     //This process will be fairly automatic since we are typically creating these objects from existing data
     public void onBindViewHolder(@NonNull mViewHolder holder, final int position) {
         //Log.i(, )
-        holder.fragHour.setText(hours.get(position));
+        /*holder.fragHour.setText(hours.get(position));
         holder.fragEventName.setText(eventName.get(position));
         holder.fragTime.setText(times.get(position));
-        holder.fragDesc.setText(description.get(position));
+        holder.fragDesc.setText(description.get(position));*/
+
+        holder.fragHour.setText(user.getEventFlavor(position));
+        holder.fragEventName.setText(user.getEventName(position));
+        holder.fragTime.setText(user.getEventTime(position));
+        holder.fragDesc.setText(user.getEventDesc(position));
 
 
+        //Remember fragment parent is the ConstraintLayout
         holder.fragmentParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Clicked at:", hours.get(position));
-                Toast.makeText(context, hours.get(position), Toast.LENGTH_SHORT).show();
+                Log.d("Clicked at:", user.getEventFlavor(position));
+                Toast.makeText(context, user.getEventFlavor(position), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,7 +106,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     //Returns the total number of existing items by returning the size of the ArrayList
     public int getItemCount() {
-        return hours.size();
+        return user.size();
     }
 
 
@@ -106,7 +135,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
     }
 
-    public void addNewItem(String title,String descript, String date, String sTime, String eTime, boolean pEvent, Context recyclerContext) {
+    /*public void addNewItem(String title,String descript, String date, String sTime, String eTime, boolean pEvent, Context recyclerContext) {
             hours.add(sTime);
             eventName.add(title);
             times.add(sTime + "-" + eTime);
@@ -115,6 +144,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     public int size() {
-        return hours.size() - 1;
-    }
+        return user.size() - 1;
+    }*/
 }

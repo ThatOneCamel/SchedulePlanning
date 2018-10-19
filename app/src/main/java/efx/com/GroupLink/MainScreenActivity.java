@@ -18,22 +18,21 @@ public class MainScreenActivity extends AppCompatActivity {
 
     RecyclerView mainRecyclerView;
     RecycleViewAdapter mainAdapter;
-    ArrayList<String> randomH;
-    ArrayList<String> randomE;
-    ArrayList<String> randomT;
-    ArrayList<String> randomD;
+    UserInfo mainUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        randomH = new ArrayList<>();
-        randomE = new ArrayList<>();
-        randomT = new ArrayList<>();
-        randomD = new ArrayList<>();
+
+        //Initializing the UserInfo class
+        mainUser = new UserInfo();
+        initRecycler();
         //createData("EventName","Description", "06/10/2018", "STARTTIME", "ENDTIME");
     }
 
+
+    //Called when this activity receives the result code of an activity
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -41,43 +40,47 @@ public class MainScreenActivity extends AppCompatActivity {
             Log.i("Cancelled EventData", "Nothing new was added");
 
         } else {
-            String title = data.getStringExtra("title");
+            /*String title = data.getStringExtra("title");
             String description = data.getStringExtra("description");
-            String date = data.getStringExtra("date");
+            String date = data.getStringExtra("date");*/
             String start = data.getStringExtra("start");
             String end = data.getStringExtra("end");
-            createData(title, description, date, start, end);
+            //createData(title, description, date, start, end);
+
+            String time = start + " - " + end;
+
+            mainUser.addEventName(data.getStringExtra("title"));
+            mainUser.addEventDesc(data.getStringExtra("description"));
+            mainUser.addEventDate(data.getStringExtra("date"));
+            mainUser.addEventFlavor("9");
+            mainUser.addEventTime(time);
+            mainUser.addNumberOfEvents(1);
+
+            //mainAdapter.setEqual(mainUser);
+
             mainAdapter.notifyDataSetChanged();
         }
     }
 
-    //This is just a test function to create random data to test our recycled views
-    private void createData(String title, String description, String date, String start, String end) {
-        TextView mainEmptyPlannerTxt = (TextView)findViewById(R.id.mainEmptyPlannerTxt);
-        //Toggle
-        if (mainEmptyPlannerTxt.getVisibility() == View.VISIBLE) {
-            mainEmptyPlannerTxt.setVisibility(View.INVISIBLE);
-        }
-        if (title != null && !title.isEmpty() && description != null && !description.isEmpty() && date != null
-                && !date.isEmpty() && start != null && !start.isEmpty() && end != null && !end.isEmpty()) {
-                String a = start.replace(" ", "");
-                String b = end.replace(" ", "");
-                randomH.add(a);
-                randomE.add(title);
-                randomT.add(a + "-" + b);
-                randomD.add(description);
-                initRecycler(randomH, randomE, randomT, randomD);
-         }
+    private void createEntry(UserInfo user){
+        mainUser.addNewEvent(
+                "My First Event Title",
+                "8:00 AM - 12:00 PM",
+                "A generic event",
+                "DEBUG: SETUP FLAVOR TEXT METHODS",
+                false);
+
     }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
-    private void initRecycler(ArrayList<String> hour, ArrayList<String> eventName, ArrayList<String> time, ArrayList<String> description){
+    private void initRecycler(){
         //References the RecyclerView in the MainActivity
         mainRecyclerView = findViewById(R.id.mainRecycler);
 
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
-        mainAdapter = new RecycleViewAdapter(hour, eventName, time, description,this);
+        //mainAdapter = new RecycleViewAdapter(hour, eventName, time, description,this);
+        mainAdapter = new RecycleViewAdapter(mainUser);
 
         //Connects our recycler and our adapter
         mainRecyclerView.setAdapter(mainAdapter);
@@ -92,5 +95,6 @@ public class MainScreenActivity extends AppCompatActivity {
     public void openActivity(View v){
         Intent intent = new Intent(MainScreenActivity.this, EventData.class);
         startActivityForResult(intent, 123);
+        //Log.i("Event1:", mainUser.getEventName(0));
     }
 }

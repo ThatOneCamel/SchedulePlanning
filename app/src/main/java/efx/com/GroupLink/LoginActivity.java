@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private static int RC_SIGN_IN = 123;
+    public UserInfo user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance(); //This determines whether or not the user is signed in
+        user = new UserInfo();
 
         //Declaring a List of the possible ways users can sign in [Email and Phone Number]
         List<AuthUI.IdpConfig> signInProviders = Arrays.asList(

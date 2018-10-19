@@ -34,6 +34,7 @@ public class EventData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_data);
+
         Toolbar topToolBar = findViewById(R.id.toolbar);
         //setSupportActionBar(topToolBar);
         //ActionBar actionBar = getSupportActionBar();
@@ -48,7 +49,16 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.eventVisibility)
         };
 
+        //Creating on click listener
+        input[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });//End Date button OnClickListener
+
         //Creating on click listeners for the eventStart and eventEnd text fields.
+
         //When they are clicked they will create and open a new TimePickerDialog
         //eventStart OnClickListener
         input[3].setOnClickListener(new View.OnClickListener() {
@@ -81,6 +91,10 @@ public class EventData extends AppCompatActivity {
         });
 
     }
+
+    //public Dialog createDateDialog(final TextView myTextView){
+        //return dateDialog;
+    //}
 
     //Creates the TimePickerDialog
     public Dialog createTimeDialog(final TextView myTextView){
@@ -269,9 +283,7 @@ public class EventData extends AppCompatActivity {
         description= assignStringData(1);
         date = assignStringData(2);
         start = assignStringData(3);
-        sAMPM = assignStringData(4);
-        end = assignStringData(5);
-        eAMPM = assignStringData(6);*/
+        end = assignStringData(5); */
 
 
         //If any of these fields are empty, emptyField will be set to true, causing an error dialog
