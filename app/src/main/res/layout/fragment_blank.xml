@@ -18,7 +18,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/button_green"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +27,19 @@
 
     <TextView
         android:id="@+id/fragEventName"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="EventName"
-        android:textColor="@color/fui_bgGitHub"
+        android:textAlignment="viewStart"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/fragDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,30 +47,33 @@
         android:id="@+id/fragTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="60dp"
         android:text="09:00AM - 09:45AM"
-        android:textColor="@color/fui_bgGitHub"
-        android:textSize="18sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragBackground" />
+        app:layout_constraintEnd_toEndOf="@+id/fragBackground"
+        app:layout_constraintTop_toBottomOf="@+id/fragDate" />
 
     <TextView
         android:id="@+id/fragDesc"
-        android:layout_width="285dp"
+        android:layout_width="135dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="Lorem ipsum This is the example text why are you still writing this finish doing work"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
-        android:textColor="@color/fui_bgGitHub"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/fragBackground"
-        app:layout_constraintEnd_toEndOf="@+id/fragBackground"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragTime"
+        app:layout_constraintStart_toStartOf="@+id/fragBackground"
         app:layout_constraintTop_toBottomOf="@+id/fragEventName" />
 
     <TextView
@@ -89,5 +98,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fragDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:text="MM/DD/YYYY"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -63,6 +63,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         user = main;
     }
 
+    public void setContext(Context appContext){
+        context = appContext;
+    }
+
     //Note: Override methods are default methods of the AndroidOS that we are modifying to suit our needs
 
     @NonNull
@@ -90,6 +94,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.fragEventName.setText(user.getEventName(position));
         holder.fragTime.setText(user.getEventTime(position));
         holder.fragDesc.setText(user.getEventDesc(position));
+        holder.fragDate.setText(user.getEventDate(position));
 
 
         //Remember fragment parent is the ConstraintLayout
@@ -123,6 +128,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         TextView fragEventName;
         TextView fragTime;
         TextView fragDesc;
+        TextView fragDate;
         ConstraintLayout fragmentParent;
 
         public mViewHolder(View itemView){
@@ -131,6 +137,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             fragEventName = itemView.findViewById(R.id.fragEventName);
             fragTime = itemView.findViewById(R.id.fragTime);
             fragDesc = itemView.findViewById(R.id.fragDesc);
+            fragDate = itemView.findViewById(R.id.fragDate);
             fragmentParent = itemView.findViewById(R.id.userFragment);
 
         }

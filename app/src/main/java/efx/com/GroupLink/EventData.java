@@ -130,6 +130,7 @@ public class EventData extends AppCompatActivity {
                 day);
 
         dateDialog.setTitle("What day is the event on?");
+        dateDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         return dateDialog;
     }
