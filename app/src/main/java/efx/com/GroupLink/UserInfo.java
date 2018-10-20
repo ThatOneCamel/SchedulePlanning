@@ -79,11 +79,11 @@ public class UserInfo {
             data.get(numOfEvents).add(flavorText);
             printData(numOfEvents);
             numOfEvents++;
-            sortEvents();
+            sort();
 
     }
 
-    void sortEvents(){
+    void sort(){
 
         //Date is position 1, Time is position 2
         //Will sort entire List based on a single column [in this case, sorting based on the Date]
@@ -108,8 +108,52 @@ public class UserInfo {
 
                 //return iteratorA.get(0).compareTo(iteratorB.get(0));
             }
-        });
-    }
+        }); //End Sort by Calendar Date
+
+        //Loops through events to check for events that take place on the same day
+         //Then checks those events' times and sorts them accordingly
+        for(int i = numOfEvents - 1; i > 0; i--){
+            //If two dates are the same...
+            if (data.get(i).get(1).equals( data.get(i-1).get(1))){
+                ArrayList<String> temp = data.get(i);
+
+                //timeX[0] is equal to the event's start time
+                //timeA is the newer event
+                //timeB is the older event
+                String timeA[] = getEventTime(i).split("-");
+                String timeB[] = getEventTime(i-1).split("-");
+
+
+                //If Old event takes place before New event, no change
+                if(timeB[0].contains("AM") && timeA[0].contains("PM")){
+                    Log.i("FIRST IF", "No Swap Made");
+
+                } else if (timeB[0].contains("PM") && timeA[0].contains("AM")){
+                    //If Old event takes place after New event, swap the two
+                    data.set(i, data.get(i-1));
+                    data.set(i-1, temp);
+                    Log.i("SECOND IF", "Swapped");
+
+
+                } else if (timeB[0].compareTo(timeA[0]) > 0){
+                    //If both events have AM, or both have PM, compare the two times
+                      //If the old event takes place after the new event, swap the two
+                    //Setting A=B
+                    data.set(i, data.get(i-1));
+
+                    //Setting B=Temp which was A
+                    //So now A and B have been swapped
+                    data.set(i-1, temp);
+                    Log.i("THIRD IF", "Swapped");
+
+                }//End CompareTo If-Statement
+
+            }//End Equals If-Statement
+
+        } //End For Loop
+
+
+    }//End Sort
 
     // 0=Name, 1=Date, 2=Time, 3=Description, 4=FlavorText
     // 4=FlavorText
@@ -156,19 +200,6 @@ public class UserInfo {
     String getEventDesc(int i){ return eventDescriptions.get(i); }
     String getEventFlavor(int i){ return eventFlavorText.get(i); }*/
     //String getGroup(int i){ return groups.get(i); }
-
-    void sort(){
-        //String datesA[] = getEventDate(0).split("/");
-       // String datesB[] = getEventDate(1).split("/");
-
-        Log.i("TAGHERE", "1st is Month, 2nd is Day, 3rd is Year");
-        for(int i = 0; i < 3; i++){
-            //Log.i("DateA:", datesA[i]);
-            //Log.i("DateB:", datesB[i]);
-
-        }
-
-    }
 
     void printData(int row){
         Log.i("Row" + row, data.get(row).toString());
