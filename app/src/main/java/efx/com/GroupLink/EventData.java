@@ -25,8 +25,8 @@ import java.util.Date;
 public class EventData extends AppCompatActivity {
 
     private EditText[] input;
-    private TextView alertTextView;
     private String[] fakeGroupNames;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,43 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.eventVisibility)
         };
 
+        unpackExtras();
+        setClickListeners();
+
+    }
+
+    void unpackExtras(){
+        ArrayList<String> oldData;
+        if (getIntent().getExtras() != null) {
+            //Order is Title, Date, Time, Description, FlavorText
+            oldData = getIntent().getStringArrayListExtra("event");
+
+            TextView header = findViewById(R.id.descriptiveText);
+            header.setText("Editing the details of: " + oldData.get(0));
+
+            input[0].setText(oldData.get(0));
+            input[1].setText(oldData.get(3));
+            input[2].setText(oldData.get(1));
+
+            //Separates the Start and End Times, then removes the whitespace at beginning and end of the strings
+            // trim() removes leading and ending whitespace
+            String time[] = oldData.get(2).split("-");
+            time[0] = time[0].trim();
+            time[1] = time[1].trim();
+            input[3].setText(time[0]);
+            input[4].setText(time[1]);
+
+
+            //Grabbing the position of the
+            position = getIntent().getIntExtra("pos", -1);
+            Log.i("INTENT_RESULT", "Extra received @pos:" + position);
+
+        } else {
+            Log.i("INTENT_RESULT", "No extras received, pos");
+        }
+    }
+
+    void setClickListeners(){
         //Creating on click listener
         input[2].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +130,6 @@ public class EventData extends AppCompatActivity {
                 createCheckboxDialog(fakeGroupNames, input[5]).show();
             }
         });
-
     }
 
     public Dialog createDateDialog(final TextView myTextView){

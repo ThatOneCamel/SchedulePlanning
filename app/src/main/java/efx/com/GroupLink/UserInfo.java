@@ -82,6 +82,8 @@ public class UserInfo {
 
     }
 
+    ArrayList<String> getEvent(int pos){ return data.get(pos); }
+
     void sort(){
 
         //Date is position 1, Time is position 2
