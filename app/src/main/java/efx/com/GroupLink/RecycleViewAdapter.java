@@ -107,7 +107,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Intent mIntent = new Intent(context, EventData.class);
                 mIntent.putStringArrayListExtra("event", user.getEvent(position));
                 mIntent.putExtra("pos", position);
-                context.startActivity(mIntent);
+                ((Activity)context).startActivityForResult(mIntent, 123);
+
 
             }
         });

@@ -27,10 +27,7 @@ public class UserInfo {
     private List<ArrayList<String>> data;
 
     //Column Order is: Name, Date, Time, Description, FlavorText
-
-
-    //private RecycleViewAdapter userAdapter;
-
+    
     UserInfo(){
         userAuthorization = FirebaseAuth.getInstance();
         //uid = userAuthorization.getUid();
@@ -53,19 +50,7 @@ public class UserInfo {
         Log.i("NUMEVENTS:" , Integer.toString(numOfEvents));
 
     }
-
-    //Set & Get functions
-
-    /*void addNewEvent(String myName, String myDate, String myTime, String myDesc, String flavorText, Boolean privacy){
-        eventNames.add(myName);
-        eventDates.add(myDate);
-        eventTimes.add(myTime);
-        eventDescriptions.add(myDesc);
-        eventFlavorText.add(flavorText);
-        eventIsPrivate.add(privacy);
-        numOfEvents++;
-    }*/
-
+    //This creates a NEW event
     void addEvent(String myName, String myDate, String myTime, String myDesc, String flavorText){
         //This creates a new ArrayList [Which is a new ROW of data]
             //if (numOfEvents != 0)
@@ -82,9 +67,17 @@ public class UserInfo {
 
     }
 
-    ArrayList<String> getEvent(int pos){ return data.get(pos); }
+    void editEvent(String myName, String myDate, String myTime, String myDesc, String flavorText, int pos){
+        setEventName(pos, myName);
+        setEventDate(pos, myDate);
+        setEventTime(pos, myTime);
+        setEventDesc(pos, myDesc);
+        setEventFlavor(pos, flavorText);
+        printData(pos);
+        sort();
+    }
 
-    void sort(){
+    private void sort(){
 
         //Date is position 1, Time is position 2
         //Will sort entire List based on a single column [in this case, sorting based on the Date]
@@ -111,8 +104,13 @@ public class UserInfo {
             }
         }); //End Sort by Calendar Date
 
+        sortByTime();
+
+    }//End Sort()
+
+    private void sortByTime(){
         //Loops through events to check for events that take place on the same day
-         //Then checks those events' times and sorts them accordingly
+        //Then checks those events' times and sorts them accordingly
         for(int i = numOfEvents - 1; i > 0; i--){
             //If two dates are the same...
             if (data.get(i).get(1).equals( data.get(i-1).get(1))){
@@ -138,7 +136,7 @@ public class UserInfo {
 
                 } else if (timeB[0].compareTo(timeA[0]) > 0){
                     //If both events have AM, or both have PM, compare the two times
-                      //If the old event takes place after the new event, swap the two
+                    //If the old event takes place after the new event, swap the two
                     //Setting A=B
                     data.set(i, data.get(i-1));
 
@@ -151,25 +149,35 @@ public class UserInfo {
 
             }//End Equals If-Statement
 
-        } //End For Loop
+        }
+    } //End sortByTime()
 
 
-    }//End Sort
+    //Returns entire event
+    ArrayList<String> getEvent(int pos){ return data.get(pos); }
 
     // 0=Name, 1=Date, 2=Time, 3=Description, 4=FlavorText
-    // 4=FlavorText
+    //These RETURN a SPECIFIC event attribute
     String getEventName(int i){ return data.get(i).get(0); }
     String getEventDate(int i){ return data.get(i).get(1); }
     String getEventTime(int i){ return data.get(i).get(2); }
     String getEventDesc(int i){ return data.get(i).get(3); }
     String getEventFlavor(int i){ return data.get(i).get(4); }
 
+    //These override EXISTING event attributes
+    private void setEventName(int i, String input){ data.get(i).set(0, input); }
+    private void setEventDate(int i, String input){ data.get(i).set(1, input); }
+    private void setEventTime(int i, String input){ data.get(i).set(2, input); }
+    private void setEventDesc(int i, String input){ data.get(i).set(3, input); }
+    private void setEventFlavor(int i, String input){ data.get(i).set(4, input); }
 
-    boolean isEmpty(){ return numOfEvents == 0; }
-    void addNumberOfEvents(int i){ numOfEvents += i; }
-    int size(){ return numOfEvents; }
+
+
 
     String getUid(){ return uid; }
+    boolean isEmpty(){ return numOfEvents == 0; }
+    int size(){ return numOfEvents; }
+
 
     void setUsername(String input){ name = input; }
     void setEmail(String input){ email = input; }
@@ -192,25 +200,9 @@ public class UserInfo {
     void setEventTime(int i, String input){ eventTimes.set(i, input); }
     void setEventDesc(int i, String input){ eventDescriptions.set(i, input); }
     void setEventFlavor(int i, String input){ eventFlavorText.set(i, input); }
-    void setGroup(int i, String input){ groups.set(i, input); }
+    void setGroup(int i, String input){ groups.set(i, input); }*/
 
-    //These RETURN a SPECIFIC event attribute
-    String getEventName(int i){ return eventNames.get(i); }
-    String getEventDate(int i){ return eventDates.get(i); }
-    String getEventTime(int i){ return eventTimes.get(i); }
-    String getEventDesc(int i){ return eventDescriptions.get(i); }
-    String getEventFlavor(int i){ return eventFlavorText.get(i); }*/
-    //String getGroup(int i){ return groups.get(i); }
-
-    void printData(int row){
-        Log.i("Row" + row, data.get(row).toString());
-
-
-    }
-
-
-
-
+    void printData(int row){ Log.i("Row" + row, data.get(row).toString()); }
 
     private class Groups {
         private ArrayList<String> groupName, key;

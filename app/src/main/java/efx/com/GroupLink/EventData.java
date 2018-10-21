@@ -26,7 +26,7 @@ public class EventData extends AppCompatActivity {
 
     private EditText[] input;
     private String[] fakeGroupNames;
-    private int position;
+    private int position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -375,6 +375,8 @@ public class EventData extends AppCompatActivity {
             mIntent.putExtra("date", arr[2]);
             mIntent.putExtra("start", arr[3]);
             mIntent.putExtra("end", arr[4]);
+            mIntent.putExtra("pos", position);
+
             setResult(123, mIntent);
             finish();
         }

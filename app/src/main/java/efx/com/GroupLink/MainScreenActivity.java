@@ -37,40 +37,40 @@ public class MainScreenActivity extends AppCompatActivity {
             Log.i("Cancelled EventData", "Nothing new was added");
 
         } else {
-            /*String title = data.getStringExtra("title");
-            String description = data.getStringExtra("description");
-            String date = data.getStringExtra("date");*/
+
             String start = data.getStringExtra("start");
             String end = data.getStringExtra("end");
-            //createData(title, description, date, start, end);
-
             String time = start + " - " + end;
 
-            /*mainUser.addEventName(data.getStringExtra("title"));
-            mainUser.addEventDesc(data.getStringExtra("description"));
-            mainUser.addEventDate(data.getStringExtra("date"));
-            mainUser.addEventFlavor(data.getStringExtra("start"));
-            mainUser.addEventTime(time);*/
-            //mainUser.addNumberOfEvents(1);
             //Title->Date->Time->Description->FlavorText
-            mainUser.addEvent(
-                    data.getStringExtra("title"),
-                    data.getStringExtra("date"),
-                    time,
-                    data.getStringExtra("description"),
-                    data.getStringExtra("start")
-            );
+
+
+            int position;
+
+            if((position = data.getIntExtra("pos", -1)) != -1){
+
+                mainUser.editEvent(
+                        data.getStringExtra("title"),
+                        data.getStringExtra("date"),
+                        time,
+                        data.getStringExtra("description"),
+                        data.getStringExtra("start"),
+                        position);
+                Log.i("EventChange:", "Event EDITED");
+
+            } else {
+                mainUser.addEvent(
+                        data.getStringExtra("title"),
+                        data.getStringExtra("date"),
+                        time,
+                        data.getStringExtra("description"),
+                        data.getStringExtra("start"));
+                Log.i("EventChange:", "Event CREATED");
+
+            } //End If-Else
+
             TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
             emptyPlannerTxt.setVisibility(View.INVISIBLE);
-            if (mainUser.size() > 1) {
-                //sortingFragments();
-            }
-            //mainAdapter.setEqual(mainUser);
-
-            if(mainUser.size() > 1){
-                //mainUser.sort();
-            }
-
             mainAdapter.notifyDataSetChanged();
         }
     }
