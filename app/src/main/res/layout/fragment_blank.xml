@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userFragment"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_gravity="top|center"
-    android:clickable="true"
     tools:context=".BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,9 +14,9 @@
         android:id="@+id/fragBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/button_orange"
@@ -116,4 +115,4 @@
         app:layout_constraintEnd_toEndOf="@+id/fragBackground"
         app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
