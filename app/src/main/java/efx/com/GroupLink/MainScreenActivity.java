@@ -1,7 +1,12 @@
 package efx.com.GroupLink;
 
 import android.content.Intent;
+
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,24 +15,64 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+
 public class MainScreenActivity extends AppCompatActivity {
 
     RecyclerView mainRecyclerView;
     RecycleViewAdapter mainAdapter;
     UserInfo mainUser;
 
+    FirebaseDatabase database;
+    DatabaseReference databaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        database = FirebaseDatabase.getInstance();
+        databaseRef = database.getReference("users");
+
         //Initializing the UserInfo class
-        mainUser = new UserInfo();
+        //mainUser = new UserInfo();
+        //mainUser.setDatabaseKey(databaseRef.push().getKey());
+        loadLocalData();
+
         initRecycler();
         //createDemoData(mainUser);
 
     }
 
+    void pushToDatabase(){
+        databaseRef.child(mainUser.getDatabaseKey()).setValue(mainUser);
+        Log.i("VALUE SET", "Something was pushed to Firebase");
+    }
+
+    void loadLocalData(){
+        try
+        {
+            FileInputStream file = this.openFileInput("user.dat");
+            ObjectInputStream objectIn = new ObjectInputStream(file);
+            mainUser =  (UserInfo) objectIn.readObject();
+            setPlannerTextInvisible();
+            objectIn.close();
+            file.close();
+            Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
+
+        }catch(IOException error){
+            Log.e("INPUT_EXCEPTION", error.getLocalizedMessage());
+            mainUser = new UserInfo();
+
+        }catch(ClassNotFoundException error){
+            Log.e("CLASS_EXCEPTION", error.getLocalizedMessage());
+            mainUser = new UserInfo();
+        }
+
+    }
 
     //Called when this activity receives the result code of an activity
     @Override
@@ -69,53 +114,19 @@ public class MainScreenActivity extends AppCompatActivity {
 
             } //End If-Else
 
-            TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
-            emptyPlannerTxt.setVisibility(View.INVISIBLE);
+            setPlannerTextInvisible();
             mainAdapter.notifyDataSetChanged();
+            //pushToDatabase();
+            mainUser.saveLocalData(this);
         }
     }
 
-    /*private void createDemoData(UserInfo user){
-
-        findViewById(R.id.mainEmptyPlannerTxt).setVisibility(View.INVISIBLE);
-
-        Random rand = new Random();
-
-        int month, day, year, start, end;
-
-
-        for (int i = 0; i < 10; i++){
-            //Random Month 1-12
-            month = rand.nextInt(9) + 1;
-
-            //Random Day 1-25
-            day = rand.nextInt(21) + 10;
-
-            //Random Year from 2000 - 2018
-            year = rand.nextInt(18) + 2000;
-
-            //Random Times from 1-12
-            start = rand.nextInt(12) + 1;
-            end = rand.nextInt(12) + 1;
-
-
-            String date = String.format("%02d/%02d/%d", month, day, year);
-            String date2 = "0" + month + "/" + day + "/" + year;
-
-            mainUser.addNewEvent(
-                    "Event #" + i,
-                    date2,
-                    start +":00 AM - " + end +":00 PM",
-                    "A generic event",
-                    start + "AM",
-                    false);
-            sortingFragments();
-
+    void setPlannerTextInvisible(){
+        if (mainUser.size() > 0){
+            TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
+            emptyPlannerTxt.setVisibility(View.INVISIBLE);
         }
-        //sortingFragments();
-        mainAdapter.notifyDataSetChanged();
-
-    }*/
+    }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
     private void initRecycler(){
@@ -159,37 +170,4 @@ public class MainScreenActivity extends AppCompatActivity {
         //Log.i("Event1:", mainUser.getEventName(0));
     }
 
-    /*public void sortingFragments() {
-        int arrLength = mainUser.size();
-
-        for (int i = 0; i < arrLength - 1; i++)
-        {
-            int min_index = i;
-            for (int j = i+1; j < arrLength; j++) {
-                //If Date i is greater than Date j, returns a positive number
-                if (mainUser.getEventDate(i).compareTo(mainUser.getEventDate(j)) > 0) {
-                    //If number is positive, make minimum index = j (the smaller date)
-                    min_index = j;
-                }
-            }
-            //Make temporary storage for original data
-            String tempEventName = mainUser.getEventName(min_index);
-            String tempEventDate = mainUser.getEventDate(min_index);
-            String tempEventTime = mainUser.getEventTime(min_index);
-            String tempEventDesc = mainUser.getEventDesc(min_index);
-            String tempEventFlavor = mainUser.getEventFlavor(min_index);
-
-            mainUser.setEventName(min_index, mainUser.getEventName(i));
-            mainUser.setEventDate(min_index, mainUser.getEventDate(i));
-            mainUser.setEventTime(min_index, mainUser.getEventTime(i));
-            mainUser.setEventDesc(min_index, mainUser.getEventDesc(i));
-            mainUser.setEventFlavor(min_index, mainUser.getEventFlavor(i));
-
-            mainUser.setEventName(i, tempEventName);
-            mainUser.setEventDate(i, tempEventDate);
-            mainUser.setEventTime(i, tempEventTime);
-            mainUser.setEventDesc(i, tempEventDesc);
-            mainUser.setEventFlavor(i, tempEventFlavor);
-        }
-    }*/
 }

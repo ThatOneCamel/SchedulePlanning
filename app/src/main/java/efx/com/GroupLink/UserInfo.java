@@ -1,10 +1,17 @@
 package efx.com.GroupLink;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,10 +20,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class UserInfo {
+public class UserInfo implements Serializable {
 
-    private FirebaseAuth userAuthorization;
-    private String name, email, uid;
+    //private FirebaseAuth userAuthorization;
+    private String name, email, uid, databaseKey;
 
     //private ArrayList<String> eventNames, eventDates, eventTimes, eventDescriptions, eventFlavorText, groups;
     //private ArrayList<Date> eventDates;
@@ -27,9 +34,9 @@ public class UserInfo {
     private List<ArrayList<String>> data;
 
     //Column Order is: Name, Date, Time, Description, FlavorText
-    
+
     UserInfo(){
-        userAuthorization = FirebaseAuth.getInstance();
+        //userAuthorization = FirebaseAuth.getInstance();
         //uid = userAuthorization.getUid();
 
         data = new ArrayList<>();
@@ -50,6 +57,32 @@ public class UserInfo {
         Log.i("NUMEVENTS:" , Integer.toString(numOfEvents));
 
     }
+
+    //Serializes class object into a file
+    void saveLocalData(Context context){
+        try {
+            //FileOutputStream file = new FileOutputStream(filepath);
+            FileOutputStream file = context.openFileOutput("user.dat", Context.MODE_PRIVATE);
+
+            ObjectOutputStream objectOut = new ObjectOutputStream(file);
+            objectOut.writeObject(this);
+            objectOut.close();
+            file.close();
+            Log.i("FILE", "DATA_SAVED");
+        } catch (IOException error){
+            Log.i("FILE_ERROR", error.getLocalizedMessage());
+            error.printStackTrace();
+        }
+    }
+
+    void deleteLocalData(Context context){
+        context.deleteFile("user.dat");
+
+    }
+
+    void setDatabaseKey(String key){ databaseKey = key; }
+    String getDatabaseKey(){ return databaseKey;}
+
     //This creates a NEW event
     void addEvent(String myName, String myDate, String myTime, String myDesc, String flavorText){
         //This creates a new ArrayList [Which is a new ROW of data]
