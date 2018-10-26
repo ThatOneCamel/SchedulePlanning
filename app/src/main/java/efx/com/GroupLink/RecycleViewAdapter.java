@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -108,7 +109,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 mIntent.putStringArrayListExtra("event", user.getEvent(position));
                 mIntent.putExtra("pos", position);
                 ((Activity)context).startActivityForResult(mIntent, 123);
-
 
             }
         });
