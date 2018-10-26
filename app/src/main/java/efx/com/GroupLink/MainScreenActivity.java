@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,12 +36,13 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         database = FirebaseDatabase.getInstance();
-        databaseRef = database.getReference("users");
+        databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
 
         //Initializing the UserInfo class
         //mainUser = new UserInfo();
         //mainUser.setDatabaseKey(databaseRef.push().getKey());
         loadLocalData();
+        //mainUser.setDatabaseKey(databaseRef.push().getKey());
 
         initRecycler();
         //createDemoData(mainUser);
@@ -48,7 +50,14 @@ public class MainScreenActivity extends AppCompatActivity {
     }
 
     void pushToDatabase(){
-        databaseRef.child(mainUser.getDatabaseKey()).setValue(mainUser);
+        int n = mainUser.size();
+        PushFire object = new PushFire(mainUser.getEvent(n -1));
+        //databaseRef.child("events").push().setValue(object);
+
+        String key = databaseRef.child("events").push().getKey();
+        mainUser.addKey(n, key);
+        databaseRef.child("events").child(key).setValue(object);
+        //mainUser.setDatabaseKey();
         Log.i("VALUE SET", "Something was pushed to Firebase");
     }
 
@@ -62,14 +71,19 @@ public class MainScreenActivity extends AppCompatActivity {
             objectIn.close();
             file.close();
             Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
+            mainUser.setDatabaseKey(databaseRef.push().getKey());
+
 
         }catch(IOException error){
             Log.e("INPUT_EXCEPTION", error.getLocalizedMessage());
             mainUser = new UserInfo();
+            mainUser.setDatabaseKey(databaseRef.push().getKey());
 
         }catch(ClassNotFoundException error){
             Log.e("CLASS_EXCEPTION", error.getLocalizedMessage());
             mainUser = new UserInfo();
+            mainUser.setDatabaseKey(databaseRef.push().getKey());
+
         }
 
     }
@@ -81,11 +95,17 @@ public class MainScreenActivity extends AppCompatActivity {
         if (resultCode == RESULT_CANCELED){
             Log.i("Cancelled EventData", "Nothing new was added");
 
+        } else if (resultCode == 111 && data != null){
+            int position = data.getIntExtra("pos", -1);
+            mainUser.deleteEvent(position);
+            mainAdapter.notifyItemRemoved(position);
+           //databaseRef.child("events").removeValue()
+
         } else {
 
             String start = data.getStringExtra("start");
             String end = data.getStringExtra("end");
-            String time = start + " - " + end;
+            String time = start + " -" + end;
 
             //Title->Date->Time->Description->FlavorText
 
@@ -116,9 +136,11 @@ public class MainScreenActivity extends AppCompatActivity {
 
             setPlannerTextInvisible();
             mainAdapter.notifyDataSetChanged();
-            //pushToDatabase();
-            mainUser.saveLocalData(this);
+            pushToDatabase();
+            //mainUser.saveLocalData(this);
         }
+        mainUser.saveLocalData(this);
+
     }
 
     void setPlannerTextInvisible(){
@@ -169,5 +191,11 @@ public class MainScreenActivity extends AppCompatActivity {
         startActivityForResult(intent, 123);
         //Log.i("Event1:", mainUser.getEventName(0));
     }
+
+    public void logOut(View logOut) {
+        FirebaseAuth.getInstance().signOut();
+
+    }
+
 
 }

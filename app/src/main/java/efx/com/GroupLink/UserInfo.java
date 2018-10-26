@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -83,20 +84,24 @@ public class UserInfo implements Serializable {
     void setDatabaseKey(String key){ databaseKey = key; }
     String getDatabaseKey(){ return databaseKey;}
 
+    void addKey(int pos, String key){
+        pos -= 1;
+        data.get(pos).add(key);
+    }
+
     //This creates a NEW event
     void addEvent(String myName, String myDate, String myTime, String myDesc, String flavorText){
         //This creates a new ArrayList [Which is a new ROW of data]
             //if (numOfEvents != 0)
-            data.add(new ArrayList<String>());
-
-            data.get(numOfEvents).add(myName);
-            data.get(numOfEvents).add(myDate);
-            data.get(numOfEvents).add(myTime);
-            data.get(numOfEvents).add(myDesc);
-            data.get(numOfEvents).add(flavorText);
-            printData(numOfEvents);
-            numOfEvents++;
-            sort();
+        data.add(new ArrayList<String>());
+        data.get(numOfEvents).add(myName);
+        data.get(numOfEvents).add(myDate);
+        data.get(numOfEvents).add(myTime);
+        data.get(numOfEvents).add(myDesc);
+        data.get(numOfEvents).add(flavorText);
+        printData(numOfEvents);
+        numOfEvents++;
+        sort();
 
     }
 
@@ -108,6 +113,15 @@ public class UserInfo implements Serializable {
         setEventFlavor(pos, flavorText);
         printData(pos);
         sort();
+    }
+
+    void deleteEvent(int pos){
+        String tempKey = data.get(pos).get(5);
+        Log.i("KEY_VALUE", tempKey);
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getUid()).child("events").child(tempKey).removeValue();
+
+        data.remove(pos);
+        numOfEvents--;
     }
 
     private void sort(){
@@ -189,7 +203,7 @@ public class UserInfo implements Serializable {
     //Returns entire event
     ArrayList<String> getEvent(int pos){ return data.get(pos); }
 
-    // 0=Name, 1=Date, 2=Time, 3=Description, 4=FlavorText
+    // 0=Title, 1=Date, 2=Time, 3=Description, 4=FlavorText
     //These RETURN a SPECIFIC event attribute
     String getEventName(int i){ return data.get(i).get(0); }
     String getEventDate(int i){ return data.get(i).get(1); }
@@ -237,14 +251,38 @@ public class UserInfo implements Serializable {
 
     void printData(int row){ Log.i("Row" + row, data.get(row).toString()); }
 
-    private class Groups {
-        private ArrayList<String> groupName, key;
-        private ArrayList<UserInfo> groupMembers;
+}
 
-        Groups(){
-            //Add Group Members
-        }
+class PushFire implements Serializable{
+    private String title, date, time, description, flavorText;
 
+    PushFire(ArrayList<String> event){
+        title = event.get(0);
+        date = event.get(1);
+        time = event.get(2);
+        description = event.get(3);
+        flavorText = event.get(4);
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getFlavorText() {
+        return flavorText;
+    }
+
 }
 

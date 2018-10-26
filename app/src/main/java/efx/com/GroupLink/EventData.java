@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class EventData extends AppCompatActivity {
     private EditText[] input;
     private String[] fakeGroupNames;
     private int position = -1;
+    private Button deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class EventData extends AppCompatActivity {
         //setSupportActionBar(topToolBar);
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.setDisplayHomeAsUpEnabled(true);
+
+        deleteBtn = findViewById(R.id.btnDelete);
 
         input = new EditText[]{
                 findViewById(R.id.eventTitle),
@@ -54,6 +58,8 @@ public class EventData extends AppCompatActivity {
     void unpackExtras(){
         ArrayList<String> oldData;
         if (getIntent().getExtras() != null) {
+            deleteBtn.setVisibility(View.VISIBLE);
+
             //Order is Title, Date, Time, Description, FlavorText
             oldData = getIntent().getStringArrayListExtra("event");
 
@@ -382,4 +388,12 @@ public class EventData extends AppCompatActivity {
         }
 
     }
+
+    public void deleteEvent(View v){
+        Intent delIntent = new Intent(EventData.this, MainScreenActivity.class);
+        delIntent.putExtra("pos", position);
+        setResult(111, delIntent);
+        finish();
+    }
+
 }

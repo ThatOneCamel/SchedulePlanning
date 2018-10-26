@@ -27,6 +27,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+    //implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
