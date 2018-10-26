@@ -1,9 +1,12 @@
 package efx.com.GroupLink;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -11,10 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.ui.auth.data.model.User;
-
-import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
 
@@ -63,6 +62,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         user = main;
     }
 
+    public void setContext(Context appContext){
+        context = appContext;
+    }
+
     //Note: Override methods are default methods of the AndroidOS that we are modifying to suit our needs
 
     @NonNull
@@ -79,7 +82,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     //This method is called every single time a new item is added to the list
     //Allows you to modify template items [such as fragments] as they are created in the list
     //This process will be fairly automatic since we are typically creating these objects from existing data
-    public void onBindViewHolder(@NonNull mViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final mViewHolder holder, final int position) {
         //Log.i(, )
         /*holder.fragHour.setText(hours.get(position));
         holder.fragEventName.setText(eventName.get(position));
@@ -90,7 +93,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.fragEventName.setText(user.getEventName(position));
         holder.fragTime.setText(user.getEventTime(position));
         holder.fragDesc.setText(user.getEventDesc(position));
-
+        holder.fragDate.setText(user.getEventDate(position));
 
         //Remember fragment parent is the ConstraintLayout
         holder.fragmentParent.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +101,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             public void onClick(View v) {
                 Log.d("Clicked at:", user.getEventName(position));
                 Toast.makeText(context, user.getEventName(position), Toast.LENGTH_SHORT).show();
+
+                //Using the context from the MainActivity to start a new intent as if we were calling
+                 //it from MainActivity itself
+                Intent mIntent = new Intent(context, EventData.class);
+                mIntent.putStringArrayListExtra("event", user.getEvent(position));
+                mIntent.putExtra("pos", position);
+                ((Activity)context).startActivityForResult(mIntent, 123);
+
+
             }
         });
 
@@ -123,6 +135,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         TextView fragEventName;
         TextView fragTime;
         TextView fragDesc;
+        TextView fragDate;
         ConstraintLayout fragmentParent;
 
         public mViewHolder(View itemView){
@@ -131,20 +144,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             fragEventName = itemView.findViewById(R.id.fragEventName);
             fragTime = itemView.findViewById(R.id.fragTime);
             fragDesc = itemView.findViewById(R.id.fragDesc);
+            fragDate = itemView.findViewById(R.id.fragDate);
             fragmentParent = itemView.findViewById(R.id.userFragment);
 
         }
     }
 
-    /*public void addNewItem(String title,String descript, String date, String sTime, String eTime, boolean pEvent, Context recyclerContext) {
-            hours.add(sTime);
-            eventName.add(title);
-            times.add(sTime + "-" + eTime);
-            description.add(descript);
-            context = recyclerContext;
-    }
-
-    public int size() {
-        return user.size() - 1;
-    }*/
 }

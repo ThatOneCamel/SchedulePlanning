@@ -3,16 +3,13 @@ package efx.com.GroupLink;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -20,10 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.google.firebase.auth.FirebaseUser;
-
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,15 +25,14 @@ import java.util.Date;
 public class EventData extends AppCompatActivity {
 
     private EditText[] input;
-    private TextView alertTextView;
     private String[] fakeGroupNames;
+    private int position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_data);
 
-        Toolbar topToolBar = findViewById(R.id.toolbar);
         //setSupportActionBar(topToolBar);
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.setDisplayHomeAsUpEnabled(true);
@@ -53,6 +46,43 @@ public class EventData extends AppCompatActivity {
                 findViewById(R.id.eventVisibility)
         };
 
+        unpackExtras();
+        setClickListeners();
+
+    }
+
+    void unpackExtras(){
+        ArrayList<String> oldData;
+        if (getIntent().getExtras() != null) {
+            //Order is Title, Date, Time, Description, FlavorText
+            oldData = getIntent().getStringArrayListExtra("event");
+
+            TextView header = findViewById(R.id.descriptiveText);
+            header.setText("Editing the details of: " + oldData.get(0));
+
+            input[0].setText(oldData.get(0));
+            input[1].setText(oldData.get(3));
+            input[2].setText(oldData.get(1));
+
+            //Separates the Start and End Times, then removes the whitespace at beginning and end of the strings
+            // trim() removes leading and ending whitespace
+            String time[] = oldData.get(2).split("-");
+            time[0] = time[0].trim();
+            time[1] = time[1].trim();
+            input[3].setText(time[0]);
+            input[4].setText(time[1]);
+
+
+            //Grabbing the position of the
+            position = getIntent().getIntExtra("pos", -1);
+            Log.i("INTENT_RESULT", "Extra received @pos:" + position);
+
+        } else {
+            Log.i("INTENT_RESULT", "No extras received, pos");
+        }
+    }
+
+    void setClickListeners(){
         //Creating on click listener
         input[2].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +130,6 @@ public class EventData extends AppCompatActivity {
                 createCheckboxDialog(fakeGroupNames, input[5]).show();
             }
         });
-
     }
 
     public Dialog createDateDialog(final TextView myTextView){
@@ -130,6 +159,7 @@ public class EventData extends AppCompatActivity {
                 day);
 
         dateDialog.setTitle("What day is the event on?");
+        dateDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         return dateDialog;
     }
@@ -345,6 +375,8 @@ public class EventData extends AppCompatActivity {
             mIntent.putExtra("date", arr[2]);
             mIntent.putExtra("start", arr[3]);
             mIntent.putExtra("end", arr[4]);
+            mIntent.putExtra("pos", position);
+
             setResult(123, mIntent);
             finish();
         }

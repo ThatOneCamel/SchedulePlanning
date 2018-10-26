@@ -40,6 +40,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_green2.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_green2.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/layout_select_dialog_singlechoice_material.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/layout/select_dialog_singlechoice_material.xml"
     },
@@ -476,6 +480,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_yellow.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_yellow.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/90e68b2de6220fd66900b94b2a80b598/res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
@@ -772,6 +780,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5a61adf7230bf4b3eb1cfe0721bda68b/res/layout/design_menu_item_action_area.xml"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_orange.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_orange.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/color_switch_thumb_material_dark.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/color/switch_thumb_material_dark.xml"
     },
@@ -918,6 +930,10 @@
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/90e68b2de6220fd66900b94b2a80b598/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+    },
+    {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_red.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_red.png"
     },
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
@@ -1772,6 +1788,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/90e68b2de6220fd66900b94b2a80b598/res/color/common_google_signin_btn_tint.xml"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_cyan.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_cyan.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/drawable-xhdpi-v4/abc_text_select_handle_right_mtrl_dark.png"
     },
@@ -1818,6 +1838,10 @@
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/layout-v26_abc_screen_toolbar.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/layout-v26/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_grey.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_grey.png"
     },
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
@@ -2008,6 +2032,10 @@
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5a61adf7230bf4b3eb1cfe0721bda68b/res/layout/design_navigation_item_separator.xml"
     },
     {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_blue.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_blue.png"
+    },
+    {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/0505b68aa4eb69b462bfa19384990869/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
@@ -2086,6 +2114,10 @@
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/color_abc_primary_text_disable_only_material_light.xml.flat",
         "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_purple.png.flat",
+        "source": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/src/main/res/drawable/button_purple.png"
     },
     {
         "merged": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/res/merged/debug/drawable_button_green.png.flat",

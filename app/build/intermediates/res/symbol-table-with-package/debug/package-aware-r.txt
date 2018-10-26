@@ -866,7 +866,15 @@ drawable app_icon_trans
 drawable app_icon_trans_2x
 drawable avd_hide_password
 drawable avd_show_password
+drawable button_blue
+drawable button_cyan
 drawable button_green
+drawable button_green2
+drawable button_grey
+drawable button_orange
+drawable button_purple
+drawable button_red
+drawable button_yellow
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1035,6 +1043,7 @@ id fill_vertical
 id fixed
 id forever
 id fragBackground
+id fragDate
 id fragDesc
 id fragEventName
 id fragTime
