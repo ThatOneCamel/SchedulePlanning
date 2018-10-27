@@ -76,6 +76,7 @@ public class UserInfo implements Serializable {
 
     void deleteLocalData(Context context){
         context.deleteFile("user.dat");
+        Log.i("LOCALDATA", "DELETED USER FILES");
 
     }
 
