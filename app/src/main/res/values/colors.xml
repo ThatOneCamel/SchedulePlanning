@@ -8,4 +8,16 @@
     <color name="custom_bg_A">#16171a</color>
     <color name="custom_bg_B">#121212</color>
     <color name="custom_primary">#212121</color>
+
+
+    <color name="Green">#1DB955</color>
+    <color name="Blue">#14AAFF</color>
+    <color name="Yellow">#FFB414</color>
+    <color name="Red">#D03434</color>
+
+    <color name="Cyan">#1CDFA5</color>
+    <color name="Orange">#FF7A19</color>
+    <color name="Purple">#E240FF</color>
+    <color name="Grey">#A3A3A3</color>
+
 </resources>

@@ -8,8 +8,6 @@
     android:layout_gravity="top|center"
     tools:context=".BlankFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ImageView
         android:id="@+id/fragBackground"
         android:layout_width="0dp"

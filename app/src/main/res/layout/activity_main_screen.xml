@@ -42,7 +42,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:background="@null"
-        android:onClick="logOut"
+        android:onClick="openSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/material_icon_more_white" />

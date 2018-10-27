@@ -2,21 +2,29 @@ package efx.com.GroupLink;
 
 import android.app.Activity;
 import android.content.Context;
+
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
+
+    //static String fragmentColor = "yellow";
 
     //RecycleView Variables
 
@@ -31,6 +39,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     //Context is basically the system getting the current state of an object/environment
     //Simply put: Each list item has its own individual context
     private Context context;  //Separate fragment objects
+    int colorID;
+
 
     //Adapter Constructor [Connects Data set to ArrayLists]
     //'d' prefix represents "data"
@@ -52,23 +62,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     }
 
+    //Basically a copy constructor, copies the UserInfo object from main and keeps track of it
+    //Also grabs context from MainActivity
     public RecycleViewAdapter(UserInfo myUser, Context appContext){
         user = myUser;
         context = appContext;
-        //user.addEventName("TEST TEST CONSTRCUTOR");
-
     }
 
-    public void setEqual(UserInfo main){
-        user = main;
-    }
-
-    public void setContext(Context appContext){
-        context = appContext;
-    }
-
-    //Note: Override methods are default methods of the AndroidOS that we are modifying to suit our needs
-
+    //Note: Override methods are default functions/methods of the AndroidOS that we are modifying to suit our needs
     @NonNull
     @Override
     //Method responsible for inflating the view
@@ -90,11 +91,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.fragTime.setText(times.get(position));
         holder.fragDesc.setText(description.get(position));*/
 
+        //Sets the fragment colors to the color defined by the static variable
+        colorID = context.getResources().getIdentifier("button_" + user.getColor(),
+                "drawable", context.getApplicationInfo().packageName);
         holder.fragHour.setText(user.getEventFlavor(position));
         holder.fragEventName.setText(user.getEventName(position));
         holder.fragTime.setText(user.getEventTime(position));
         holder.fragDesc.setText(user.getEventDesc(position));
         holder.fragDate.setText(user.getEventDate(position));
+        holder.fragBg.setImageResource(colorID);
 
         //Remember fragment parent is the ConstraintLayout
         holder.fragmentParent.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +141,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         TextView fragTime;
         TextView fragDesc;
         TextView fragDate;
+        ImageView fragBg;
         ConstraintLayout fragmentParent;
 
         public mViewHolder(View itemView){
@@ -145,6 +151,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             fragTime = itemView.findViewById(R.id.fragTime);
             fragDesc = itemView.findViewById(R.id.fragDesc);
             fragDate = itemView.findViewById(R.id.fragDate);
+            fragBg = itemView.findViewById(R.id.fragBackground);
             fragmentParent = itemView.findViewById(R.id.userFragment);
 
         }
