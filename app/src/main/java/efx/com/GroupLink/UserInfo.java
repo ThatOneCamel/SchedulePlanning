@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileInputStream;
@@ -112,7 +113,6 @@ public class UserInfo implements Serializable {
         data.get(numOfEvents).add(flavorText);
         printData(numOfEvents);
         numOfEvents++;
-        sort();
 
     }
 
@@ -135,7 +135,7 @@ public class UserInfo implements Serializable {
         numOfEvents--;
     }
 
-    private void sort(){
+    void sort(){
 
         //Date is position 1, Time is position 2
         //Will sort entire List based on a single column [in this case, sorting based on the Date]
@@ -221,6 +221,8 @@ public class UserInfo implements Serializable {
     String getEventTime(int i){ return data.get(i).get(2); }
     String getEventDesc(int i){ return data.get(i).get(3); }
     String getEventFlavor(int i){ return data.get(i).get(4); }
+    String getEventPostID(int i){ return data.get(i).get(5); }
+
 
     //These override EXISTING event attributes
     private void setEventName(int i, String input){ data.get(i).set(0, input); }
