@@ -57,6 +57,19 @@ public class UserInfo implements Serializable {
 
     }
 
+    void importEvent(PushFire holder){
+        addEvent(
+                holder.getTitle(),
+                holder.getDate(),
+                holder.getTime(),
+                holder.getDescription(),
+                holder.getFlavorText()
+        );
+
+        Log.i("EVENT_" + size(), "WAS IMPORTED");
+
+    }
+
     //Serializes class object into a file
     void saveLocalData(Context context){
         try {
@@ -91,7 +104,6 @@ public class UserInfo implements Serializable {
     //This creates a NEW event
     void addEvent(String myName, String myDate, String myTime, String myDesc, String flavorText){
         //This creates a new ArrayList [Which is a new ROW of data]
-            //if (numOfEvents != 0)
         data.add(new ArrayList<String>());
         data.get(numOfEvents).add(myName);
         data.get(numOfEvents).add(myDate);
@@ -255,12 +267,24 @@ public class UserInfo implements Serializable {
 class PushFire implements Serializable{
     private String title, date, time, description, flavorText;
 
+    //Constructor
     PushFire(ArrayList<String> event){
         title = event.get(0);
         date = event.get(1);
         time = event.get(2);
         description = event.get(3);
         flavorText = event.get(4);
+    }
+
+    PushFire(String title_in, String date_in, String time_in, String desc_in, String flavor_in){
+       title = time_in;
+       date = date_in;
+       time = time_in;
+       description = desc_in;
+       flavorText = flavor_in;
+    }
+
+    public PushFire() {
     }
 
     public String getTitle() {
@@ -279,9 +303,16 @@ class PushFire implements Serializable{
         return description;
     }
 
-    public String getFlavorText() {
-        return flavorText;
-    }
+    public String getFlavorText() { return flavorText; }
 
+    public void setTitle(String title) { this.title = title; }
+
+    public void setDate(String date) { this.date = date; }
+
+    public void setTime(String time) { this.time = time; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public void setFlavorText(String flavorText) { this.flavorText = flavorText; }
 }
 
