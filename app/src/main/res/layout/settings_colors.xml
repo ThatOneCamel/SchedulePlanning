@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/radioGroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="60dp"
+    android:layout_marginEnd="60dp"
+    android:background="@color/custom_bg_B"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <RadioButton
+        android:id="@+id/radioBlue"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Blue"
+        android:paddingLeft="24dp"
+        android:text="Blue"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioGreen"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Green"
+        android:paddingLeft="24dp"
+        android:text="Green"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioYellow"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Yellow"
+        android:paddingLeft="24dp"
+        android:text="Yellow"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioRed"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Red"
+        android:paddingLeft="24dp"
+        android:text="Red"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioCyan"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Cyan"
+        android:paddingLeft="24dp"
+        android:text="Cyan"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioOrange"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Orange"
+        android:paddingLeft="24dp"
+        android:text="Orange"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioPurple"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Purple"
+        android:paddingLeft="24dp"
+        android:text="Purple"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioGrey"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:buttonTint="@color/Grey"
+        android:paddingLeft="24dp"
+        android:text="Grey"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/confirm"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/Blue"
+        android:text="Confirm" />
+
+</RadioGroup>

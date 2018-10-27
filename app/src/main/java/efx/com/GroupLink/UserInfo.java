@@ -25,6 +25,7 @@ public class UserInfo implements Serializable {
 
     //private FirebaseAuth userAuthorization;
     private String name, email, uid, databaseKey;
+    private String color;
 
     //private ArrayList<String> eventNames, eventDates, eventTimes, eventDescriptions, eventFlavorText, groups;
     //private ArrayList<Date> eventDates;
@@ -34,28 +35,25 @@ public class UserInfo implements Serializable {
     //Creating a 2d List. A list of lists
     private List<ArrayList<String>> data;
 
+    String getColor(){ return color; }
+    void setColor(String input){ color = input; Log.i("COLOR_SET_TO" , color); }
+
     //Column Order is: Name, Date, Time, Description, FlavorText
-
+    //Default Constructor
     UserInfo(){
-        //userAuthorization = FirebaseAuth.getInstance();
-        //uid = userAuthorization.getUid();
-
         data = new ArrayList<>();
 
         name = email = "default";
         numOfEvents = 0;
+        color = "blue";
 
-        /*eventNames = new ArrayList<>();
-        eventDates = new ArrayList<>();
-        eventTimes = new ArrayList<>();
-        eventDescriptions = new ArrayList<>();
-        eventFlavorText = new ArrayList<>();*/
-        //groups = new ArrayList<>();Log.i("UID:" , uid);
         eventIsPrivate = new ArrayList<>();
 
-        Log.i("NAME:" , name);
-        Log.i("EMAIL:" , email);
-        Log.i("NUMEVENTS:" , Integer.toString(numOfEvents));
+        Log.i("NAME" , name);
+        Log.i("EMAIL" , email);
+        Log.i("DEFAULT_COLOR" , color);
+
+        Log.i("NUM_EVENTS" , Integer.toString(numOfEvents));
 
     }
 

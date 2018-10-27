@@ -25,7 +25,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     RecyclerView mainRecyclerView;
     RecycleViewAdapter mainAdapter;
-    UserInfo mainUser;
+    static UserInfo mainUser;
 
     FirebaseDatabase database;
     DatabaseReference databaseRef;
@@ -67,11 +67,12 @@ public class MainScreenActivity extends AppCompatActivity {
             FileInputStream file = this.openFileInput("user.dat");
             ObjectInputStream objectIn = new ObjectInputStream(file);
             mainUser =  (UserInfo) objectIn.readObject();
-            setPlannerTextInvisible();
+            setPlannerText();
             objectIn.close();
             file.close();
             Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
             mainUser.setDatabaseKey(databaseRef.push().getKey());
+            Log.i("COLORSETDEFAULT", mainUser.getColor());
 
 
         }catch(IOException error){
@@ -92,13 +93,20 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+
+        //If a user presses back
         if (resultCode == RESULT_CANCELED){
             Log.i("Cancelled EventData", "Nothing new was added");
+
+            //Saving and updating data in the event that a user changed settings
+            mainAdapter.notifyDataSetChanged();
+            mainUser.saveLocalData(this);
 
         } else if (resultCode == 111 && data != null){
             int position = data.getIntExtra("pos", -1);
             mainUser.deleteEvent(position);
             mainAdapter.notifyItemRemoved(position);
+            setPlannerText();
            //databaseRef.child("events").removeValue()
 
         } else {
@@ -134,19 +142,20 @@ public class MainScreenActivity extends AppCompatActivity {
 
             } //End If-Else
 
-            setPlannerTextInvisible();
+            setPlannerText();
             mainAdapter.notifyDataSetChanged();
             pushToDatabase();
-            //mainUser.saveLocalData(this);
+            mainUser.saveLocalData(this);
         }
-        mainUser.saveLocalData(this);
-
     }
 
-    void setPlannerTextInvisible(){
+    void setPlannerText(){
+        TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
+
         if (mainUser.size() > 0){
-            TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
             emptyPlannerTxt.setVisibility(View.INVISIBLE);
+        } else {
+            emptyPlannerTxt.setVisibility(View.VISIBLE);
         }
     }
 
@@ -190,6 +199,11 @@ public class MainScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(MainScreenActivity.this, EventData.class);
         startActivityForResult(intent, 123);
         //Log.i("Event1:", mainUser.getEventName(0));
+    }
+
+    public void openSettings(View v){
+        Intent intent = new Intent(MainScreenActivity.this, SettingsActivity.class);
+        startActivityForResult(intent, 155);
     }
 
     public void logOut(View logOut) {
