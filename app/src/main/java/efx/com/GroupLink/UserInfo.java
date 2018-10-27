@@ -221,6 +221,8 @@ public class UserInfo implements Serializable {
     String getEventTime(int i){ return data.get(i).get(2); }
     String getEventDesc(int i){ return data.get(i).get(3); }
     String getEventFlavor(int i){ return data.get(i).get(4); }
+    String getEventPostID(int i){ return data.get(i).get(5); }
+
 
     //These override EXISTING event attributes
     private void setEventName(int i, String input){ data.get(i).set(0, input); }

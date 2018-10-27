@@ -112,6 +112,15 @@ public class MainScreenActivity extends AppCompatActivity {
         Log.i("VALUE SET", "Something was pushed to Firebase");
     }
 
+    void editDatabase(int pos){
+        PushFire object = new PushFire(mainUser.getEvent(pos));
+        //databaseRef.child("events").push().setValue(object);
+
+        databaseRef.child("events").child(mainUser.getEventPostID(pos)).setValue(object);
+        //mainUser.setDatabaseKey();
+        Log.i("VALUE EDITED", "Something was pushed to Firebase");
+    }
+
     void loadLocalData(){
         try
         {
@@ -180,6 +189,7 @@ public class MainScreenActivity extends AppCompatActivity {
                         data.getStringExtra("description"),
                         data.getStringExtra("start"),
                         position);
+                editDatabase(position);
                 Log.i("EventChange:", "Event EDITED");
 
             } else {
