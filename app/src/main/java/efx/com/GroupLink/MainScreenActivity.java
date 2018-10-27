@@ -62,21 +62,28 @@ public class MainScreenActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //A For-Each loop that finds every child [which is an event in this case)
-                for(DataSnapshot snap : dataSnapshot.getChildren()){
 
-                    //PushFire is the class we used to push data to the database
-                    //So now it needs to be what we use to read and retrieve that data
-                    PushFire temp = snap.getValue(PushFire.class);
+                try {
+                    //A For-Each loop that finds every child [which is an event in this case)
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
 
-                    //Importing each event into our mainUser
-                    mainUser.importEvent(temp);
-                    mainUser.addKey(mainUser.size(), snap.getKey());
-                    Log.i("EVENT_KEY_RECIEVED", snap.getKey());
+                        //PushFire is the class we used to push data to the database
+                        //So now it needs to be what we use to read and retrieve that data
+                        PushFire temp = snap.getValue(PushFire.class);
 
+                        //Importing each event into our mainUser
+                        mainUser.importEvent(temp);
+                        mainUser.addKey(mainUser.size(), snap.getKey());
+                        mainUser.sort();
+                        Log.i("EVENT_KEY_RECIEVED", snap.getKey());
+
+                    }
+                    mainUser.setUsername(dataSnapshot.getValue().toString());
+                    Log.i("USERNAME RECIEVED", mainUser.getName());
+
+                } catch (NullPointerException e) {
+                    Log.i("NO DATA FOUND", "User has no firebase events");
                 }
-                mainUser.setUsername(dataSnapshot.getValue().toString());
-                Log.i("USERNAME RECIEVED", mainUser.getName());
                 initRecycler();
                 setPlannerText();
                 mainAdapter.notifyDataSetChanged();
@@ -85,7 +92,7 @@ public class MainScreenActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(MainScreenActivity.this,
-                        "Error: Could not retrieve from database", Toast.LENGTH_SHORT).show();
+                        "Could not retrieve from database", Toast.LENGTH_SHORT).show();
                 Log.i("ERROR_DATABASE", databaseError.getMessage());
             }
         });
@@ -183,12 +190,13 @@ public class MainScreenActivity extends AppCompatActivity {
                         data.getStringExtra("description"),
                         data.getStringExtra("start"));
                 Log.i("EventChange:", "Event CREATED");
+                pushToDatabase();
+                mainUser.sort();
 
             } //End If-Else
 
             setPlannerText();
             mainAdapter.notifyDataSetChanged();
-            pushToDatabase();
             mainUser.saveLocalData(this);
         }
     }
