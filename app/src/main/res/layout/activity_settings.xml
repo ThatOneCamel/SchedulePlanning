@@ -117,6 +117,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:onClick="logOut"
                 android:text="Log Out"
                 android:textAlignment="viewStart" />
 

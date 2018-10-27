@@ -5,8 +5,11 @@ import android.content.Intent;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,17 +40,57 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         database = FirebaseDatabase.getInstance();
+        //Referencing root -> users -> UID
         databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
+        mainUser = new UserInfo();
+
 
         //Initializing the UserInfo class
         //mainUser = new UserInfo();
         //mainUser.setDatabaseKey(databaseRef.push().getKey());
-        loadLocalData();
+        //loadLocalData();
         //mainUser.setDatabaseKey(databaseRef.push().getKey());
-
-        initRecycler();
+        retrieveEvents();
+        //initRecycler();
         //createDemoData(mainUser);
 
+    }
+
+    void retrieveEvents(){
+
+        databaseRef.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //A For-Each loop that finds every child [which is an event in this case)
+                for(DataSnapshot snap : dataSnapshot.getChildren()){
+
+                    //PushFire is the class we used to push data to the database
+                    //So now it needs to be what we use to read and retrieve that data
+                    PushFire temp = snap.getValue(PushFire.class);
+
+                    //Importing each event into our mainUser
+                    mainUser.importEvent(temp);
+                    mainUser.addKey(mainUser.size(), snap.getKey());
+                    Log.i("EVENT_KEY_RECIEVED", snap.getKey());
+
+                }
+                mainUser.setUsername(dataSnapshot.getValue().toString());
+                Log.i("USERNAME RECIEVED", mainUser.getName());
+                initRecycler();
+                setPlannerText();
+                mainAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(MainScreenActivity.this,
+                        "Error: Could not retrieve from database", Toast.LENGTH_SHORT).show();
+                Log.i("ERROR_DATABASE", databaseError.getMessage());
+            }
+        });
+
+        Toast.makeText(this, "EVENT DATA RECIEVED", Toast.LENGTH_SHORT).show();
     }
 
     void pushToDatabase(){
