@@ -37,15 +37,17 @@
 
     <ImageButton
         android:id="@+id/settingsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="43dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:adjustViewBounds="true"
         android:background="@null"
         android:onClick="openSettings"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/material_icon_more_white" />
+        app:srcCompat="@drawable/baseline_more_vert_white_24" />
 
     <TextView
         android:id="@+id/mainEmptyPlannerTxt"

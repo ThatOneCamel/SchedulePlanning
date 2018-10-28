@@ -39,17 +39,16 @@ public class MainScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        //Creating a connection to to the Firebase database
         database = FirebaseDatabase.getInstance();
-        //Referencing root -> users -> UID
+
+        //Referencing root -> users -> UID [This is where user's data will be written]
         databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
+        databaseRef.keepSynced(true);
         mainUser = new UserInfo();
 
-
-        //Initializing the UserInfo class
-        //mainUser = new UserInfo();
-        //mainUser.setDatabaseKey(databaseRef.push().getKey());
-        //loadLocalData();
-        //mainUser.setDatabaseKey(databaseRef.push().getKey());
+        //Getting any settings that
+        loadLocalData();
         retrieveEvents();
         //initRecycler();
         //createDemoData(mainUser);
@@ -87,13 +86,16 @@ public class MainScreenActivity extends AppCompatActivity {
                 initRecycler();
                 setPlannerText();
                 mainAdapter.notifyDataSetChanged();
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(MainScreenActivity.this,
-                        "Could not retrieve from database", Toast.LENGTH_SHORT).show();
+                        "Could not connect to Firebase; showing local backup", Toast.LENGTH_SHORT).show();
                 Log.i("ERROR_DATABASE", databaseError.getMessage());
+                //If a connection to the database could not be made or if a network error occurs
+                 //We load whatever data the user had previously
             }
         });
 
@@ -122,28 +124,32 @@ public class MainScreenActivity extends AppCompatActivity {
     }
 
     void loadLocalData(){
-        try
-        {
+        try {
+            //Finding and opening the user.dat file, then assigning it to an InputStream
             FileInputStream file = this.openFileInput("user.dat");
             ObjectInputStream objectIn = new ObjectInputStream(file);
-            mainUser =  (UserInfo) objectIn.readObject();
-            setPlannerText();
+
+            //Assigning the data that was saved in our file to a temporary object
+             //This is because we do not want to overwrite local changes when there are potentially
+              // newer changes server-side
+            UserInfo fileObject = (UserInfo) objectIn.readObject();
+
+            mainUser.setColor(fileObject.getColor());
+
+            //Closing the InputStream and the file
             objectIn.close();
             file.close();
+
             Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
-            mainUser.setDatabaseKey(databaseRef.push().getKey());
             Log.i("COLORSETDEFAULT", mainUser.getColor());
 
-
         }catch(IOException error){
+            //File not found
             Log.e("INPUT_EXCEPTION", error.getLocalizedMessage());
-            mainUser = new UserInfo();
-            mainUser.setDatabaseKey(databaseRef.push().getKey());
 
         }catch(ClassNotFoundException error){
+            //Error with the class object that was saved
             Log.e("CLASS_EXCEPTION", error.getLocalizedMessage());
-            mainUser = new UserInfo();
-            mainUser.setDatabaseKey(databaseRef.push().getKey());
 
         }
 
@@ -267,11 +273,5 @@ public class MainScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(MainScreenActivity.this, SettingsActivity.class);
         startActivityForResult(intent, 155);
     }
-
-    public void logOut(View logOut) {
-        FirebaseAuth.getInstance().signOut();
-
-    }
-
 
 }
