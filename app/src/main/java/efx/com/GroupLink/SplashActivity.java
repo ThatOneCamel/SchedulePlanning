@@ -12,7 +12,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash); //Everything on page will be loaded
 
-        //Handle showing the splash page first
+        //Loading the splash page first then create a 3 second delay before code is run
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

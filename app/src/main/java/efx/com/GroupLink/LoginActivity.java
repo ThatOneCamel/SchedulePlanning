@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
         databaseRef = database.getReference("users");
 
         auth = FirebaseAuth.getInstance(); //This determines whether or not the user is signed in

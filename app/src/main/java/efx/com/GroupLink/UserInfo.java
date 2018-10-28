@@ -46,7 +46,7 @@ public class UserInfo implements Serializable {
 
         name = email = "default";
         numOfEvents = 0;
-        color = "blue";
+        color = "green";
 
         eventIsPrivate = new ArrayList<>();
 
