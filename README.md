@@ -18,4 +18,4 @@
 
 
 - Logo artwork: [Cameron Thomas](https://gitlab.com/ThomasCameronT)
-- Programming & Testing: [Cameron Thomas](https://gitlab.com/ThomasCameronT), [Quyen Dong](https://github.com/Quyennalynn) [Stephen Overstreet](https://github.com/Franklin9523), and [Abhishek KC](https://github.com/abhi888kc)
+- Programming & Testing: [Cameron Thomas](https://gitlab.com/ThomasCameronT), [Quyen Dong](https://github.com/Quyennalynn), [Stephen Overstreet](https://github.com/Franklin9523), and [Abhishek KC](https://github.com/abhi888kc)
