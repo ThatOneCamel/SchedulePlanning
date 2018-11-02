@@ -173,7 +173,6 @@ public class MainScreenActivity extends AppCompatActivity {
             mainUser.deleteEvent(position);
             mainAdapter.notifyItemRemoved(position);
             setPlannerText();
-           //databaseRef.child("events").removeValue()
 
         } else {
 
@@ -234,7 +233,6 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
-        //mainAdapter = new RecycleViewAdapter(hour, eventName, time, description,this);
         mainAdapter = new RecycleViewAdapter(mainUser, this);
 
         //Connects our recycler and our adapter
@@ -244,8 +242,6 @@ public class MainScreenActivity extends AppCompatActivity {
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //Creating a reference to our floating action button and creating an OnScrollListener
-         //Whenever a user scrolls down the fab will be hidden, if they scroll up or are near the top
-          // the fab will be shown
         final FloatingActionButton fab = findViewById(R.id.mainAddBtn);
         mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -266,7 +262,6 @@ public class MainScreenActivity extends AppCompatActivity {
     public void openActivity(View v){
         Intent intent = new Intent(MainScreenActivity.this, EventData.class);
         startActivityForResult(intent, 123);
-        //Log.i("Event1:", mainUser.getEventName(0));
     }
 
     public void openSettings(View v){

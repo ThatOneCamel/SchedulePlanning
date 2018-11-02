@@ -12,7 +12,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash); //Everything on page will be loaded
+        setContentView(R.layout.activity_splash);
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 

@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             List<AuthUI.IdpConfig> signInProviders = Arrays.asList(
                     new AuthUI.IdpConfig.EmailBuilder().build(),
                     new AuthUI.IdpConfig.GoogleBuilder().build()
-                    //new AuthUI.IdpConfig.TwitterBuilder().build()
             );
 
             startSignIn(signInProviders);
@@ -73,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             System.exit(0);
         }
         Log.i("This is the users ID", auth.getUid());
-        //DatabaseReference x = FirebaseDatabase.getInstance().getReference("Users");
-        //x.child("uid").setValue(auth.getUid());
         Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
         databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
         startActivity(intent);

@@ -25,11 +25,9 @@ import java.util.Locale;
 public class UserInfo implements Serializable {
 
     //private FirebaseAuth userAuthorization;
-    private String name, email, uid, databaseKey;
+    private String name, email, databaseKey;
     private String color;
 
-    //private ArrayList<String> eventNames, eventDates, eventTimes, eventDescriptions, eventFlavorText, groups;
-    //private ArrayList<Date> eventDates;
     private ArrayList<Boolean> eventIsPrivate;
     private int numOfEvents;
 
@@ -231,10 +229,6 @@ public class UserInfo implements Serializable {
     private void setEventDesc(int i, String input){ data.get(i).set(3, input); }
     private void setEventFlavor(int i, String input){ data.get(i).set(4, input); }
 
-
-
-
-    String getUid(){ return uid; }
     boolean isEmpty(){ return numOfEvents == 0; }
     int size(){ return numOfEvents; }
 
@@ -244,23 +238,6 @@ public class UserInfo implements Serializable {
 
     String getName(){ return name; }
     String getEmail(){ return email; }
-
-    //These create NEW event attributes
-    //These are for DEBUG purposes, generally we will use addNewEvent(...)
-    /*void addEventName(String input){ eventNames.add(input); }
-    void addEventDate(String input){ eventDates.add(input); }
-    void addEventTime(String input){ eventTimes.add(input); }
-    void addEventDesc(String input){ eventDescriptions.add(input); }
-    void addEventFlavor(String input){ eventFlavorText.add(input); }
-    void addGroup(String input){ groups.add(input); }
-
-    //These override EXISTING event attributes
-    void setEventName(int i, String input){ eventNames.set(i, input); }
-    void setEventDate(int i, String input){ eventDates.set(i, input); }
-    void setEventTime(int i, String input){ eventTimes.set(i, input); }
-    void setEventDesc(int i, String input){ eventDescriptions.set(i, input); }
-    void setEventFlavor(int i, String input){ eventFlavorText.set(i, input); }
-    void setGroup(int i, String input){ groups.set(i, input); }*/
 
     void printData(int row){ Log.i("Row" + row, data.get(row).toString()); }
 

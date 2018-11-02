@@ -17,9 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    //Button editProfile, editColor, editGroups, feedbackBtn, aboutBtn, logoutBtn;
-    //Switch themeSwitch;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
                 MainScreenActivity.mainUser.getColor().substring(1);
 
         //Setting the name of the id's string and capitalizing the first letter of the color
-         //radio + Color -> radioColor
         String radioColor = "radio" + presetColor;
 
         //Setting our preset color to be checked when the user opens the dialog
