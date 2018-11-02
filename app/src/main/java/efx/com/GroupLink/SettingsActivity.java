@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import static efx.com.GroupLink.UserTab.mainUser;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void logOut(View logOut) {
         FirebaseAuth.getInstance().signOut();
         Intent restart = new Intent(SettingsActivity.this, LoginActivity.class);
-        MainScreenActivity.mainUser.deleteLocalData(getApplicationContext());
+        mainUser.deleteLocalData(getApplicationContext());
         restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(restart);
         finish();
@@ -54,8 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         final RadioGroup group = customView.findViewById(R.id.radioGroup);
         //Getting the color that the user currently has set
-        String presetColor = MainScreenActivity.mainUser.getColor().substring(0, 1).toUpperCase() +
-                MainScreenActivity.mainUser.getColor().substring(1);
+        String presetColor = mainUser.getColor().substring(0, 1).toUpperCase() +
+                mainUser.getColor().substring(1);
 
         //Setting the name of the id's string and capitalizing the first letter of the color
         String radioColor = "radio" + presetColor;
@@ -93,7 +94,7 @@ public class SettingsActivity extends AppCompatActivity {
                 String choice = userChoice.getText().toString().toLowerCase();
 
                 //Setting the value of the fragments' background color
-                MainScreenActivity.mainUser.setColor(choice);
+                mainUser.setColor(choice);
                 Log.i("CONFIRM", "CLICKED");
                 Log.i("SELECTED BUTTON", choice);
                 dialog.dismiss();

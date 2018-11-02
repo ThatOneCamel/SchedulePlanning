@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainScreenActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="openActivity"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
+        tools:listitem="@layout/fragment_blank"
+        android:focusable="true" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
         android:layout_width="410dp"
@@ -19,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/settingsBtn2"
+        android:id="@+id/settingsBtn"
         android:layout_width="43dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
@@ -31,6 +48,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_more_vert_white_24" />
+
+    <TextView
+        android:id="@+id/mainEmptyPlannerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/abeezee_italic"
+        android:text="@string/mainEmptyPlannerTxt"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/mainRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainRecycler" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mainAddBtn"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openActivity"
+        app:backgroundTint="@color/custom_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mainPager"

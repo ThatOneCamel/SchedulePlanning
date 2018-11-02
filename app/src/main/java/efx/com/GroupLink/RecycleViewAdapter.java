@@ -1,18 +1,12 @@
 package efx.com.GroupLink;
 
-import android.app.Activity;
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -25,7 +19,7 @@ import android.widget.Toast;
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
 
     UserInfo user;
-
+    UserTab userFrag;
     //Context is basically the system getting the current state of an object/environment
     private Context context;  //Separate fragment objects
     int colorID;
@@ -37,7 +31,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     //Basically a copy constructor, copies the UserInfo object from main and keeps track of it
     //Also grabs context from MainActivity
-    public RecycleViewAdapter(UserInfo myUser, Context appContext){
+    public RecycleViewAdapter(UserInfo myUser, Context appContext, UserTab frag){
+
+        userFrag = frag;
         user = myUser;
         context = appContext;
     }
@@ -81,7 +77,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Intent mIntent = new Intent(context, EventData.class);
                 mIntent.putStringArrayListExtra("event", user.getEvent(position));
                 mIntent.putExtra("pos", position);
-                ((Activity)context).startActivityForResult(mIntent, 123);
+                userFrag.startActivityForResult(mIntent, 123);
 
             }
         });

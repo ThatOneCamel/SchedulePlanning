@@ -1,10 +1,22 @@
 package efx.com.GroupLink;
 
-import android.content.Intent;
 
-import com.firebase.ui.auth.data.model.User;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,88 +24,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import static efx.com.GroupLink.UserTab.mainUser;
+import static android.app.Activity.RESULT_CANCELED;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class UserTab extends Fragment {
 
 
-public class MainScreenActivity extends AppCompatActivity {
+    public UserTab() {
+        // Required empty public constructor
+    }
 
-    RecyclerView mainRecyclerView;
-    RecycleViewAdapter mainAdapter;
-    //UserInfo mainUser;
+    private View view;
 
+
+    private RecyclerView mainRecyclerView;
+    private RecycleViewAdapter mainAdapter;
+    static UserInfo mainUser;
 
     FirebaseDatabase database;
     DatabaseReference databaseRef;
-    int tabPosition = 0;
+    FloatingActionButton fab;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.mainPager);
-        PagerAdapter myPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myPagerAdapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.mainTab);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                tabPosition = tab.getPosition();
-                Log.i("TAB OPENED", "Tab" + tab.getPosition());
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-
-
-        //Creating a connection to to the Firebase database
-        database = FirebaseDatabase.getInstance();
-
-        //Referencing root -> users -> UID [This is where user's data will be written]
-        databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
-        databaseRef.keepSynced(true);
-        //mainUser = new UserInfo();
-
-        //Getting any settings that
-        //loadLocalData();
-        //retrieveEvents();
-        //initRecycler();
-        //createDemoData(mainUser);
-
-    }
-
-    /*void retrieveEvents(){
+    void retrieveEvents(){
 
         databaseRef.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -129,15 +87,15 @@ public class MainScreenActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(MainScreenActivity.this,
+                Toast.makeText(getActivity(),
                         "Could not connect to Firebase; showing local backup", Toast.LENGTH_SHORT).show();
                 Log.i("ERROR_DATABASE", databaseError.getMessage());
                 //If a connection to the database could not be made or if a network error occurs
-                 //We load whatever data the user had previously
+                //We load whatever data the user had previously
             }
         });
 
-        Toast.makeText(this, "EVENT DATA RECIEVED", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "EVENT DATA RECIEVED", Toast.LENGTH_SHORT).show();
     }
 
     void pushToDatabase(){
@@ -164,12 +122,12 @@ public class MainScreenActivity extends AppCompatActivity {
     void loadLocalData(){
         try {
             //Finding and opening the user.dat file, then assigning it to an InputStream
-            FileInputStream file = this.openFileInput("user.dat");
+            FileInputStream file = getActivity().openFileInput("user.dat");
             ObjectInputStream objectIn = new ObjectInputStream(file);
 
             //Assigning the data that was saved in our file to a temporary object
-             //This is because we do not want to overwrite local changes when there are potentially
-              // newer changes server-side
+            //This is because we do not want to overwrite local changes when there are potentially
+            // newer changes server-side
             UserInfo fileObject = (UserInfo) objectIn.readObject();
 
             mainUser.setColor(fileObject.getColor());
@@ -195,7 +153,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     //Called when this activity receives the result code of an activity
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data){
+    public void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         //If a user presses back
@@ -204,7 +162,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
             //Saving and updating data in the event that a user changed settings
             mainAdapter.notifyDataSetChanged();
-            mainUser.saveLocalData(this);
+            mainUser.saveLocalData(getContext());
 
         } else if (resultCode == 111 && data != null){
             int position = data.getIntExtra("pos", -1);
@@ -250,12 +208,12 @@ public class MainScreenActivity extends AppCompatActivity {
 
             setPlannerText();
             mainAdapter.notifyDataSetChanged();
-            mainUser.saveLocalData(this);
+            mainUser.saveLocalData(getContext());
         }
     }
 
     void setPlannerText(){
-        TextView emptyPlannerTxt = findViewById(R.id.mainEmptyPlannerTxt);
+        TextView emptyPlannerTxt = view.findViewById(R.id.mainEmptyPlannerTxt);
 
         if (mainUser.size() > 0){
             emptyPlannerTxt.setVisibility(View.INVISIBLE);
@@ -267,20 +225,20 @@ public class MainScreenActivity extends AppCompatActivity {
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
     private void initRecycler(){
         //References the RecyclerView in the MainActivity
-        mainRecyclerView = findViewById(R.id.mainRecycler);
+        mainRecyclerView = view.findViewById(R.id.mainRecycler);
 
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
-        mainAdapter = new RecycleViewAdapter(mainUser, this);
+        mainAdapter = new RecycleViewAdapter(mainUser, getActivity(), this);
 
         //Connects our recycler and our adapter
         mainRecyclerView.setAdapter(mainAdapter);
 
         //This will order the items correctly in a linear fashion
-        mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Creating a reference to our floating action button and creating an OnScrollListener
-        final FloatingActionButton fab = findViewById(R.id.mainAddBtn);
+        fab = view.findViewById(R.id.mainAddBtn);
         mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -293,21 +251,59 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(v);
+            }
+        });
+
         //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
         Log.i("init called:", "Recycler created successfully");
     }//End initRecycler
-    */
 
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mainUser.saveLocalData(this);
-
+    public void openActivity(View v){
+        Intent intent = new Intent(getActivity(), EventData.class);
+        startActivityForResult(intent, 123);
     }
 
     public void openSettings(View v){
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
         startActivityForResult(intent, 155);
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view =  inflater.inflate(R.layout.fragment_group_tab, container, false);
+
+
+        //Creating a connection to to the Firebase database
+        database = FirebaseDatabase.getInstance();
+
+        //Referencing root -> users -> UID [This is where user's data will be written]
+        databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
+        databaseRef.keepSynced(true);
+
+        ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
+
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettings(v);
+            }
+        });
+
+        mainUser = new UserInfo();
+        loadLocalData();
+        retrieveEvents();
+        initRecycler();
+
+
+
+        return view;
+    }
+
 
 }
