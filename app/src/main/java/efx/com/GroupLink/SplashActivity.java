@@ -5,12 +5,16 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash); //Everything on page will be loaded
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         //Loading the splash page first then create a 3 second delay before code is run
         new Handler().postDelayed(new Runnable() {

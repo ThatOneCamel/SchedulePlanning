@@ -24,16 +24,7 @@ import android.widget.Toast;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
 
-    //static String fragmentColor = "yellow";
-
-    //RecycleView Variables
-
-    //Array that will contain the information from the data set, the info to be displayed on individual fragments
-   /* public ArrayList<String> hours = new ArrayList<>(); //used to store hours on the left side of fragment
-    private ArrayList<String> eventName = new ArrayList<>(); //used to store eventName inside the fragment
-    private ArrayList<String> times = new ArrayList<>(); //used to store time inside the fragment
-    private ArrayList<String> description = new ArrayList<>(); //used to store description inside the fragment*/
-
+    //RecycleView
     UserInfo user;
 
     //Context is basically the system getting the current state of an object/environment
@@ -43,21 +34,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
 
     //Adapter Constructor [Connects Data set to ArrayLists]
-    //'d' prefix represents "data"
-    /*public RecycleViewAdapter(ArrayList<String> dHours, ArrayList<String> dName, ArrayList<String> dTimes, ArrayList<String> dDescription, Context dContext){
-        hours = dHours;
-        eventName = dName;
-        times = dTimes;
-        description = dDescription;
-        context = dContext;
-
-        user.setEventName(0, eventName.get(0));
-        //eventTimes.add(myTime);
-        //eventDescriptions.add(myDesc);
-        //eventTimeDisplays.add(myHour);
-        //eventIsPrivate.add(privacy);
-    }*/
-
     public RecycleViewAdapter(){
 
     }
@@ -126,7 +102,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public int getItemCount() {
         return user.size();
     }
-
 
     //Holds individual recyclerview elements in memory, for faster/efficient loading
     //By putting the fragment into the memory findViewById(...), which is expensive,
