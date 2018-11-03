@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
-        android:layout_width="410dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:background="@color/custom_primary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -19,10 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/settingsBtn2"
+        android:id="@+id/settingsBtn"
         android:layout_width="43dp"
         android:layout_height="45dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:adjustViewBounds="true"
         android:background="@null"
@@ -35,10 +35,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mainPager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +46,7 @@
             android:id="@+id/mainTab"
             style="@style/AppTheme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="64dp">
 

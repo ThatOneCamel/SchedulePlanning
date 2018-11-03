@@ -4,32 +4,32 @@
             "outputFile": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/values-land/values-land.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/d2c8224d44c8dbec0db785e6f26b6770/res/values-land/values-land.xml",
                     "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,125,189,260",
-                        "endColumns": "69,63,70,67",
-                        "endOffsets": "120,184,255,323"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,196",
+                        "endColumns": "69,70,67",
+                        "endOffsets": "120,191,259"
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5a61adf7230bf4b3eb1cfe0721bda68b/res/values-land/values-land.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/material-1.0.0-rc01.aar/8d21612fea80be14059dd75f9d606df2/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
                         "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "232"
+                        "endColumns": "10",
+                        "endOffsets": "222"
                     },
                     "to": {
-                        "startLines": "6",
+                        "startLines": "5",
                         "startColumns": "4",
-                        "startOffsets": "328",
-                        "endLines": "9",
-                        "endColumns": "12",
-                        "endOffsets": "505"
+                        "startOffsets": "264",
+                        "endLines": "8",
+                        "endColumns": "10",
+                        "endOffsets": "431"
                     }
                 }
             ]

@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void logOut(View logOut) {
         FirebaseAuth.getInstance().signOut();
         Intent restart = new Intent(SettingsActivity.this, LoginActivity.class);
-        mainUser.deleteLocalData(getApplicationContext());
+        //mainUser.deleteLocalData(getApplicationContext());
         restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(restart);
         finish();

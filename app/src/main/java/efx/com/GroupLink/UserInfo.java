@@ -3,19 +3,17 @@ package efx.com.GroupLink;
 import android.content.Context;
 import android.util.Log;
 
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,9 +28,11 @@ public class UserInfo implements Serializable {
 
     private ArrayList<Boolean> eventIsPrivate;
     private int numOfEvents;
+    //private Context context;
 
     //Creating a 2d List. A list of lists
     private List<ArrayList<String>> data;
+    //private UserTab reference;
 
     String getColor(){ return color; }
     void setColor(String input){ color = input; Log.i("COLOR_SET_TO" , color); }
@@ -55,6 +55,10 @@ public class UserInfo implements Serializable {
         Log.i("NUM_EVENTS" , Integer.toString(numOfEvents));
 
     }
+
+    //void setReference(UserTab fragment){ reference = fragment; }
+
+    //UserTab getReference(){ return reference; }
 
     void importEvent(PushFire holder){
         addEvent(

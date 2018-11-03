@@ -4,7 +4,7 @@
             "outputFile": "/Users/Cameron/Documents/AndroidStudio/SchedulePlanning/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/298a6d0d3cd3348304e25752d19f7dc8/res/values-v24/values-v24.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/d2c8224d44c8dbec0db785e6f26b6770/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/580517ef74349e0b2554e9775ed04bf1/res/values-v24/values-v24.xml",
+                    "source": "/Users/Cameron/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/4bdf6e6de2624e372bb06dfca9da2349/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -122,7 +121,7 @@ public class UserTab extends Fragment {
     void loadLocalData(){
         try {
             //Finding and opening the user.dat file, then assigning it to an InputStream
-            FileInputStream file = getActivity().openFileInput("user.dat");
+            FileInputStream file = getContext().openFileInput("user.dat");
             ObjectInputStream objectIn = new ObjectInputStream(file);
 
             //Assigning the data that was saved in our file to a temporary object
@@ -155,6 +154,8 @@ public class UserTab extends Fragment {
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.i("RESULT:", "USERTAB");
 
         //If a user presses back
         if (resultCode == RESULT_CANCELED){
@@ -267,7 +268,7 @@ public class UserTab extends Fragment {
         startActivityForResult(intent, 123);
     }
 
-    public void openSettings(View v){
+    public void startSettingsActivity(){
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         startActivityForResult(intent, 155);
     }
@@ -286,21 +287,10 @@ public class UserTab extends Fragment {
         databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
         databaseRef.keepSynced(true);
 
-        ImageButton settingsBtn = view.findViewById(R.id.settingsBtn);
-
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSettings(v);
-            }
-        });
-
         mainUser = new UserInfo();
         loadLocalData();
         retrieveEvents();
         initRecycler();
-
-
 
         return view;
     }
