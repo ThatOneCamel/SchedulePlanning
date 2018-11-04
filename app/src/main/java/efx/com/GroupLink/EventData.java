@@ -35,10 +35,6 @@ public class EventData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_data);
 
-        //setSupportActionBar(topToolBar);
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-
         deleteBtn = findViewById(R.id.btnDelete);
 
         input = new EditText[]{
@@ -179,8 +175,7 @@ public class EventData extends AppCompatActivity {
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
 
-        //Defining OnTimeSetListener, this will basically run the method below when the time has
-            // been set by the user after pressing "Ok" in the dialog
+        //Defining OnTimeSetListener
         final TimePickerDialog.OnTimeSetListener myListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -218,9 +213,9 @@ public class EventData extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 this, //Defining the context
                 R.style.TimePickerTheme, //Setting the theme
-                myListener, //Setting the OnTimeSetListener
-                hour, //Grabbing the pre-set hour
-                min, //Grabbing the pre-set minute
+                myListener, //OnTimeSetListener
+                hour,
+                min,
                 false); //Determining whether the picker is 12-hour or 24-hour
 
         //Sets the title of the dialog and the surrounding background's appearance
@@ -351,14 +346,6 @@ public class EventData extends AppCompatActivity {
     }
 
     public void saveData(View v){
-        //String title, description, date, start, end, sAMPM, eAMPM;
-
-        /*title = assignStringData(0);
-        description= assignStringData(1);
-        date = assignStringData(2);
-        start = assignStringData(3);
-        end = assignStringData(5); */
-
 
         //If any of these fields are empty, emptyField will be set to true, causing an error dialog
         String arr[] = new String[5];

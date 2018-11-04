@@ -1,18 +1,12 @@
 package efx.com.GroupLink;
 
-import android.app.Activity;
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -24,23 +18,22 @@ import android.widget.Toast;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.mViewHolder> {
 
-    //RecycleView
     UserInfo user;
-
+    UserTab userFrag;
     //Context is basically the system getting the current state of an object/environment
-    //Simply put: Each list item has its own individual context
     private Context context;  //Separate fragment objects
     int colorID;
 
 
-    //Adapter Constructor [Connects Data set to ArrayLists]
     public RecycleViewAdapter(){
 
     }
 
     //Basically a copy constructor, copies the UserInfo object from main and keeps track of it
     //Also grabs context from MainActivity
-    public RecycleViewAdapter(UserInfo myUser, Context appContext){
+    public RecycleViewAdapter(UserInfo myUser, Context appContext, UserTab frag){
+
+        userFrag = frag;
         user = myUser;
         context = appContext;
     }
@@ -61,11 +54,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     //Allows you to modify template items [such as fragments] as they are created in the list
     //This process will be fairly automatic since we are typically creating these objects from existing data
     public void onBindViewHolder(@NonNull final mViewHolder holder, final int position) {
-        //Log.i(, )
-        /*holder.fragHour.setText(hours.get(position));
-        holder.fragEventName.setText(eventName.get(position));
-        holder.fragTime.setText(times.get(position));
-        holder.fragDesc.setText(description.get(position));*/
 
         //Sets the fragment colors to the color defined by the static variable
         colorID = context.getResources().getIdentifier("button_" + user.getColor(),
@@ -89,7 +77,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Intent mIntent = new Intent(context, EventData.class);
                 mIntent.putStringArrayListExtra("event", user.getEvent(position));
                 mIntent.putExtra("pos", position);
-                ((Activity)context).startActivityForResult(mIntent, 123);
+                userFrag.startActivityForResult(mIntent, 123);
 
             }
         });
@@ -104,10 +92,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     //Holds individual recyclerview elements in memory, for faster/efficient loading
-    //By putting the fragment into the memory findViewById(...), which is expensive,
-    //Only has to be called once, instead of every time an object is created
-    //IE: References the fragment template, puts it in memory for fast access
-    //Process is automated by the AndroidOS
+    //By putting the fragment into the memory findViewById(...)
     public class mViewHolder extends RecyclerView.ViewHolder{
 
         //Variables

@@ -3,19 +3,17 @@ package efx.com.GroupLink;
 import android.content.Context;
 import android.util.Log;
 
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,16 +23,16 @@ import java.util.Locale;
 public class UserInfo implements Serializable {
 
     //private FirebaseAuth userAuthorization;
-    private String name, email, uid, databaseKey;
+    private String name, email, databaseKey;
     private String color;
 
-    //private ArrayList<String> eventNames, eventDates, eventTimes, eventDescriptions, eventFlavorText, groups;
-    //private ArrayList<Date> eventDates;
     private ArrayList<Boolean> eventIsPrivate;
     private int numOfEvents;
+    //private Context context;
 
     //Creating a 2d List. A list of lists
     private List<ArrayList<String>> data;
+    //private UserTab reference;
 
     String getColor(){ return color; }
     void setColor(String input){ color = input; Log.i("COLOR_SET_TO" , color); }
@@ -57,6 +55,10 @@ public class UserInfo implements Serializable {
         Log.i("NUM_EVENTS" , Integer.toString(numOfEvents));
 
     }
+
+    //void setReference(UserTab fragment){ reference = fragment; }
+
+    //UserTab getReference(){ return reference; }
 
     void importEvent(PushFire holder){
         addEvent(
@@ -231,10 +233,6 @@ public class UserInfo implements Serializable {
     private void setEventDesc(int i, String input){ data.get(i).set(3, input); }
     private void setEventFlavor(int i, String input){ data.get(i).set(4, input); }
 
-
-
-
-    String getUid(){ return uid; }
     boolean isEmpty(){ return numOfEvents == 0; }
     int size(){ return numOfEvents; }
 
@@ -244,23 +242,6 @@ public class UserInfo implements Serializable {
 
     String getName(){ return name; }
     String getEmail(){ return email; }
-
-    //These create NEW event attributes
-    //These are for DEBUG purposes, generally we will use addNewEvent(...)
-    /*void addEventName(String input){ eventNames.add(input); }
-    void addEventDate(String input){ eventDates.add(input); }
-    void addEventTime(String input){ eventTimes.add(input); }
-    void addEventDesc(String input){ eventDescriptions.add(input); }
-    void addEventFlavor(String input){ eventFlavorText.add(input); }
-    void addGroup(String input){ groups.add(input); }
-
-    //These override EXISTING event attributes
-    void setEventName(int i, String input){ eventNames.set(i, input); }
-    void setEventDate(int i, String input){ eventDates.set(i, input); }
-    void setEventTime(int i, String input){ eventTimes.set(i, input); }
-    void setEventDesc(int i, String input){ eventDescriptions.set(i, input); }
-    void setEventFlavor(int i, String input){ eventFlavorText.set(i, input); }
-    void setGroup(int i, String input){ groups.set(i, input); }*/
 
     void printData(int row){ Log.i("Row" + row, data.get(row).toString()); }
 
