@@ -47,6 +47,8 @@
             style="@style/AppTheme"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            app:tabGravity="center"
+            app:tabMinWidth="120dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="64dp">
 

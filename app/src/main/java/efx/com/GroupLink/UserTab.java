@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static efx.com.GroupLink.MainScreenActivity.mTabLayout;
+import static efx.com.GroupLink.MainScreenActivity.myPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +52,7 @@ public class UserTab extends Fragment {
     FirebaseDatabase database;
     DatabaseReference databaseRef;
     FloatingActionButton fab;
+    boolean shown;
 
     void retrieveEvents(){
 
@@ -240,6 +244,12 @@ public class UserTab extends Fragment {
 
         //Creating a reference to our floating action button and creating an OnScrollListener
         fab = view.findViewById(R.id.mainAddBtn);
+        final FloatingActionButton eventfab = view.findViewById(R.id.dialAddEvent);
+        final FloatingActionButton groupfab = view.findViewById(R.id.dialAddGroup);
+        eventfab.hide();
+        groupfab.hide();
+        shown = false;
+
         mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -252,10 +262,44 @@ public class UserTab extends Fragment {
             }
         });
 
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (shown){
+                    fab.animate().rotation(0f);
+                    eventfab.hide();
+                    groupfab.hide();
+                    shown = !shown;
+                } else {
+                    fab.animate().rotation(45f);
+                    eventfab.show();
+                    groupfab.show();
+                    shown = !shown;
+                }
+            }
+        });
+
+        eventfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 openActivity(v);
+            }
+        });
+
+        groupfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Group Create CLICKED", Toast.LENGTH_LONG).show();
+                //mTabLayout.newTab();
+                mTabLayout.addTab(mTabLayout.newTab().setText("Group"));
+                myPagerAdapter.addTabItem();
+                if (myPagerAdapter.getCount() > 3){
+                    mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    mTabLayout.setPaddingRelative(80, 0, 0, 0);
+                }
+
             }
         });
 

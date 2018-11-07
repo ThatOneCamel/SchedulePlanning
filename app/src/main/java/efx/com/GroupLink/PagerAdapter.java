@@ -6,10 +6,14 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
+    private int count;
+
     //Constructor
     public PagerAdapter(FragmentManager manager){
         super(manager);
+        count = 1;
     }
+
 
     @Override
     //Gets all existing items
@@ -17,15 +21,16 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0: return new UserTab();
             case 1: return new BlankFragment();
+            default: return new BlankFragment();
             //case 2: return new UserTab();
         }
-        return null;
+        //return null;
     }
 
 
     @Override
     public int getCount() {
-        return 2;
+        return count;
     }
 
     @Override
@@ -36,8 +41,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return "Debug";
             default:
-                return null;
+                return "New Group";
         }
+    }
+
+    public void addTabItem(){
+        count++;
+        notifyDataSetChanged();
     }
 
 

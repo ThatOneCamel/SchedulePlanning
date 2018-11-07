@@ -10,19 +10,22 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainScreenActivity extends AppCompatActivity {
 
+    static TabLayout mTabLayout;
+    static PagerAdapter myPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
         final ViewPager viewPager = findViewById(R.id.mainPager);
-        PagerAdapter myPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        myPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
-        TabLayout tabLayout = findViewById(R.id.mainTab);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout = findViewById(R.id.mainTab);
+        mTabLayout.setupWithViewPager(viewPager);
 
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());

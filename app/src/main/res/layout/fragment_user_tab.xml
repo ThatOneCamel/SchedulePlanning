@@ -14,6 +14,7 @@
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -40,19 +41,49 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mainAddBtn"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/insert_invitation_24px"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/custom_primary"
+        app:backgroundTint="@color/custom_bg_A"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:rippleColor="@color/browser_actions_bg_grey"
+        app:srcCompat="@drawable/add_24px" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dialAddEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:backgroundTint="@color/custom_bg_A"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/mainAddBtn"
+        app:layout_constraintEnd_toEndOf="@+id/mainAddBtn"
+        app:maxImageSize="20dp"
+        app:srcCompat="@drawable/create_24px" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dialAddGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:backgroundTint="@color/custom_bg_A"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/dialAddEvent"
+        app:layout_constraintEnd_toEndOf="@+id/mainAddBtn"
+        app:srcCompat="@drawable/group_add_24px" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
