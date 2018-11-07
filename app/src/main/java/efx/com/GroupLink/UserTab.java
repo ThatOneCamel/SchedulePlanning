@@ -277,7 +277,7 @@ public class UserTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_group_tab, container, false);
+        view =  inflater.inflate(R.layout.fragment_user_tab, container, false);
 
 
         //Creating a connection to to the Firebase database

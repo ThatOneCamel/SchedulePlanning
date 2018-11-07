@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class BlankFragment extends Fragment {
-    
+
     public BlankFragment() {
         // Required empty public constructor
     }
