@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="efx.com.GroupLink.UserTab">
+    tools:context="efx.com.GroupLink.GroupTab">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecycler"
@@ -57,33 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/browser_actions_bg_grey"
         app:srcCompat="@drawable/add_24px" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/dialAddEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        app:backgroundTint="@color/custom_bg_A"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/mainAddBtn"
-        app:layout_constraintEnd_toEndOf="@+id/mainAddBtn"
-        app:maxImageSize="20dp"
-        app:srcCompat="@drawable/create_24px" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/dialAddGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        app:backgroundTint="@color/custom_bg_A"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/dialAddEvent"
-        app:layout_constraintEnd_toEndOf="@+id/mainAddBtn"
-        app:srcCompat="@drawable/group_add_24px" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

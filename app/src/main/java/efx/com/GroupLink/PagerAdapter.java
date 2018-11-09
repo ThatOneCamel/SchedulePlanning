@@ -20,8 +20,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0: return new UserTab();
-            case 1: return new BlankFragment();
-            default: return new BlankFragment();
+            case 1: return new GroupTab();
+            default: return new GroupTab();
             //case 2: return new UserTab();
         }
         //return null;

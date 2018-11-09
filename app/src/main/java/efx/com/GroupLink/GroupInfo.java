@@ -79,11 +79,11 @@ public class GroupInfo implements Serializable{
     }
     void importGroupEvent(PushGroupFire holder){
         addGroupEvent(
-                holder.getGroupTitle(),
-                holder.getGroupDate(),
-                holder.getGroupTime(),
-                holder.getGroupDescription(),
-                holder.getGroupFlavorText()
+                holder.getEventName(),
+                holder.getEventDate(),
+                holder.getEventTime(),
+                holder.getEventDescription(),
+                holder.getEventFlavorText()
         );
         Log.i("EVENT_" + groupEventSize(), "WAS IMPORTED");
     }
@@ -93,7 +93,7 @@ public class GroupInfo implements Serializable{
 
     void pushGroupToDatabase(){
         int n = groupEventSize();
-        PushGroupFire object = new PushGroupFire(getGroupEvent(n -1));
+        PushGroupFire object = new PushGroupFire(groupLead, groupMembers, getGroupEvent(n -1));
         String key = databaseRef.child("gEvents").push().getKey();
         addKey(n, key);
         databaseRef.child("gEvents").child(key).setValue(object);
@@ -197,44 +197,50 @@ public class GroupInfo implements Serializable{
 
 }
 class PushGroupFire implements Serializable {
-    private String groupTitle, groupDate, groupTime, groupDescription, groupFlavorText;
+
+    private String groupName;
+    private ArrayList<String> groupMembers;
+    private String eventName, eventDate, eventTime, eventDescription, eventFlavorText;
 
     //Constructor
-    PushGroupFire(ArrayList<String> event){
-        groupTitle = event.get(0);
-        groupDate = event.get(1);
-        groupTime = event.get(2);
-        groupDescription = event.get(3);
-        groupFlavorText = event.get(4);
+    PushGroupFire(String groupLeader, ArrayList<String> members, ArrayList<String> events){
+        eventName = events.get(0);
+        eventDate = events.get(1);
+        eventTime = events.get(2);
+        eventDescription = events.get(3);
+        eventFlavorText = events.get(4);
     }
 
     PushGroupFire(String title_in, String date_in, String time_in, String desc_in, String flavor_in){
-        groupTitle = time_in;
-        groupDate = date_in;
-        groupTime = time_in;
-        groupDescription = desc_in;
-        groupFlavorText = flavor_in;
+        eventName = time_in;
+        eventDate = date_in;
+        eventTime = time_in;
+        eventDescription = desc_in;
+        eventFlavorText = flavor_in;
     }
 
     public PushGroupFire() {
     }
+    public String getGroupName(){ return groupName; }
+    //GetGroupMembers
 
-    public String getGroupTitle() {
-        return groupTitle;
+    public String getEventName() {
+        return eventName;
     }
-    public String getGroupDate() {
-        return groupDate;
+    public String getEventDate() {
+        return eventDate;
     }
-    public String getGroupTime() {
-        return groupTime;
+    public String getEventTime() {
+        return eventTime;
     }
-    public String getGroupDescription() {
-        return groupDescription;
+    public String getEventDescription() {
+        return eventDescription;
     }
-    public String getGroupFlavorText() { return groupFlavorText; }
-    public void setGroupTitle(String title) { this.groupTitle = title; }
-    public void setGroupDate(String date) { this.groupDate = date; }
-    public void setGroupTime(String time) { this.groupTime = time; }
-    public void setGroupDescription(String description) { this.groupDescription = description; }
-    public void setGroupFlavorText(String flavorText) { this.groupFlavorText = flavorText; }
+    public String getEventFlavorText() { return eventFlavorText; }
+
+    public void setEventName(String title) { this.eventName = title; }
+    public void setEventDate(String date) { this.eventDate = date; }
+    public void setEventTime(String time) { this.eventTime = time; }
+    public void setEventDescription(String description) { this.eventDescription = description; }
+    public void setEventFlavorText(String flavorText) { this.eventFlavorText = flavorText; }
 }
