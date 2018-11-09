@@ -259,14 +259,6 @@ class PushFire implements Serializable{
         flavorText = event.get(4);
     }
 
-    PushFire(String title_in, String date_in, String time_in, String desc_in, String flavor_in){
-       title = time_in;
-       date = date_in;
-       time = time_in;
-       description = desc_in;
-       flavorText = flavor_in;
-    }
-
     public PushFire() {
     }
 

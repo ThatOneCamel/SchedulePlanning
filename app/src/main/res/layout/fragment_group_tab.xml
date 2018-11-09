@@ -40,12 +40,11 @@
         app:layout_constraintTop_toBottomOf="@+id/mainRecycler" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mainAddBtn"
+        android:id="@+id/groupAddBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="26dp"
         android:background="@drawable/insert_invitation_24px"
         android:clickable="true"
         android:focusable="true"

@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private static int RC_SIGN_IN = 123;
+    private EditText email, pass;
 
     DatabaseReference databaseRef;
 
@@ -32,11 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         databaseRef = database.getReference("users");
 
         auth = FirebaseAuth.getInstance(); //This determines whether or not the user is signed in
+        email = findViewById(R.id.editText);
+        pass = findViewById(R.id.editText2);
+
         if (auth.getCurrentUser() != null){
             Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
             Toast.makeText(this, "DEBUG: Welcome back to GroupLink! We have signed you in", Toast.LENGTH_SHORT).show();
-            //if (databaseRef)
-            databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
+            //databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
             startActivity(intent);
             finish();
         } else {
@@ -47,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     new AuthUI.IdpConfig.GoogleBuilder().build()
             );
 
-            startSignIn(signInProviders);
+            //startSignIn(signInProviders);
         }
     }
 
@@ -85,10 +92,25 @@ public class LoginActivity extends AppCompatActivity {
 
     //DEBUG FUNCTION
     public void login(View loginBtn) {
-        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-        Toast.makeText(this, "DEBUG: CUSTOM LOGIN", Toast.LENGTH_SHORT).show();
-        startActivity(intent);
-        finish();
+
+        auth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                            Toast.makeText(getApplicationContext(), "DEBUG: Welcome back to GroupLink! We have signed you in", Toast.LENGTH_SHORT).show();
+                            databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Log.e("FAILURE", "Sign-in Failed: " + task.getException().getMessage());
+
+                            Toast.makeText(LoginActivity.this,"Error Login",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
     }
 
 }

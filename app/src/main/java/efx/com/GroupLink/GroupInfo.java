@@ -48,6 +48,8 @@ public class GroupInfo implements Serializable{
         Log.i("NUM_GROUP_EVENTS" , Integer.toString(numOfGroupEvents));
     }
 
+    DatabaseReference getDatabaseRef(){ return databaseRef; }
+
 
     //This creates a NEW event
     void addGroupEvent(String myName, String myDate, String myTime, String myDesc, String flavorText){
@@ -73,7 +75,7 @@ public class GroupInfo implements Serializable{
     void deleteGroupEvent(int pos){
         String tempKey = groupData.get(pos).get(5);
         Log.i("KEY_VALUE", tempKey);
-        FirebaseDatabase.getInstance().getReference().child("allgroups").child(FirebaseAuth.getInstance().getUid()).child("gEvents").child(tempKey).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("allgroups").child("gEvents").child(tempKey).removeValue();
         groupData.remove(pos);
         numOfGroupEvents--;
     }
@@ -93,7 +95,7 @@ public class GroupInfo implements Serializable{
 
     void pushGroupToDatabase(){
         int n = groupEventSize();
-        PushGroupFire object = new PushGroupFire(groupLead, groupMembers, getGroupEvent(n -1));
+        PushGroupFire object = new PushGroupFire(getGroupEvent(n -1));
         String key = databaseRef.child("gEvents").push().getKey();
         addKey(n, key);
         databaseRef.child("gEvents").child(key).setValue(object);
@@ -199,24 +201,15 @@ public class GroupInfo implements Serializable{
 class PushGroupFire implements Serializable {
 
     private String groupName;
-    private ArrayList<String> groupMembers;
     private String eventName, eventDate, eventTime, eventDescription, eventFlavorText;
 
     //Constructor
-    PushGroupFire(String groupLeader, ArrayList<String> members, ArrayList<String> events){
+    PushGroupFire(ArrayList<String> events){
         eventName = events.get(0);
         eventDate = events.get(1);
         eventTime = events.get(2);
         eventDescription = events.get(3);
         eventFlavorText = events.get(4);
-    }
-
-    PushGroupFire(String title_in, String date_in, String time_in, String desc_in, String flavor_in){
-        eventName = time_in;
-        eventDate = date_in;
-        eventTime = time_in;
-        eventDescription = desc_in;
-        eventFlavorText = flavor_in;
     }
 
     public PushGroupFire() {

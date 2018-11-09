@@ -29,9 +29,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
 
     @Override
-    public int getCount() {
-        return count;
-    }
+    public int getCount() { return count; }
 
     @Override
     public CharSequence getPageTitle(int position) {
