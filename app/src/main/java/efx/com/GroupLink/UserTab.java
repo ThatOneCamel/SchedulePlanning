@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -305,6 +307,7 @@ public class UserTab extends Fragment {
 
         //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
         Log.i("init called:", "Recycler created successfully");
+
     }//End initRecycler
 
     public void openActivity(View v){
@@ -323,6 +326,16 @@ public class UserTab extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_user_tab, container, false);
 
+        ImageButton settingsBtn = container.getRootView().findViewById(R.id.settingsBtn);
+
+
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSettingsActivity();
+            }
+        });
+
 
         //Creating a connection to to the Firebase database
         database = FirebaseDatabase.getInstance();
@@ -334,7 +347,7 @@ public class UserTab extends Fragment {
         mainUser = new UserInfo();
         loadLocalData();
         retrieveEvents();
-        initRecycler();
+        //initRecycler();
 
         return view;
     }

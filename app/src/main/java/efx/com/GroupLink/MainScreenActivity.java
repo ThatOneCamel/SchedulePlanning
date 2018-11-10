@@ -12,26 +12,26 @@ public class MainScreenActivity extends AppCompatActivity {
 
     static TabLayout mTabLayout;
     static PagerAdapter myPagerAdapter;
+    ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        final ViewPager viewPager = findViewById(R.id.mainPager);
+        mViewPager = findViewById(R.id.mainPager);
         myPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myPagerAdapter);
-        viewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(myPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
         mTabLayout = findViewById(R.id.mainTab);
-        mTabLayout.setupWithViewPager(viewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
 
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                mViewPager.setCurrentItem(tab.getPosition());
                 Log.i("TAB OPENED", "Tab" + tab.getPosition());
-
 
             }
 
@@ -48,9 +48,8 @@ public class MainScreenActivity extends AppCompatActivity {
 
     }
 
-    public void openSettings(View v){
-        UserTab reference = (UserTab) getSupportFragmentManager().getFragments().get(0);
-        reference.startSettingsActivity();
+    public void goHome(View v){
+        mViewPager.setCurrentItem(0);
     }
 
 }

@@ -22,7 +22,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 0: return new UserTab();
             case 1: return new GroupTab();
             default: return new GroupTab();
-            //case 2: return new UserTab();
         }
         //return null;
     }
@@ -37,7 +36,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "Main";
             case 1:
-                return "Debug";
+                return "Group A";
             default:
                 return "New Group";
         }

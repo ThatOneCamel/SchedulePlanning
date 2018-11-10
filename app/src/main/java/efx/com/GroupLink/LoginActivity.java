@@ -1,11 +1,15 @@
 package efx.com.GroupLink;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,7 +28,6 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private static int RC_SIGN_IN = 123;
     private EditText email, pass;
 
     DatabaseReference databaseRef;
@@ -41,11 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = findViewById(R.id.editText2);
 
         if (auth.getCurrentUser() != null){
-            Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-            Toast.makeText(this, "DEBUG: Welcome back to GroupLink! We have signed you in", Toast.LENGTH_SHORT).show();
-            //databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
-            startActivity(intent);
-            finish();
+            goToMain();
         } else {
 
             //Declaring a List of the possible ways users can sign in [Email and Phone Number]
@@ -54,63 +54,136 @@ public class LoginActivity extends AppCompatActivity {
                     new AuthUI.IdpConfig.GoogleBuilder().build()
             );
 
-            //startSignIn(signInProviders);
         }
+
     }
 
-    //Start Login Activity
-    void startSignIn(List<AuthUI.IdpConfig> providers){
-        //An activity is a new page, this method opens a new screen which is the login page
-        startActivityForResult(
-            AuthUI.getInstance() //Pulls Up Authentication Page
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(providers) //Get providers from the list declared in onCreate fx
-                    .setLogo(R.drawable.app_icon_bold_2x)
-                    .setTheme(R.style.AppTheme)
-                    .build(),
-            RC_SIGN_IN);
+    public void signUpStart(View btn){
+
+        if (invalidInput()){
+            Toast.makeText(this, "Please input text into all fields", Toast.LENGTH_LONG).show();
+        } else {
+            attemptCreateAccount();
+        }
+
     }
 
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data){
-        if (resultCode == RESULT_CANCELED) {
-            Activity myActivity = this;
-            myActivity.finish();
-            System.exit(0);
+    private void attemptCreateAccount(){
+        String emailStr = email.getText().toString();
+        String passStr = pass.getText().toString();
+        auth.createUserWithEmailAndPassword(emailStr, passStr)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            //Show username dialog and continue
+                            createUsernameDialog().show();
+
+                            //Default is set as a user's display name in the event
+                            // an error occurred before they could finish signing up
+                            databaseRef.child(auth.getUid()).child("username").setValue("Default");
+
+                        } else {
+                            Log.w("ERROR Signup", "createUserWithEmail:failure", task.getException());
+
+                            Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();;
+                        }
+
+
+                    }
+
+                });//End Create User
+
+    }
+
+    public Dialog createUsernameDialog(){
+
+        final AlertDialog dialog = new AlertDialog.Builder(this).setCancelable(false).create();
+        View customView = getLayoutInflater().inflate(R.layout.display_name_input, null);
+        dialog.setView(customView);
+
+        final EditText name = customView.findViewById(R.id.editDisplayName);
+        Button confirmation = customView.findViewById(R.id.displayConfirmBtn);
+
+        confirmation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(name.getText().toString().isEmpty())
+                    Toast.makeText(getApplication(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                 else
+                    inputDisplayName(name.getText().toString());
+            }
+        });//End OnClickListener
+
+        return dialog;
+    }
+
+    private void inputDisplayName(String displayName){
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(displayName)
+                .build();
+
+        auth.getCurrentUser().updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            databaseRef.child(auth.getUid()).child("username").setValue(auth.getCurrentUser().getDisplayName());
+                            goToMain();
+                            Log.d("Success!", "User profile updated.");
+                        }
+
+
+                    }
+                });//End Update Profile
+
+    }
+
+
+    public void login(View btn) {
+
+        if (invalidInput()) {
+            Toast.makeText(this, "Please input text into all fields", Toast.LENGTH_LONG).show();
+        } else {
+            attemptLogin();
         }
-        Log.i("This is the users ID", auth.getUid());
+
+    }
+
+    private boolean invalidInput(){
+        return (email.getText().toString().isEmpty() || pass.getText().toString().isEmpty());
+    }
+
+    private void attemptLogin(){
+        String emailStr = email.getText().toString();
+        String passStr = pass.getText().toString();
+
+        auth.signInWithEmailAndPassword(emailStr, passStr)
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        goToMain();
+
+
+                    } else {
+                        Log.e("FAILURE", "Sign-in Failed: " + task.getException().getMessage());
+                        Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();;
+                    }
+
+
+                }
+            });//End signIn
+
+
+    }//End attemptLogin
+
+    private void goToMain(){
         Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-        databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
+        Toast.makeText(getApplicationContext(), "DEBUG: Welcome to GroupLink! We have signed you in", Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }
 
-    //Logout Button
-    public void logOut(View logOut) {
-       FirebaseAuth.getInstance().signOut();
-    }
 
-    //DEBUG FUNCTION
-    public void login(View loginBtn) {
-
-        auth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                            Toast.makeText(getApplicationContext(), "DEBUG: Welcome back to GroupLink! We have signed you in", Toast.LENGTH_SHORT).show();
-                            databaseRef.child(auth.getUid()).child("username").setValue("Default Username");
-                            startActivity(intent);
-                            finish();
-                        }else{
-                            Log.e("FAILURE", "Sign-in Failed: " + task.getException().getMessage());
-
-                            Toast.makeText(LoginActivity.this,"Error Login",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-    }
-
-}
+}//End Activity
