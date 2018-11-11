@@ -1,6 +1,8 @@
 package efx.com.GroupLink;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static efx.com.GroupLink.MainScreenActivity.mTabLayout;
+import static efx.com.GroupLink.MainScreenActivity.myPagerAdapter;
 import static efx.com.GroupLink.UserTab.mainUser;
+import static efx.com.GroupLink.MainScreenActivity.userGroups;
 
 
 /**
@@ -32,13 +39,15 @@ public class GroupTab extends Fragment {
 
     View mView;
 
+    private int position;
+
 
     public GroupTab() {
         // Required empty public constructor
     }
+
     private RecyclerView groupRecyclerView;
     private GroupRecycleViewAdapter groupAdapter;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,11 +67,20 @@ public class GroupTab extends Fragment {
             }
         });
 
-        myGroup = new GroupInfo();
-        myGroup.setColor(mainUser.getColor());
+
         initGroupRecycler();
+        Toast.makeText(getActivity(), "MyPos is:" + position, Toast.LENGTH_LONG).show();
 
         return mView;
+    }
+
+    public void setup(String name, int pos){
+        myGroup = new GroupInfo();
+        myGroup.setColor(mainUser.getColor());
+        myGroup.setGroupName(name);
+        position = pos;
+        Log.i("PEACH_JAM", "Group Name is:" + myGroup.getGroupName());
+
     }
 
     void setPlannerText(){

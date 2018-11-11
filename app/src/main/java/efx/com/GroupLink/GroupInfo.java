@@ -102,6 +102,10 @@ public class GroupInfo implements Serializable{
         Log.i("VALUE SET", "Something was pushed to Firebase");
     }
 
+    public void setGroupName(String name){ groupName = name; }
+    public String getGroupName(){ return groupName; }
+
+    public void setGroupLead(String name){ groupLead = name; }
     //These override EXISTING event attributes
     private void setGroupEventName(int i, String input){ groupData.get(i).set(0, input); }
     private void setGroupEventDate(int i, String input){ groupData.get(i).set(1, input); }

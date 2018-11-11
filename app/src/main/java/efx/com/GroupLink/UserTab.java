@@ -1,6 +1,8 @@
 package efx.com.GroupLink;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -295,8 +298,8 @@ public class UserTab extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Group Create CLICKED", Toast.LENGTH_LONG).show();
                 //mTabLayout.newTab();
-                mTabLayout.addTab(mTabLayout.newTab().setText("Group"));
-                myPagerAdapter.addTabItem();
+                enterGroupName().show();
+                //mTabLayout.addTab(mTabLayout.newTab().setText("Group"));
                 if (myPagerAdapter.getCount() > 3){
                     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
                     mTabLayout.setPaddingRelative(80, 0, 0, 0);
@@ -320,6 +323,38 @@ public class UserTab extends Fragment {
         startActivityForResult(intent, 155);
     }
 
+    private Dialog enterGroupName(){
+        final AlertDialog mDialog = new AlertDialog.Builder(getActivity()).create();
+        View customView = getLayoutInflater().inflate(R.layout.display_name_input, null);
+        mDialog.setView(customView);
+
+        TextView displayText = customView.findViewById(R.id.displayText);
+        displayText.setText("Please input your group's name");
+        final EditText nameField = customView.findViewById(R.id.editDisplayName);
+        nameField.setHint("Group Name");
+
+        Button myBtn = customView.findViewById(R.id.displayConfirmBtn);
+        myBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nameField.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Please enter a name for your group.", Toast.LENGTH_LONG).show();
+                } else {
+                    String groupName = nameField.getText().toString();
+                    mTabLayout.addTab(mTabLayout.newTab());
+                    myPagerAdapter.addTabItem(groupName);
+                    mDialog.dismiss();
+                }
+
+            }
+        });
+
+
+        return mDialog;
+    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -335,7 +370,6 @@ public class UserTab extends Fragment {
                 startSettingsActivity();
             }
         });
-
 
         //Creating a connection to to the Firebase database
         database = FirebaseDatabase.getInstance();

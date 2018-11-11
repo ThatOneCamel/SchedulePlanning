@@ -42,5 +42,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/Orange"
         android:text="Confirm" />
 </LinearLayout>
