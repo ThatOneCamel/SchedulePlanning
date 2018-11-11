@@ -47,19 +47,15 @@ public class UserTab extends Fragment {
         // Required empty public constructor
     }
 
-    private View view;
+    private View fragView;
 
-
-    private RecyclerView mainRecyclerView;
     private RecycleViewAdapter mainAdapter;
     static UserInfo mainUser;
 
-    FirebaseDatabase database;
-    DatabaseReference databaseRef;
-    FloatingActionButton fab;
-    boolean shown;
+    private DatabaseReference databaseRef;
+    private boolean shown;
 
-    void retrieveEvents(){
+    private void retrieveEvents(){
 
         databaseRef.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -104,9 +100,12 @@ public class UserTab extends Fragment {
         });
 
         Toast.makeText(getActivity(), "EVENT DATA RECIEVED", Toast.LENGTH_SHORT).show();
+
     }
 
-    void pushToDatabase(){
+
+
+    private void pushToDatabase(){
         int n = mainUser.size();
         PushFire object = new PushFire(mainUser.getEvent(n -1));
         //databaseRef.child("events").push().setValue(object);
@@ -118,7 +117,7 @@ public class UserTab extends Fragment {
         Log.i("VALUE SET", "Something was pushed to Firebase");
     }
 
-    void editDatabase(int pos){
+    private void editDatabase(int pos){
         PushFire object = new PushFire(mainUser.getEvent(pos));
         //databaseRef.child("events").push().setValue(object);
 
@@ -127,7 +126,7 @@ public class UserTab extends Fragment {
         Log.i("VALUE EDITED", "Something was pushed to Firebase");
     }
 
-    void loadLocalData(){
+    private void loadLocalData(){
         try {
             //Finding and opening the user.dat file, then assigning it to an InputStream
             FileInputStream file = getContext().openFileInput("user.dat");
@@ -222,8 +221,8 @@ public class UserTab extends Fragment {
         }
     }
 
-    void setPlannerText(){
-        TextView emptyPlannerTxt = view.findViewById(R.id.mainEmptyPlannerTxt);
+    private void setPlannerText(){
+        TextView emptyPlannerTxt = fragView.findViewById(R.id.mainEmptyPlannerTxt);
 
         if (mainUser.size() > 0){
             emptyPlannerTxt.setVisibility(View.INVISIBLE);
@@ -235,7 +234,7 @@ public class UserTab extends Fragment {
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
     private void initRecycler(){
         //References the RecyclerView in the MainActivity
-        mainRecyclerView = view.findViewById(R.id.mainRecycler);
+        RecyclerView mainRecyclerView = fragView.findViewById(R.id.mainRecycler);
 
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
@@ -247,15 +246,26 @@ public class UserTab extends Fragment {
         //This will order the items correctly in a linear fashion
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Creating a reference to our floating action button and creating an OnScrollListener
-        fab = view.findViewById(R.id.mainAddBtn);
-        final FloatingActionButton eventfab = view.findViewById(R.id.dialAddEvent);
-        final FloatingActionButton groupfab = view.findViewById(R.id.dialAddGroup);
+        initFloatingButtons(mainRecyclerView);
+
+
+        //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
+        Log.i("init called:", "Recycler created successfully");
+
+    }//End initRecycler
+
+    //Setting up the OnClickListeners of the floating action buttons
+    //Also attaching an OnScrollListener to the RecyclerView
+    private void initFloatingButtons(RecyclerView mRecyclerView){
+
+        final FloatingActionButton fab = fragView.findViewById(R.id.mainAddBtn);
+        final FloatingActionButton eventfab = fragView.findViewById(R.id.dialAddEvent);
+        final FloatingActionButton groupfab = fragView.findViewById(R.id.dialAddGroup);
         eventfab.hide();
         groupfab.hide();
         shown = false;
 
-        mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -307,18 +317,14 @@ public class UserTab extends Fragment {
 
             }
         });
+    }
 
-        //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
-        Log.i("init called:", "Recycler created successfully");
-
-    }//End initRecycler
-
-    public void openActivity(View v){
+    private void openActivity(View v){
         Intent intent = new Intent(getActivity(), EventData.class);
         startActivityForResult(intent, 123);
     }
 
-    public void startSettingsActivity(){
+    private void startSettingsActivity(){
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         startActivityForResult(intent, 155);
     }
@@ -359,11 +365,9 @@ public class UserTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_user_tab, container, false);
+        fragView =  inflater.inflate(R.layout.fragment_user_tab, container, false);
 
         ImageButton settingsBtn = container.getRootView().findViewById(R.id.settingsBtn);
-
-
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -372,7 +376,7 @@ public class UserTab extends Fragment {
         });
 
         //Creating a connection to to the Firebase database
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //Referencing root -> users -> UID [This is where user's data will be written]
         databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
@@ -381,9 +385,8 @@ public class UserTab extends Fragment {
         mainUser = new UserInfo();
         loadLocalData();
         retrieveEvents();
-        //initRecycler();
 
-        return view;
+        return fragView;
     }
 
 

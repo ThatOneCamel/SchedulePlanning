@@ -83,7 +83,7 @@ public class GroupTab extends Fragment {
 
     }
 
-    void setPlannerText(){
+    private void setPlannerText(){
         TextView emptyPlannerTxt = mView.findViewById(R.id.mainEmptyPlannerTxt);
 
         if (myGroup.groupEventSize() > 0){
