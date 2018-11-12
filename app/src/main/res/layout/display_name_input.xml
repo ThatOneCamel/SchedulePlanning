@@ -32,7 +32,8 @@
         android:ems="10"
         android:hint="Display Name"
         android:inputType="textPersonName"
-        android:theme="@style/Theme_Blue" />
+        android:theme="@style/Theme_Blue"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/displayConfirmBtn"

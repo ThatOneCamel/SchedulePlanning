@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class UserTab extends Fragment {
 
         databaseRef.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
                 try {
@@ -77,11 +78,11 @@ public class UserTab extends Fragment {
                         Log.i("EVENT_KEY_RECIEVED", snap.getKey());
 
                     }
-                    mainUser.setUsername(dataSnapshot.getValue().toString());
-                    Log.i("USERNAME RECIEVED", mainUser.getName());
+                    mainUser.setUsername(databaseRef.child("username").getKey());
+                    Log.i("USERNAME RECEIVED", mainUser.getName());
 
                 } catch (NullPointerException e) {
-                    Log.i("NO DATA FOUND", "User has no firebase events");
+                    Log.i("NO DATA FOUND", "User has no FireBase events");
                 }
                 initRecycler();
                 setPlannerText();
@@ -90,9 +91,9 @@ public class UserTab extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getActivity(),
-                        "Could not connect to Firebase; showing local backup", Toast.LENGTH_SHORT).show();
+                        "Could not connect to FireBase; showing local backup", Toast.LENGTH_SHORT).show();
                 Log.i("ERROR_DATABASE", databaseError.getMessage());
                 //If a connection to the database could not be made or if a network error occurs
                 //We load whatever data the user had previously
@@ -114,7 +115,7 @@ public class UserTab extends Fragment {
         mainUser.addKey(n, key);
         databaseRef.child("events").child(key).setValue(object);
         //mainUser.setDatabaseKey();
-        Log.i("VALUE SET", "Something was pushed to Firebase");
+        Log.i("VALUE SET", "Something was pushed to FireBase");
     }
 
     private void editDatabase(int pos){
@@ -123,7 +124,7 @@ public class UserTab extends Fragment {
 
         databaseRef.child("events").child(mainUser.getEventPostID(pos)).setValue(object);
         //mainUser.setDatabaseKey();
-        Log.i("VALUE EDITED", "Something was pushed to Firebase");
+        Log.i("VALUE EDITED", "Something was pushed to FireBase");
     }
 
     private void loadLocalData(){
@@ -144,7 +145,7 @@ public class UserTab extends Fragment {
             file.close();
 
             Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
-            Log.i("COLORSETDEFAULT", mainUser.getColor());
+            Log.i("COLOR_SET_DEFAULT", mainUser.getColor());
 
         }catch(IOException error){
             //File not found
@@ -154,6 +155,8 @@ public class UserTab extends Fragment {
             //Error with the class object that was saved
             Log.e("CLASS_EXCEPTION", error.getLocalizedMessage());
 
+        }catch (NullPointerException error){
+            Log.e("NULL_EXCEPTION", error.getLocalizedMessage());
         }
 
     }
@@ -162,8 +165,6 @@ public class UserTab extends Fragment {
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
-        Log.i("RESULT:", "USERTAB");
 
         //If a user presses back
         if (resultCode == RESULT_CANCELED){
@@ -181,9 +182,10 @@ public class UserTab extends Fragment {
 
         } else {
 
-            String start = data.getStringExtra("start");
-            String end = data.getStringExtra("end");
-            String time = start + " -" + end;
+                String start = data.getStringExtra("start");
+                String end = data.getStringExtra("end");
+                String time = start + " -" + end;
+
 
             //Title->Date->Time->Description->FlavorText
 
@@ -229,6 +231,7 @@ public class UserTab extends Fragment {
         } else {
             emptyPlannerTxt.setVisibility(View.VISIBLE);
         }
+
     }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
@@ -259,15 +262,15 @@ public class UserTab extends Fragment {
     private void initFloatingButtons(RecyclerView mRecyclerView){
 
         final FloatingActionButton fab = fragView.findViewById(R.id.mainAddBtn);
-        final FloatingActionButton eventfab = fragView.findViewById(R.id.dialAddEvent);
-        final FloatingActionButton groupfab = fragView.findViewById(R.id.dialAddGroup);
-        eventfab.hide();
-        groupfab.hide();
+        final FloatingActionButton eventFab = fragView.findViewById(R.id.dialAddEvent);
+        final FloatingActionButton groupFab = fragView.findViewById(R.id.dialAddGroup);
+        eventFab.hide();
+        groupFab.hide();
         shown = false;
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0)
@@ -284,26 +287,26 @@ public class UserTab extends Fragment {
 
                 if (shown){
                     fab.animate().rotation(0f);
-                    eventfab.hide();
-                    groupfab.hide();
+                    eventFab.hide();
+                    groupFab.hide();
                     shown = !shown;
                 } else {
                     fab.animate().rotation(45f);
-                    eventfab.show();
-                    groupfab.show();
+                    eventFab.show();
+                    groupFab.show();
                     shown = !shown;
                 }
             }
         });
 
-        eventfab.setOnClickListener(new View.OnClickListener() {
+        eventFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(v);
+                openActivity();
             }
         });
 
-        groupfab.setOnClickListener(new View.OnClickListener() {
+        groupFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Group Create CLICKED", Toast.LENGTH_LONG).show();
@@ -319,7 +322,7 @@ public class UserTab extends Fragment {
         });
     }
 
-    private void openActivity(View v){
+    private void openActivity(){
         Intent intent = new Intent(getActivity(), EventData.class);
         startActivityForResult(intent, 123);
     }
@@ -331,7 +334,7 @@ public class UserTab extends Fragment {
 
     private Dialog enterGroupName(){
         final AlertDialog mDialog = new AlertDialog.Builder(getActivity()).create();
-        View customView = getLayoutInflater().inflate(R.layout.display_name_input, null);
+        View customView = View.inflate(getActivity(), R.layout.display_name_input, null);
         mDialog.setView(customView);
 
         TextView displayText = customView.findViewById(R.id.displayText);
@@ -362,7 +365,7 @@ public class UserTab extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragView =  inflater.inflate(R.layout.fragment_user_tab, container, false);
@@ -375,7 +378,7 @@ public class UserTab extends Fragment {
             }
         });
 
-        //Creating a connection to to the Firebase database
+        //Creating a connection to to the FireBase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //Referencing root -> users -> UID [This is where user's data will be written]

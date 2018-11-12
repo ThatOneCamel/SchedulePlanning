@@ -41,7 +41,8 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptiveText" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptiveText"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/fragDesc"
@@ -57,7 +58,8 @@
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/eventTitle"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/eventDate"
@@ -70,7 +72,8 @@
         android:hint="Date: MM/DD/YYYY"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/fragDesc"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/eventStart"
@@ -83,7 +86,8 @@
         android:hint="Start Time:"
         android:inputType="time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+        app:layout_constraintTop_toBottomOf="@+id/eventDate"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/eventEnd"
@@ -96,7 +100,8 @@
         android:hint="End Time:"
         android:inputType="time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventStart" />
+        app:layout_constraintTop_toBottomOf="@+id/eventStart"
+        android:importantForAutofill="no" />
 
     <CheckBox
         android:id="@+id/eventPrivateCheck"
@@ -170,6 +175,7 @@
         android:hint="Who can see this event?"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptiveText_Private" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptiveText_Private"
+        android:importantForAutofill="no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Log.w("ERROR Signup", "createUserWithEmail:failure", task.getException());
 
-                            Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();;
+                            Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     } else {
                         Log.e("FAILURE", "Sign-in Failed: " + task.getException().getMessage());
-                        Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplication(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
 
 

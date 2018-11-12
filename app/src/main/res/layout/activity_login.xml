@@ -32,7 +32,8 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="email" />
 
     <EditText
         android:id="@+id/editText2"
@@ -48,7 +49,8 @@
         app:layout_constraintBottom_toTopOf="@+id/signupBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="password" />
 
     <Button
         android:id="@+id/signupBtn"
@@ -117,7 +119,7 @@
         android:fontFamily="@font/rubik_bold"
         android:text="GroupLink"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="32dp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/textEmail_Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -34,7 +35,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
 
         if(position != 0){
@@ -72,13 +73,5 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         groups.add(groupName);
         notifyDataSetChanged();
     }
-
-
-    private void packageBundle(String groupName){
-        Bundle arguments = new Bundle();
-        arguments.putString("name", groupName);
-    }
-
-
 
 }
