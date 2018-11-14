@@ -1,9 +1,12 @@
 package efx.com.GroupLink;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,23 +48,19 @@ public class UserTab extends Fragment {
         // Required empty public constructor
     }
 
-    private View view;
+    private View fragView;
 
-
-    private RecyclerView mainRecyclerView;
     private RecycleViewAdapter mainAdapter;
     static UserInfo mainUser;
 
-    FirebaseDatabase database;
-    DatabaseReference databaseRef;
-    FloatingActionButton fab;
-    boolean shown;
+    private DatabaseReference databaseRef;
+    private boolean shown;
 
-    void retrieveEvents(){
+    private void retrieveEvents(){
 
         databaseRef.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
                 try {
@@ -76,11 +78,11 @@ public class UserTab extends Fragment {
                         Log.i("EVENT_KEY_RECIEVED", snap.getKey());
 
                     }
-                    mainUser.setUsername(dataSnapshot.getValue().toString());
-                    Log.i("USERNAME RECIEVED", mainUser.getName());
+                    mainUser.setUsername(databaseRef.child("username").getKey());
+                    Log.i("USERNAME RECEIVED", mainUser.getName());
 
                 } catch (NullPointerException e) {
-                    Log.i("NO DATA FOUND", "User has no firebase events");
+                    Log.i("NO DATA FOUND", "User has no FireBase events");
                 }
                 initRecycler();
                 setPlannerText();
@@ -89,9 +91,9 @@ public class UserTab extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getActivity(),
-                        "Could not connect to Firebase; showing local backup", Toast.LENGTH_SHORT).show();
+                        "Could not connect to FireBase; showing local backup", Toast.LENGTH_SHORT).show();
                 Log.i("ERROR_DATABASE", databaseError.getMessage());
                 //If a connection to the database could not be made or if a network error occurs
                 //We load whatever data the user had previously
@@ -99,9 +101,12 @@ public class UserTab extends Fragment {
         });
 
         Toast.makeText(getActivity(), "EVENT DATA RECIEVED", Toast.LENGTH_SHORT).show();
+
     }
 
-    void pushToDatabase(){
+
+
+    private void pushToDatabase(){
         int n = mainUser.size();
         PushFire object = new PushFire(mainUser.getEvent(n -1));
         //databaseRef.child("events").push().setValue(object);
@@ -110,19 +115,19 @@ public class UserTab extends Fragment {
         mainUser.addKey(n, key);
         databaseRef.child("events").child(key).setValue(object);
         //mainUser.setDatabaseKey();
-        Log.i("VALUE SET", "Something was pushed to Firebase");
+        Log.i("VALUE SET", "Something was pushed to FireBase");
     }
 
-    void editDatabase(int pos){
+    private void editDatabase(int pos){
         PushFire object = new PushFire(mainUser.getEvent(pos));
         //databaseRef.child("events").push().setValue(object);
 
         databaseRef.child("events").child(mainUser.getEventPostID(pos)).setValue(object);
         //mainUser.setDatabaseKey();
-        Log.i("VALUE EDITED", "Something was pushed to Firebase");
+        Log.i("VALUE EDITED", "Something was pushed to FireBase");
     }
 
-    void loadLocalData(){
+    private void loadLocalData(){
         try {
             //Finding and opening the user.dat file, then assigning it to an InputStream
             FileInputStream file = getContext().openFileInput("user.dat");
@@ -140,7 +145,7 @@ public class UserTab extends Fragment {
             file.close();
 
             Log.i("FILE", "DATA_LOADED_SUCCESSFULLY");
-            Log.i("COLORSETDEFAULT", mainUser.getColor());
+            Log.i("COLOR_SET_DEFAULT", mainUser.getColor());
 
         }catch(IOException error){
             //File not found
@@ -150,6 +155,8 @@ public class UserTab extends Fragment {
             //Error with the class object that was saved
             Log.e("CLASS_EXCEPTION", error.getLocalizedMessage());
 
+        }catch (NullPointerException error){
+            Log.e("NULL_EXCEPTION", error.getLocalizedMessage());
         }
 
     }
@@ -158,8 +165,6 @@ public class UserTab extends Fragment {
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
-        Log.i("RESULT:", "USERTAB");
 
         //If a user presses back
         if (resultCode == RESULT_CANCELED){
@@ -177,9 +182,10 @@ public class UserTab extends Fragment {
 
         } else {
 
-            String start = data.getStringExtra("start");
-            String end = data.getStringExtra("end");
-            String time = start + " -" + end;
+                String start = data.getStringExtra("start");
+                String end = data.getStringExtra("end");
+                String time = start + " -" + end;
+
 
             //Title->Date->Time->Description->FlavorText
 
@@ -217,20 +223,21 @@ public class UserTab extends Fragment {
         }
     }
 
-    void setPlannerText(){
-        TextView emptyPlannerTxt = view.findViewById(R.id.mainEmptyPlannerTxt);
+    private void setPlannerText(){
+        TextView emptyPlannerTxt = fragView.findViewById(R.id.mainEmptyPlannerTxt);
 
         if (mainUser.size() > 0){
             emptyPlannerTxt.setVisibility(View.INVISIBLE);
         } else {
             emptyPlannerTxt.setVisibility(View.VISIBLE);
         }
+
     }
 
     //This will initialize our custom recyclerView by telling it which RecyclerView to reference [The one in Main Activity]
     private void initRecycler(){
         //References the RecyclerView in the MainActivity
-        mainRecyclerView = view.findViewById(R.id.mainRecycler);
+        RecyclerView mainRecyclerView = fragView.findViewById(R.id.mainRecycler);
 
         //Creates a new class object from our custom RecycleViewAdapter.Java class
         //This is calling the constructor
@@ -242,17 +249,28 @@ public class UserTab extends Fragment {
         //This will order the items correctly in a linear fashion
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Creating a reference to our floating action button and creating an OnScrollListener
-        fab = view.findViewById(R.id.mainAddBtn);
-        final FloatingActionButton eventfab = view.findViewById(R.id.dialAddEvent);
-        final FloatingActionButton groupfab = view.findViewById(R.id.dialAddGroup);
-        eventfab.hide();
-        groupfab.hide();
+        initFloatingButtons(mainRecyclerView);
+
+
+        //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
+        Log.i("init called:", "Recycler created successfully");
+
+    }//End initRecycler
+
+    //Setting up the OnClickListeners of the floating action buttons
+    //Also attaching an OnScrollListener to the RecyclerView
+    private void initFloatingButtons(RecyclerView mRecyclerView){
+
+        final FloatingActionButton fab = fragView.findViewById(R.id.mainAddBtn);
+        final FloatingActionButton eventFab = fragView.findViewById(R.id.dialAddEvent);
+        final FloatingActionButton groupFab = fragView.findViewById(R.id.dialAddGroup);
+        eventFab.hide();
+        groupFab.hide();
         shown = false;
 
-        mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0)
@@ -269,32 +287,32 @@ public class UserTab extends Fragment {
 
                 if (shown){
                     fab.animate().rotation(0f);
-                    eventfab.hide();
-                    groupfab.hide();
+                    eventFab.hide();
+                    groupFab.hide();
                     shown = !shown;
                 } else {
                     fab.animate().rotation(45f);
-                    eventfab.show();
-                    groupfab.show();
+                    eventFab.show();
+                    groupFab.show();
                     shown = !shown;
                 }
             }
         });
 
-        eventfab.setOnClickListener(new View.OnClickListener() {
+        eventFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(v);
+                openActivity();
             }
         });
 
-        groupfab.setOnClickListener(new View.OnClickListener() {
+        groupFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Group Create CLICKED", Toast.LENGTH_LONG).show();
                 //mTabLayout.newTab();
-                mTabLayout.addTab(mTabLayout.newTab().setText("Group"));
-                myPagerAdapter.addTabItem();
+                enterGroupName().show();
+                //mTabLayout.addTab(mTabLayout.newTab().setText("Group"));
                 if (myPagerAdapter.getCount() > 3){
                     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
                     mTabLayout.setPaddingRelative(80, 0, 0, 0);
@@ -302,30 +320,66 @@ public class UserTab extends Fragment {
 
             }
         });
+    }
 
-        //DEBUG Statement: Called to ensure that the recycler was created without any fatal errors
-        Log.i("init called:", "Recycler created successfully");
-    }//End initRecycler
-
-    public void openActivity(View v){
+    private void openActivity(){
         Intent intent = new Intent(getActivity(), EventData.class);
         startActivityForResult(intent, 123);
     }
 
-    public void startSettingsActivity(){
+    private void startSettingsActivity(){
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         startActivityForResult(intent, 155);
     }
 
+    private Dialog enterGroupName(){
+        final AlertDialog mDialog = new AlertDialog.Builder(getActivity()).create();
+        View customView = View.inflate(getActivity(), R.layout.display_name_input, null);
+        mDialog.setView(customView);
+
+        TextView displayText = customView.findViewById(R.id.displayText);
+        displayText.setText("Please input your group's name");
+        final EditText nameField = customView.findViewById(R.id.editDisplayName);
+        nameField.setHint("Group Name");
+
+        Button myBtn = customView.findViewById(R.id.displayConfirmBtn);
+        myBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nameField.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Please enter a name for your group.", Toast.LENGTH_LONG).show();
+                } else {
+                    String groupName = nameField.getText().toString();
+                    mTabLayout.addTab(mTabLayout.newTab());
+                    myPagerAdapter.addTabItem(groupName);
+                    mDialog.dismiss();
+                }
+
+            }
+        });
+
+
+        return mDialog;
+    }
+
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_user_tab, container, false);
+        fragView =  inflater.inflate(R.layout.fragment_user_tab, container, false);
 
+        ImageButton settingsBtn = container.getRootView().findViewById(R.id.settingsBtn);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSettingsActivity();
+            }
+        });
 
-        //Creating a connection to to the Firebase database
-        database = FirebaseDatabase.getInstance();
+        //Creating a connection to to the FireBase database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //Referencing root -> users -> UID [This is where user's data will be written]
         databaseRef = database.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
@@ -334,9 +388,8 @@ public class UserTab extends Fragment {
         mainUser = new UserInfo();
         loadLocalData();
         retrieveEvents();
-        initRecycler();
 
-        return view;
+        return fragView;
     }
 
 
