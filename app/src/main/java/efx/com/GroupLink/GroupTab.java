@@ -24,10 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.app.Activity.RESULT_CANCELED;
-import static efx.com.GroupLink.MainScreenActivity.mTabLayout;
-import static efx.com.GroupLink.MainScreenActivity.myPagerAdapter;
 import static efx.com.GroupLink.UserTab.mainUser;
-import static efx.com.GroupLink.MainScreenActivity.userGroups;
 
 
 /**
@@ -78,6 +75,9 @@ public class GroupTab extends Fragment {
         myGroup = new GroupInfo();
         myGroup.setColor(mainUser.getColor());
         myGroup.setGroupName(name);
+        myGroup.setGroupLead(mainUser.getName());
+        myGroup.verify();
+        mainUser.addToGroupAsLeader(myGroup.getGroupKey(), myGroup.getGroupName(), myGroup.databaseRef);
         position = pos;
         Log.i("PEACH_JAM", "Group Name is:" + myGroup.getGroupName());
 

@@ -349,6 +349,7 @@ public class UserTab extends Fragment {
                 if(nameField.getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Please enter a name for your group.", Toast.LENGTH_LONG).show();
                 } else {
+                    //Creates new group tab
                     String groupName = nameField.getText().toString();
                     mTabLayout.addTab(mTabLayout.newTab());
                     myPagerAdapter.addTabItem(groupName);

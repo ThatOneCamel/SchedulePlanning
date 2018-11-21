@@ -18,6 +18,7 @@ public class GroupInfo implements Serializable{
     private int numOfMem;
     private int numOfGroupEvents;
     private String groupColor;
+    private String groupKey;
     private int votingVariable;
     private ArrayList<String> groupMembers;
     private List<ArrayList<String>> groupData;
@@ -35,6 +36,7 @@ public class GroupInfo implements Serializable{
         numOfGroupEvents = 0;
         numOfMem = 1;
         groupColor = "green";
+        groupKey = "";
         database = FirebaseDatabase.getInstance();
 
         //Referencing root -> users -> UID [This is where user's data will be written]
@@ -90,6 +92,11 @@ public class GroupInfo implements Serializable{
         Log.i("EVENT_" + groupEventSize(), "WAS IMPORTED");
     }
 
+    void verify(){
+        groupKey = databaseRef.child(groupName).push().getKey();
+        databaseRef.child(groupKey).child("groupname").setValue(groupName);
+        Log.i("PUSH", "GROUPNAME PUSHED");
+    }
 
     ArrayList<String> getGroupEvent(int pos){ return groupData.get(pos); }
 
@@ -122,6 +129,8 @@ public class GroupInfo implements Serializable{
     String getGroupEventFlavor(int i){ return groupData.get(i).get(4); }
     String getGroupEventPostID(int i){ return groupData.get(i).get(5); }
     void printGroupData(int row){ Log.i("Row" + row, groupData.get(row).toString()); }
+
+    String getGroupKey(){ return groupKey; }
 
     //Returns entire event
     ArrayList<String> getEvent(int pos){ return groupData.get(pos); }
@@ -205,6 +214,7 @@ public class GroupInfo implements Serializable{
 class PushGroupFire implements Serializable {
 
     private String groupName;
+    private String groupLeader;
     private String eventName, eventDate, eventTime, eventDescription, eventFlavorText;
 
     //Constructor
@@ -221,6 +231,7 @@ class PushGroupFire implements Serializable {
     public String getGroupName(){ return groupName; }
     //GetGroupMembers
 
+    public String getGroupLeader(){ return groupLeader; }
     public String getEventName() {
         return eventName;
     }
@@ -235,6 +246,7 @@ class PushGroupFire implements Serializable {
     }
     public String getEventFlavorText() { return eventFlavorText; }
 
+    public String setGroupLeader(String leader){ return this.groupLeader = leader; }
     public void setEventName(String title) { this.eventName = title; }
     public void setEventDate(String date) { this.eventDate = date; }
     public void setEventTime(String time) { this.eventTime = time; }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileOutputStream;
@@ -244,6 +245,21 @@ public class UserInfo implements Serializable {
     String getEmail(){ return email; }
 
     void printData(int row){ Log.i("Row" + row, data.get(row).toString()); }
+
+    void addToGroup(String groupKey, DatabaseReference ref){
+        String myUID = FirebaseAuth.getInstance().getUid();
+        ref.child(groupKey).child(myUID).setValue("member");
+
+    }
+
+    void addToGroupAsLeader(String groupKey, String groupName, DatabaseReference ref){
+        String myUID = FirebaseAuth.getInstance().getUid();
+        ref.child(groupKey).child(myUID).setValue("leader");
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        myRef.child("users").child(myUID).child("groups").child(groupKey).setValue(groupName);
+
+    }
 
 }
 

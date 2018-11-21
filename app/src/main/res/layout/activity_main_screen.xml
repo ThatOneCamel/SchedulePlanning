@@ -39,15 +39,15 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="1dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:onClick="goHome"
         android:scaleType="centerInside"
+        android:src="@drawable/outline_home_white_24dp"
         app:layout_constraintBottom_toTopOf="@+id/mainPager"
         app:layout_constraintStart_toStartOf="@+id/mainToolbar"
-        app:layout_constraintTop_toTopOf="@+id/mainToolbar"
-        app:srcCompat="@drawable/outline_home_white_24dp" />
+        app:layout_constraintTop_toTopOf="@+id/mainToolbar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mainPager"
@@ -71,6 +71,20 @@
 
         </com.google.android.material.tabs.TabLayout>
     </androidx.viewpager.widget.ViewPager>
+
+    <ImageButton
+        android:id="@+id/membersBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mainPager"
+        app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
+        app:layout_constraintTop_toTopOf="@+id/mainToolbar"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
